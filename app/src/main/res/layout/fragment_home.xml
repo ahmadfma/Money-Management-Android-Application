@@ -1,14 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/abu"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.HomeFragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:src="@drawable/ic_top_background"
+        android:scaleType="fitXY"
+        android:id="@+id/topback"/>
+
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="Selamat Pagi"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+    
+    <androidx.cardview.widget.CardView
+        android:id="@+id/saldo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/abu"
+        app:cardCornerRadius="20dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:id="@+id/saldo1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Saldo Anda"
+                    android:textColor="@color/primary"
+                    android:textSize="16sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="15dp"/>
+
+                <TextView
+                    android:id="@+id/rp1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_below="@+id/saldo1"
+                    android:layout_marginStart="15dp"/>
+
+                <TextView
+                    android:id="@+id/current_saldo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/rp1"
+                    android:layout_below="@+id/saldo1"
+                    android:textSize="20sp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginStart="3dp"
+                    android:textColor="@color/black"
+                    android:text="1.580.000"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/shareBtn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/cirlce_shape"
+                    android:drawableStart="@drawable/ic__add"
+                    android:paddingStart="6dp"
+                    android:layout_alignParentEnd="true"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/saldo2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saldo Awal"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="15dp"/>
+
+                    <TextView
+                        android:id="@+id/rp2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp"
+                        android:textSize="20sp"
+                        android:textColor="@color/hijau_tulisan"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/saldo2"
+                        android:layout_marginStart="15dp"/>
+
+                    <TextView
+                        android:id="@+id/start_saldo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/rp2"
+                        android:layout_below="@+id/saldo2"
+                        android:textSize="20sp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"
+                        android:text="1.580.000.000"
+                        android:textColor="@color/hijau_tulisan"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="10dp">
+
+                    <TextView
+                        android:id="@+id/saldo3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengeluaran Anda"
+                        android:textColor="@color/merah_tulisan"
+                        android:textSize="16sp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="15dp"/>
+
+                    <TextView
+                        android:id="@+id/rp3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp"
+                        android:textSize="20sp"
+                        android:textColor="@color/merah_tulisan"
+                        android:textStyle="bold"
+                        android:layout_below="@+id/saldo3"
+                        android:layout_marginStart="15dp"/>
+
+                    <TextView
+                        android:id="@+id/pengeluaran_saldo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/rp3"
+                        android:layout_below="@+id/saldo3"
+                        android:textSize="20sp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="3dp"
+                        android:text="1.580.000.000"
+                        android:textColor="@color/merah_tulisan"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+            
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvhome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_below="@+id/saldo"
+        android:layout_marginTop="10dp"/>
 
-</FrameLayout>
+
+</RelativeLayout>

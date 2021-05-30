@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary">#4557FF</color>
+    <color name="primary2">#4D5EFF</color>
+    <color name="merah">#FA697C</color>
+    <color name="merah_tulisan">#F70000</color>
+    <color name="pink">#FA69E3</color>
+    <color name="ungu">#7E0CF5</color>
+    <color name="biru">#41B4D9</color>
+    <color name="kuning">#FFC700</color>
+    <color name="hijau">#25B44D</color>
+    <color name="hijau_tulisan">#0DC300</color>
+    <color name="abu">#F4F4F4</color>
 </resources>
