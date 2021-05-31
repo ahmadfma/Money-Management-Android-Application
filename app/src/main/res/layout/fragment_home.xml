@@ -9,7 +9,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="250dp"
         android:src="@drawable/ic_top_background"
         android:scaleType="fitXY"
         android:id="@+id/topback"/>
@@ -20,14 +20,14 @@
         android:textSize="20sp"
         android:textColor="@color/white"
         android:text="Selamat Pagi"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="35dp"
         android:layout_marginStart="20dp"/>
     
     <androidx.cardview.widget.CardView
         android:id="@+id/saldo"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="95dp"
+        android:layout_marginTop="110dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/abu"
