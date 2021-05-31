@@ -26,6 +26,7 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
 
                 itemView.setOnClickListener {
                     radio_btn.isChecked = true
+                    AddFragment.kategori = kategori
                     if(selected_radio_btn != position) {
                         notifyDataSetChanged()
                         selected_radio_btn = position
