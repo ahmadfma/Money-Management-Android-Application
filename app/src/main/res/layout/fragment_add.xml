@@ -130,80 +130,85 @@
                 android:layout_marginBottom="5dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tipe_pemasukan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_background"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp" >
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/line"
-                    android:layout_width="10dp"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/hijau_tulisan"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tipe_pemasukan"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pemasukan"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginStart="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/line"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:background="@drawable/edit_background"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp" >
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/line"
+                        android:layout_width="10dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="@color/hijau_tulisan"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pemasukan"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginStart="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/line"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <RadioButton
+                        android:id="@+id/btn_pemasukan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tipe_pengeluaran"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_background"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:layout_marginTop="10dp">
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/line2"
-                    android:layout_width="10dp"
-                    android:layout_height="0dp"
-                    android:layout_margin="10dp"
-                    android:backgroundTint="@color/merah_tulisan"
-                    app:cardCornerRadius="10dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tipe_pengeluaran"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pengeluaran"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginStart="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/line2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:background="@drawable/edit_background"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginTop="10dp">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/line2"
+                        android:layout_width="10dp"
+                        android:layout_height="0dp"
+                        android:layout_margin="10dp"
+                        android:backgroundTint="@color/merah_tulisan"
+                        app:cardCornerRadius="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pengeluaran"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:layout_marginStart="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/line2"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <RadioButton
+                        android:id="@+id/btn_pengeluaran"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
@@ -217,6 +222,8 @@
                 android:layout_marginBottom="30dp"
                 android:backgroundTint="@color/primary2"
                 android:textColor="@color/white"/>
+
+
         </LinearLayout>
 
     </ScrollView>

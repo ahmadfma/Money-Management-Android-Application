@@ -10,19 +10,28 @@ import kotlinx.android.synthetic.main.item_kategori.view.*
 
 class KategoriAdapter(private val listKategori: ArrayList<String>, private val listColor: ArrayList<Int>): RecyclerView.Adapter<KategoriAdapter.Holder>() {
 
-    private var selected_radio_btn: Int? = null
+    private var selected_radio_btn = -1
 
     inner class Holder(itemview: View): RecyclerView.ViewHolder(itemview) {
         fun bind(kategori: String, color: Int, position: Int) {
             with(itemView) {
                 line_color.setImageResource(color)
                 text.text = kategori
-                if(position == listKategori.size-1) {
-                    underline.visibility = View.GONE
+
+                if(selected_radio_btn == -1) {
+                    radio_btn.isChecked = false
+                } else {
+                    radio_btn.isChecked = selected_radio_btn == position
                 }
-                radio_btn.setOnCheckedChangeListener { buttonView, isChecked ->
-                    Log.d("KategoriAdapter", "isChecked : $isChecked")
+
+                itemView.setOnClickListener {
+                    radio_btn.isChecked = true
+                    if(selected_radio_btn != position) {
+                        notifyDataSetChanged()
+                        selected_radio_btn = position
+                    }
                 }
+
             }
         }
     }

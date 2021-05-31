@@ -34,6 +34,14 @@ class AddFragment : Fragment() {
         rvkategori.setHasFixedSize(true)
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)
+        tipe_pemasukan.setOnClickListener {
+            btn_pemasukan.isChecked = true
+            btn_pengeluaran.isChecked = false
+        }
+        tipe_pengeluaran.setOnClickListener {
+            btn_pengeluaran.isChecked = true
+            btn_pemasukan.isChecked = false
+        }
     }
 
     companion object {
