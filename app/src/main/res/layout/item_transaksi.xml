@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
-    android:layout_margin="15dp">
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,11 +18,16 @@
             android:layout_width="10dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/primary2"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+            <ImageView
+                android:id="@+id/line_color"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@color/primary"/>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -33,6 +40,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/icon"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
@@ -60,22 +68,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/rp1"
+                    android:id="@+id/rp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/saldo1"
                     android:text="-Rp"
                     android:textColor="@color/merah_tulisan"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/current_saldo"
+                    android:id="@+id/jumlah_saldo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/saldo1"
                     android:layout_marginStart="3dp"
-                    android:layout_toEndOf="@+id/rp1"
                     android:text="1.580.000"
                     android:textColor="@color/merah_tulisan"
                     android:textSize="18sp" />
@@ -97,8 +102,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="23 Sept 20"
-            android:textColor="#1C1C1C"
-            android:textSize="16sp"
+            android:textColor="#2C2C2C"
+            android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"

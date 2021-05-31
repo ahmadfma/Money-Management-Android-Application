@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
@@ -63,6 +64,7 @@ class AddFragment : Fragment() {
 
     private fun insertData() {
         viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toInt(), judul.text.toString(), getDate()))
+        Toast.makeText(context, "Transaksi berhasil dimasukkan", Toast.LENGTH_SHORT).show()
     }
 
     private fun getDate(): String {
