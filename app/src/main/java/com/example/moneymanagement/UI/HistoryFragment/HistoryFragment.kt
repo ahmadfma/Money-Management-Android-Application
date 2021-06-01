@@ -37,8 +37,10 @@ class HistoryFragment : Fragment() {
         tanggal_btn.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         viewmodel_fragment.getAllTransactionsDate(viewmodel_user, this, object: HistoryViewModel.UI {
             override fun setTanggalUI(date: List<String>) {
-                setTombolTanggal(date)
-                loadTransactionBasedOnDate(date[0])
+                if(date.isNotEmpty()) {
+                    setTombolTanggal(date)
+                    loadTransactionBasedOnDate(date[0])
+                }
             }
         })
 

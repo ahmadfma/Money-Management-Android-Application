@@ -9,10 +9,14 @@ import com.example.moneymanagement.R
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import kotlinx.android.synthetic.main.item_transaksi.view.*
 
-class TransactionsAdapter(private val listTransaction: List<TransactionEntity>): RecyclerView.Adapter<TransactionsAdapter.Holder>() {
+class TransactionsAdapter(private val listTransaction: List<TransactionEntity>, private val listener: Listener): RecyclerView.Adapter<TransactionsAdapter.Holder>() {
+
+    interface Listener {
+        fun onViewClick(transaction: TransactionEntity)
+    }
 
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(transaction: TransactionEntity) {
+        fun bind(transaction: TransactionEntity, listener: Listener) {
             with(itemView) {
                 setIcon(transaction.category, icon, line_color)
                 jumlah_saldo.text = transaction.amount.toString()
@@ -30,6 +34,9 @@ class TransactionsAdapter(private val listTransaction: List<TransactionEntity>):
                 }
                 tanggal.text = transaction.date
                 judul.text = transaction.title
+                itemView.setOnClickListener {
+                    listener.onViewClick(transaction)
+                }
             }
         }
         private fun setIcon(categori: String, icon: ImageView, line: ImageView) {
@@ -68,7 +75,7 @@ class TransactionsAdapter(private val listTransaction: List<TransactionEntity>):
     }
 
     override fun onBindViewHolder(holder: TransactionsAdapter.Holder, position: Int) {
-        holder.bind(listTransaction[position])
+        holder.bind(listTransaction[position], listener)
     }
 
     override fun getItemCount(): Int {
