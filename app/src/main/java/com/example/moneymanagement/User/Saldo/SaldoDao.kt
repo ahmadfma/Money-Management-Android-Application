@@ -9,7 +9,7 @@ import androidx.room.Query
 interface SaldoDao {
 
     @Query("SELECT saldo FROM user_saldo")
-    fun getCurrentSaldo(): Int
+    suspend fun getCurrentSaldo(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSaldo(saldo: SaldoEntity)

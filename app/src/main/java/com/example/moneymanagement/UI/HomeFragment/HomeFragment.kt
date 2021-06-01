@@ -1,6 +1,7 @@
 package com.example.moneymanagement.UI.HomeFragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,10 @@ import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+const val TAG = "HomeFragment"
 
 class HomeFragment : Fragment() {
 
@@ -32,7 +37,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvhome.setHasFixedSize(true)
         rvhome.layoutManager = LinearLayoutManager(context)
-        tanggal_saat_ini.text = Utilities.getDate()
+
+        GlobalScope.launch {
+            viewModel.getCurrentSaldo().let {
+                if(it != null) {
+                    current_saldo.text = "$it"
+                } else {
+                    current_saldo.text = "0"
+                }
+            }
+        }
+
         viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer {
             rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
                 override fun onViewClick(transaction: TransactionEntity) {

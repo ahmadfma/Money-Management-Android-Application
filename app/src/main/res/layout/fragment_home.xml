@@ -74,7 +74,7 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginStart="3dp"
                     android:textColor="@color/black"
-                    android:text="1.580.000"/>
+                    android:text="0"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/shareBtn"
@@ -128,7 +128,7 @@
                         android:textSize="20sp"
                         android:layout_marginTop="3dp"
                         android:layout_marginStart="3dp"
-                        android:text="1.580.000.000"
+                        android:text="-"
                         android:textColor="@color/hijau_tulisan"/>
 
                 </RelativeLayout>
@@ -169,7 +169,7 @@
                         android:textSize="20sp"
                         android:layout_marginTop="3dp"
                         android:layout_marginStart="3dp"
-                        android:text="1.580.000.000"
+                        android:text="-"
                         android:textColor="@color/merah_tulisan"/>
 
                 </RelativeLayout>
