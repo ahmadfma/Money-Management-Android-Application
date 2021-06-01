@@ -15,13 +15,14 @@
         android:id="@+id/topback"/>
 
     <TextView
+        android:id="@+id/tanggal_saat_ini"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="@color/white"
-        android:text="Selamat Pagi"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="20dp"/>
+        android:text="Senin, 1 Juni 2021"
+        android:layout_marginTop="55dp"
+        android:layout_marginStart="30dp"/>
     
     <androidx.cardview.widget.CardView
         android:id="@+id/saldo"

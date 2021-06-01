@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
+import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvhome.setHasFixedSize(true)
         rvhome.layoutManager = LinearLayoutManager(context)
+        tanggal_saat_ini.text = Utilities.getDate()
         viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer {
             rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
                 override fun onViewClick(transaction: TransactionEntity) {
