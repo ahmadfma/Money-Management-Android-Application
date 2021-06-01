@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.HistoryFragment
+package com.example.moneymanagement.UI.HistoryFragment.Adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +19,12 @@ class TombolTanggalAdapter(private val listTanggal: List<String>?): RecyclerView
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TombolTanggalAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_tombol_tanggal, parent, false)
         return Holder(view)
     }
 
-    override fun onBindViewHolder(holder: TombolTanggalAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(listTanggal!![position])
     }
 

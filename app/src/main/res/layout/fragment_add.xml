@@ -10,14 +10,15 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white">
+        android:backgroundTint="@color/primary2">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="30dp"
             android:paddingBottom="18dp"
-            app:title="Tambah Transaksi"/>
+            app:title="Tambah Transaksi"
+            app:titleTextColor="@color/white"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
