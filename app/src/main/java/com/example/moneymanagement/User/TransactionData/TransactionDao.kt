@@ -13,7 +13,7 @@ interface TransactionDao {
     fun getAllDateTransactions(): LiveData<List<String>>
 
     @Query("SELECT * FROM user_transactions WHERE date LIKE :date")
-    fun getTransactionsBasedOnDate(date: String): LiveData<List<TransactionEntity>>
+    suspend fun getTransactionsBasedOnDate(date: String): List<TransactionEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTransaction(data: TransactionEntity)

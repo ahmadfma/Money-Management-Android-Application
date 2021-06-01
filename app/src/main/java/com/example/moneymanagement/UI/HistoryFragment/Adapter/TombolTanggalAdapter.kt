@@ -9,12 +9,34 @@ import kotlinx.android.synthetic.main.item_tombol_tanggal.view.*
 
 class TombolTanggalAdapter(private val listTanggal: List<String>?): RecyclerView.Adapter<TombolTanggalAdapter.Holder>() {
 
+    private var selectedIndex = 0
+
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(tanggal: String) {
             with(itemView) {
                 val temp = tanggal.split(" ").toTypedArray()
                 tanggal_tombol.text = temp[0]
                 bulan_tombol.text = temp[1]
+                if(selectedIndex == absoluteAdapterPosition) {
+                    tanggal_tombol.setTextColor(resources.getColor(R.color.white))
+                    bulan_tombol.setTextColor(resources.getColor(R.color.white))
+                    img.setImageResource(R.color.primary)
+                } else {
+                    tanggal_tombol.setTextColor(resources.getColor(R.color.black))
+                    bulan_tombol.setTextColor(resources.getColor(R.color.black))
+                    img.setImageResource(R.color.white)
+                }
+
+                itemView.setOnClickListener {
+                    tanggal_tombol.setTextColor(resources.getColor(R.color.white))
+                    bulan_tombol.setTextColor(resources.getColor(R.color.white))
+                    img.setImageResource(R.color.primary)
+                    if(selectedIndex != absoluteAdapterPosition) {
+                        selectedIndex = absoluteAdapterPosition
+                        notifyDataSetChanged()
+                    }
+                }
+
             }
         }
     }

@@ -11,8 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.HistoryFragment.Adapter.TombolTanggalAdapter
+import com.example.moneymanagement.UI.HomeFragment.TransactionsAdapter
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.coroutines.*
 
 const val TAG = "HistoryFragment"
 
@@ -38,6 +40,16 @@ class HistoryFragment : Fragment() {
                 setUIDate(date)
             }
         })
+
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                val listTransaksi = async { viewmodel_fragment.getTransactionsBasedOnDate(viewmodel_user, "1 Juni") }.await()
+                daftar_riwayat.setHasFixedSize(true)
+                daftar_riwayat.layoutManager = LinearLayoutManager(context)
+                daftar_riwayat.adapter = listTransaksi?.let { TransactionsAdapter(it) }
+            }
+        }
+
     }
 
     private fun setUIDate(data: List<String>?) {

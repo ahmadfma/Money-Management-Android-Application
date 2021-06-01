@@ -39,5 +39,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return allDateTransactions
     }
 
+    fun getTransactionBasedOnDate(date: String): List<TransactionEntity>? {
+        return transactionRepository.getTransactionsBasedOnDate(date)
+    }
 
 }
