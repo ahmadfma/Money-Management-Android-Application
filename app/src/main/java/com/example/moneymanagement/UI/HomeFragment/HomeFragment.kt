@@ -133,6 +133,7 @@ class HomeFragment : Fragment() {
 
         dialogView.hapus.setOnClickListener {
             viewModel.deleteTransactions(transaction)
+            mDialog?.dismiss()
             Toast.makeText(context, "Berhasil Dihapus", Toast.LENGTH_SHORT).show()
         }
 

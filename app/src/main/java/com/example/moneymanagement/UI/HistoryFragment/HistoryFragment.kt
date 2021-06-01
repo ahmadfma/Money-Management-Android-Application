@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.example.moneymanagement.UI.HomeFragment.TransactionsAdapter
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
 import kotlinx.coroutines.*
 
 const val TAG = "HistoryFragment"
@@ -82,7 +84,102 @@ class HistoryFragment : Fragment() {
     }
 
     private fun onViewAction(transaction: TransactionEntity) {
-        Toast.makeText(context, transaction.title, Toast.LENGTH_SHORT).show()
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.item_transaction_dialog, null)
+        val builder = context?.let {
+            AlertDialog.Builder(it)
+                .setView(dialogView)
+        }
+        val mDialog = builder?.show()
+        when(transaction.category) {
+            "Makanan & Minuman" -> {
+                dialogView.line.setImageResource(R.color.merah)
+            }
+            "Kecantikan & Kesehatan" -> {
+                dialogView.line.setImageResource(R.color.pink)
+            }
+            "Sosial & Gaya Hidup"-> {
+                dialogView.line.setImageResource(R.color.ungu)
+            }
+            "Entertainment" -> {
+                dialogView.line.setImageResource(R.color.biru)
+            }
+            "Transportasi" -> {
+                dialogView.line.setImageResource(R.color.kuning)
+            }
+            "Lainnya" -> {
+                dialogView.line.setImageResource(R.color.hijau)
+            }
+        }
+        dialogView.close_btn.setOnClickListener {
+            mDialog?.dismiss()
+        }
+        dialogView.judulET.setText(transaction.title)
+        dialogView.jumlahET.setText(transaction.amount.toString())
+        dialogView.tanggalET.isEnabled = false
+        dialogView.tanggalET.setText(transaction.date)
+        dialogView.tipeET.isEnabled = false
+        dialogView.tipeET.setText(transaction.type)
+        when(transaction.category) {
+            "Makanan & Minuman" -> {
+                dialogView.makanan_minuman.isChecked = true
+            }
+            "Kecantikan & Kesehatan" -> {
+                dialogView.kecantikan_kesehatan.isChecked = true
+            }
+            "Sosial & Gaya Hidup" -> {
+                dialogView.sosial_gayahidup.isChecked = true
+            }
+            "Entertainment" -> {
+                dialogView.entertainment.isChecked = true
+            }
+            "Transportasi" -> {
+                dialogView.transportasi.isChecked = true
+            }
+            "Lainnya" -> {
+                dialogView.lainnya.isChecked = true
+            }
+        }
+
+        dialogView.simpan.setOnClickListener {
+            var kategori = ""
+            when(dialogView.radiogroup.checkedRadioButtonId) {
+                R.id.makanan_minuman -> {
+                    kategori = "Makanan & Minuman"
+                }
+                R.id.kecantikan_kesehatan -> {
+                    kategori = "Kecantikan & Kesehatan"
+                }
+                R.id.sosial_gayahidup -> {
+                    kategori = "Sosial & Gaya Hidup"
+                }
+                R.id.entertainment -> {
+                    kategori = "Entertainment"
+                }
+                R.id.transportasi -> {
+                    kategori = "Transportasi"
+                }
+                R.id.lainnya -> {
+                    kategori = "Lainnya"
+                }
+            }
+
+            viewmodel_user.updateTransactions(TransactionEntity(transaction.id,
+                transaction.type,
+                kategori,
+                dialogView.jumlahET.text.toString().toInt(),
+                dialogView.judulET.text.toString(),
+                transaction.date
+            ))
+            mDialog?.dismiss()
+            Toast.makeText(context, "Berhasil Disimpan", Toast.LENGTH_SHORT).show()
+        }
+
+        dialogView.hapus.setOnClickListener {
+            viewmodel_user.deleteTransactions(transaction)
+            mDialog?.dismiss()
+            Toast.makeText(context, "Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     companion object {
