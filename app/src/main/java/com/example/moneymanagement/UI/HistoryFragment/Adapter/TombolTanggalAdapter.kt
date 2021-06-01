@@ -7,12 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moneymanagement.R
 import kotlinx.android.synthetic.main.item_tombol_tanggal.view.*
 
-class TombolTanggalAdapter(private val listTanggal: List<String>?): RecyclerView.Adapter<TombolTanggalAdapter.Holder>() {
+class TombolTanggalAdapter(private val listTanggal: List<String>?, private val listener: Listener): RecyclerView.Adapter<TombolTanggalAdapter.Holder>() {
+
+    interface Listener {
+        fun onDateClick(date: String)
+    }
 
     private var selectedIndex = 0
 
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(tanggal: String) {
+        fun bind(tanggal: String, listener: Listener) {
             with(itemView) {
                 val temp = tanggal.split(" ").toTypedArray()
                 tanggal_tombol.text = temp[0]
@@ -35,6 +39,7 @@ class TombolTanggalAdapter(private val listTanggal: List<String>?): RecyclerView
                         selectedIndex = absoluteAdapterPosition
                         notifyDataSetChanged()
                     }
+                    listener.onDateClick(tanggal)
                 }
 
             }
@@ -47,7 +52,7 @@ class TombolTanggalAdapter(private val listTanggal: List<String>?): RecyclerView
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(listTanggal!![position])
+        holder.bind(listTanggal!![position], listener)
     }
 
     override fun getItemCount(): Int {

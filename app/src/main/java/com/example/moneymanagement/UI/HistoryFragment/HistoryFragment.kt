@@ -37,33 +37,38 @@ class HistoryFragment : Fragment() {
         tanggal_btn.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         viewmodel_fragment.getAllTransactionsDate(viewmodel_user, this, object: HistoryViewModel.UI {
             override fun setTanggalUI(date: List<String>) {
-                setUIDate(date)
+                setTombolTanggal(date)
+                loadTransactionBasedOnDate(date[0])
             }
         })
 
-        GlobalScope.launch {
-            withContext(Dispatchers.Main) {
-                val listTransaksi = async { viewmodel_fragment.getTransactionsBasedOnDate(viewmodel_user, "1 Juni") }.await()
-                daftar_riwayat.setHasFixedSize(true)
-                daftar_riwayat.layoutManager = LinearLayoutManager(context)
-                daftar_riwayat.adapter = listTransaksi?.let { TransactionsAdapter(it) }
-            }
-        }
-
     }
 
-    private fun setUIDate(data: List<String>?) {
+    private fun setTombolTanggal(data: List<String>?) {
         val date: MutableList<String>? = data?.map {
             val temp = it.split(" ").toTypedArray()
             "${temp[1]} ${temp[2]}"
         } as MutableList<String>
 
-        Log.d(TAG, data.toString())
-        Log.d(TAG, date.toString())
-
         val set = date?.toSet()
         val list = set?.toMutableList()
-        tanggal_btn.adapter = TombolTanggalAdapter(list)
+        tanggal_btn.adapter = TombolTanggalAdapter(list, object : TombolTanggalAdapter.Listener {
+            override fun onDateClick(date: String) {
+                loadTransactionBasedOnDate(date)
+            }
+
+        })
+    }
+
+    private fun loadTransactionBasedOnDate(date: String) {
+        GlobalScope.launch {
+            withContext(Dispatchers.Main) {
+                val listTransaksi = async { viewmodel_fragment.getTransactionsBasedOnDate(viewmodel_user, date) }.await()
+                daftar_riwayat.setHasFixedSize(true)
+                daftar_riwayat.layoutManager = LinearLayoutManager(context)
+                daftar_riwayat.adapter = listTransaksi?.let { TransactionsAdapter(it) }
+            }
+        }
     }
 
 
