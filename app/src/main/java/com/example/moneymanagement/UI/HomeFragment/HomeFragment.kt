@@ -14,6 +14,7 @@ import com.example.moneymanagement.R
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_transaction_dialog.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
 
 class HomeFragment : Fragment() {
@@ -75,6 +76,41 @@ class HomeFragment : Fragment() {
                 dialogView.lainnya.isChecked = true
             }
         }
+
+        dialogView.simpan.setOnClickListener {
+            var kategori = ""
+            when(dialogView.radiogroup.checkedRadioButtonId) {
+                R.id.makanan_minuman -> {
+                    kategori = "Makanan & Minuman"
+                }
+                R.id.kecantikan_kesehatan -> {
+                    kategori = "Kecantikan & Kesehatan"
+                }
+                R.id.sosial_gayahidup -> {
+                    kategori = "Sosial & Gaya Hidup"
+                }
+                R.id.entertainment -> {
+                    kategori = "Entertainment"
+                }
+                R.id.transportasi -> {
+                    kategori = "Transportasi"
+                }
+                R.id.lainnya -> {
+                    kategori = "Lainnya"
+                }
+            }
+
+            viewModel.updateTransactions(TransactionEntity(transaction.id,
+                transaction.type,
+                kategori,
+                dialogView.jumlahET.text.toString().toInt(),
+                dialogView.judulET.text.toString(),
+                transaction.date
+            ))
+            mDialog?.dismiss()
+            Toast.makeText(context, "Berhasil Disimpan", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     companion object {
