@@ -11,15 +11,21 @@ class TransactionRepository(application: Application) {
 
     private var transactionDao: TransactionDao?
     private var transactions: LiveData<List<TransactionEntity>>? = null
+    private var allTransactionsDate: LiveData<List<String>>? = null
 
     init {
         val db = UserDatabase.getDatabase(application.applicationContext)
         transactionDao = db.transactionDao()
         transactions = transactionDao!!.getTransactions()
+        allTransactionsDate = transactionDao!!.getAllDateTransactions()
     }
 
     fun getTransactions(): LiveData<List<TransactionEntity>>? {
         return transactions
+    }
+
+    fun getAllDateTransactions(): LiveData<List<String>>? {
+        return allTransactionsDate
     }
 
     fun insert(data: TransactionEntity) = runBlocking {

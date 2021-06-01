@@ -17,6 +17,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     private var transactionRepository = TransactionRepository(application)
     private var transactions: LiveData<List<TransactionEntity>>? = transactionRepository.getTransactions()
+    private var allDateTransactions: LiveData<List<String>>? = transactionRepository.getAllDateTransactions()
 
     fun insertTransaction(data: TransactionEntity) {
         transactionRepository.insert(data)
@@ -32,6 +33,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     fun updateTransactions(data: TransactionEntity) {
         transactionRepository.update(data)
+    }
+
+    fun getAllDateTransactions(): LiveData<List<String>>? {
+        return allDateTransactions
     }
 
 
