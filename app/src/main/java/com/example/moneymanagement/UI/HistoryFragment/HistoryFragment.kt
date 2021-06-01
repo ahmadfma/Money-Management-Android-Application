@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.HistoryFragment.Adapter.TombolTanggalAdapter
 import com.example.moneymanagement.UI.HomeFragment.TransactionsAdapter
+import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.coroutines.*
@@ -68,11 +70,20 @@ class HistoryFragment : Fragment() {
                 val listTransaksi = async { viewmodel_fragment.getTransactionsBasedOnDate(viewmodel_user, date) }.await()
                 daftar_riwayat.setHasFixedSize(true)
                 daftar_riwayat.layoutManager = LinearLayoutManager(context)
-                daftar_riwayat.adapter = listTransaksi?.let { TransactionsAdapter(it) }
+                daftar_riwayat.adapter = listTransaksi?.let {
+                    TransactionsAdapter(it, object : TransactionsAdapter.Listener {
+                        override fun onViewClick(transaction: TransactionEntity) {
+                            onViewAction(transaction)
+                        }
+                    })
+                }
             }
         }
     }
 
+    private fun onViewAction(transaction: TransactionEntity) {
+        Toast.makeText(context, transaction.title, Toast.LENGTH_SHORT).show()
+    }
 
     companion object {
         @JvmStatic

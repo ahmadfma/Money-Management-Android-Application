@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
+import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -27,8 +29,16 @@ class HomeFragment : Fragment() {
         rvhome.setHasFixedSize(true)
         rvhome.layoutManager = LinearLayoutManager(context)
         viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer {
-            rvhome.adapter = TransactionsAdapter(it)
+            rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
+                override fun onViewClick(transaction: TransactionEntity) {
+                    onViewAction(transaction)
+                }
+            })
         })
+    }
+
+    private fun onViewAction(transaction: TransactionEntity) {
+        Toast.makeText(context, "${transaction.title}", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
