@@ -2,6 +2,7 @@ package com.example.moneymanagement.UI.BaseFragment
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.example.moneymanagement.R
 
 class BaseViewModel: ViewModel() {
 
@@ -9,6 +10,6 @@ class BaseViewModel: ViewModel() {
         Log.d("BaseViewModel", "created")
     }
 
-    var selectedBottomNavigationID = 0
+    var selectedBottomNavigationID = R.id.nav_home
 
 }
