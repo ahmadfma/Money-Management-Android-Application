@@ -47,6 +47,26 @@ class HomeFragment : Fragment() {
                 .setView(dialogView)
         }
         val mDialog = builder?.show()
+        when(transaction.category) {
+            "Makanan & Minuman" -> {
+                dialogView.line.setImageResource(R.color.merah)
+            }
+            "Kecantikan & Kesehatan" -> {
+                dialogView.line.setImageResource(R.color.pink)
+            }
+            "Sosial & Gaya Hidup"-> {
+                dialogView.line.setImageResource(R.color.ungu)
+            }
+            "Entertainment" -> {
+                dialogView.line.setImageResource(R.color.biru)
+            }
+            "Transportasi" -> {
+                dialogView.line.setImageResource(R.color.kuning)
+            }
+            "Lainnya" -> {
+                dialogView.line.setImageResource(R.color.hijau)
+            }
+        }
         dialogView.close_btn.setOnClickListener {
             mDialog?.dismiss()
         }
@@ -109,6 +129,11 @@ class HomeFragment : Fragment() {
             ))
             mDialog?.dismiss()
             Toast.makeText(context, "Berhasil Disimpan", Toast.LENGTH_SHORT).show()
+        }
+
+        dialogView.hapus.setOnClickListener {
+            viewModel.deleteTransactions(transaction)
+            Toast.makeText(context, "Berhasil Dihapus", Toast.LENGTH_SHORT).show()
         }
 
     }
