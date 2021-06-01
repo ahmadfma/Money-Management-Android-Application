@@ -43,4 +43,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return transactionRepository.getTransactionsBasedOnDate(date)
     }
 
+    fun getLastTransaction(): LiveData<List<TransactionEntity>>?{
+        return transactionRepository.getLastTransactions()
+    }
+
 }

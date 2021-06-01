@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvhome.setHasFixedSize(true)
         rvhome.layoutManager = LinearLayoutManager(context)
-        viewModel.getTransactions()?.observe(viewLifecycleOwner, Observer {
+        viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer {
             rvhome.adapter = TransactionsAdapter(it)
         })
     }

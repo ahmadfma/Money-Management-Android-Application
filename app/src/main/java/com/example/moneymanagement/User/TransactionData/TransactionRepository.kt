@@ -11,12 +11,14 @@ class TransactionRepository(application: Application) {
     private var transactionDao: TransactionDao?
     private var transactions: LiveData<List<TransactionEntity>>? = null
     private var allTransactionsDate: LiveData<List<String>>? = null
+    private var lastTransactions: LiveData<List<TransactionEntity>>? = null
 
     init {
         val db = UserDatabase.getDatabase(application.applicationContext)
         transactionDao = db.transactionDao()
         transactions = transactionDao!!.getTransactions()
         allTransactionsDate = transactionDao!!.getAllDateTransactions()
+        lastTransactions = transactionDao!!.getLastTransactions(3)
     }
 
     fun getTransactions(): LiveData<List<TransactionEntity>>? {
@@ -39,6 +41,10 @@ class TransactionRepository(application: Application) {
         }
         Log.d("TransactionRepo", "getTransactionsBasedOnDate, Size = ${list?.size}")
         return list
+    }
+
+    fun getLastTransactions(): LiveData<List<TransactionEntity>>? {
+        return lastTransactions
     }
 
     fun insert(data: TransactionEntity) = runBlocking {
