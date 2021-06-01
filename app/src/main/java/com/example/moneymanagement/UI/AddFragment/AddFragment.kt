@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
+import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_add.*
 import java.util.*
 
@@ -63,18 +64,8 @@ class AddFragment : Fragment() {
     }
 
     private fun insertData() {
-        viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toInt(), judul.text.toString(), getDate()))
+        viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toInt(), judul.text.toString(), Utilities.getDate()))
         Toast.makeText(context, "Transaksi berhasil dimasukkan", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun getDate(): String {
-        var hariIni = ""
-        //get Time Now
-        val dateNow = Calendar.getInstance().time
-        hariIni = DateFormat.format("EEEE", dateNow) as String
-        val date = Calendar.getInstance().time
-        val tanggal = DateFormat.format("d MMMM yyyy", date) as String
-        return "$hariIni, $tanggal"
     }
 
     companion object {
