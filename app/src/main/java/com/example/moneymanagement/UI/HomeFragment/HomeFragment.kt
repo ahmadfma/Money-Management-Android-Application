@@ -16,8 +16,12 @@ import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_saldo_dialog.view.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
+import kotlinx.android.synthetic.main.item_transaction_dialog.view.close_btn
+import kotlinx.android.synthetic.main.item_transaction_dialog.view.jumlahET
+import kotlinx.android.synthetic.main.item_transaction_dialog.view.simpan
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -49,6 +53,10 @@ class HomeFragment : Fragment() {
             }
         }
 
+        saldo.setOnClickListener {
+            saldoAction()
+        }
+
         viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
             rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
                 override fun onViewClick(transaction: TransactionEntity) {
@@ -56,6 +64,21 @@ class HomeFragment : Fragment() {
                 }
             })
         })
+    }
+
+    private fun saldoAction() {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.item_saldo_dialog, null)
+        val builder = context?.let {
+            AlertDialog.Builder(it)
+                .setView(dialogView)
+        }
+        val mDialog = builder?.show()
+        dialogView.close_btn.setOnClickListener {
+            mDialog?.dismiss()
+        }
+        dialogView.simpan.setOnClickListener {
+
+        }
     }
 
     private fun onViewAction(transaction: TransactionEntity) {
