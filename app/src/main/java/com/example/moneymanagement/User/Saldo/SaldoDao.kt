@@ -11,6 +11,12 @@ interface SaldoDao {
     @Query("SELECT saldo FROM user_saldo")
     suspend fun getCurrentSaldo(): Int
 
+    @Query("SELECT pemasukan FROM user_saldo")
+    suspend fun getCurrentPemasukan(): Int
+
+    @Query("SELECT pengeluaran FROM user_saldo")
+    suspend fun getCurrentPengeluaran(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSaldo(saldo: SaldoEntity)
 }

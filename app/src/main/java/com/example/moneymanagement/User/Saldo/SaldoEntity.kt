@@ -7,5 +7,7 @@ import androidx.room.PrimaryKey
 data class SaldoEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    var saldo: Int
+    var saldo: Int,
+    var pemasukan: Int,
+    var pengeluaran: Int
 )

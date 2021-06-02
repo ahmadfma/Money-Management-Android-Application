@@ -19,4 +19,12 @@ class SaldoRepository(application: Application) {
         return saldoDao?.getCurrentSaldo()
     }
 
+    suspend fun getCurrentPemasukan(): Int? {
+        return saldoDao?.getCurrentPemasukan()
+    }
+
+    suspend fun getCurrentPengeluaran(): Int? {
+        return saldoDao?.getCurrentPengeluaran()
+    }
+
 }
