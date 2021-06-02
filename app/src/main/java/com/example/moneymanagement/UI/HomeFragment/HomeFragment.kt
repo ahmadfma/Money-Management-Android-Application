@@ -37,8 +37,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvhome.setHasFixedSize(true)
         rvhome.layoutManager = LinearLayoutManager(context)
+        tanggal_saat_ini.text = Utilities.getDate()
 
-        GlobalScope.launch {
+        GlobalScope.launch { //menampilkan saldo saat ini
             viewModel.getCurrentSaldo().let {
                 if(it != null) {
                     current_saldo.text = "$it"
@@ -48,7 +49,7 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer {
+        viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
             rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
                 override fun onViewClick(transaction: TransactionEntity) {
                     onViewAction(transaction)

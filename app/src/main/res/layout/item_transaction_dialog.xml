@@ -49,7 +49,8 @@
                 android:layout_marginEnd="20dp"
                 android:hint="judul"
                 app:helperText="Required*"
-                app:helperTextTextColor="@color/merah_tulisan">
+                app:helperTextTextColor="@color/merah_tulisan"
+                android:textColorHint="@color/primary">
                 <EditText
                     android:id="@+id/judulET"
                     android:layout_width="match_parent"
@@ -71,7 +72,8 @@
                 android:layout_marginEnd="20dp"
                 android:hint="Jumlah"
                 app:helperText="Required*"
-                app:helperTextTextColor="@color/merah_tulisan">
+                app:helperTextTextColor="@color/merah_tulisan"
+                android:textColorHint="@color/primary">
                 <EditText
                     android:id="@+id/jumlahET"
                     android:layout_width="match_parent"
@@ -88,13 +90,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:hint="Tanggal">
+                android:hint="Tanggal"
+                android:textColorHint="@color/primary">
                 <EditText
                     android:id="@+id/tanggalET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text=" " />
+                    android:text=" "
+                    android:textColor="#7A7A7A"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -107,13 +111,15 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
-                android:hint="Tipe">
+                android:hint="Tipe"
+                android:textColorHint="@color/primary">
                 <EditText
                     android:id="@+id/tipeET"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:text=" " />
+                    android:text=" "
+                    android:textColor="#7A7A7A"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
