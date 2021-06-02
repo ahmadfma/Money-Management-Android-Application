@@ -84,8 +84,26 @@
             android:text="Simpan"
             android:layout_marginTop="20dp"
             android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp" />
+
+        <Button
+            android:id="@+id/reset_pemasukan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="reset pemasukan"
+            android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/reset_pengeluaran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="reset pengeluaran"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 
