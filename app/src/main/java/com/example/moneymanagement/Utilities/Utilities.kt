@@ -1,6 +1,7 @@
 package com.example.moneymanagement.Utilities
 
 import android.text.format.DateFormat
+import java.text.NumberFormat
 import java.util.*
 
 class Utilities {
@@ -14,5 +15,12 @@ class Utilities {
             val tanggal = DateFormat.format("d MMMM yyyy", date) as String
             return "$hariIni, $tanggal"
         }
+
+        fun formatNumber(num: Long): String {
+            val idLocale: Locale = Locale("id", "ID")
+            val format: NumberFormat = NumberFormat.getInstance(idLocale)
+            return format.format(num)
+        }
+
     }
 }

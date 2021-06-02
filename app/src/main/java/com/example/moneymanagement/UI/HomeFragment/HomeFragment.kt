@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
         viewModel.getCurrentSaldo()?.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 saldo_user = it
-                current_saldo.text = it.toString()
+                current_saldo.text = Utilities.formatNumber(it)
             } else {
                 saldo_user = 0
                 current_saldo.text = "0"
@@ -67,7 +67,7 @@ class HomeFragment : Fragment() {
         viewModel.getCurrentPemasukan()?.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 pemasukan_user = it
-                pemasukan.text = it.toString()
+                pemasukan.text = Utilities.formatNumber(it)
             } else {
                 pemasukan_user = 0
                 pemasukan.text = "0"
@@ -77,7 +77,7 @@ class HomeFragment : Fragment() {
         viewModel.getCurrentPengeluaran()?.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 pengeluaran_user = it
-                pengeluaran.text = it.toString()
+                pengeluaran.text = Utilities.formatNumber(it)
             } else {
                 pengeluaran_user = 0
                 pengeluaran.text = "0"
@@ -98,6 +98,8 @@ class HomeFragment : Fragment() {
         dialogView.close_btn.setOnClickListener {
             mDialog?.dismiss()
         }
+        dialogView.pemasukanET.isEnabled = false
+        dialogView.pengeluaranET.isEnabled = false
         dialogView.simpan.setOnClickListener {
             val saldo = dialogView.saldoET.text.toString().toLong()
             viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan_user, pengeluaran_user))

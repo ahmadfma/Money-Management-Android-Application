@@ -47,7 +47,7 @@ class AddFragment : Fragment() {
         rvkategori.setHasFixedSize(true)
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)
-        saldo_user.text = "(Saldo Anda: Rp.${HomeFragment.saldo_user})"
+        saldo_user.text = "(Saldo Anda: Rp ${Utilities.formatNumber(HomeFragment.saldo_user)})"
         tipe_pemasukan.setOnClickListener {
             btn_pemasukan.isChecked = true
             btn_pengeluaran.isChecked = false
@@ -60,7 +60,11 @@ class AddFragment : Fragment() {
         }
 
         simpan_btn.setOnClickListener {
-            insertData()
+            if(kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
+                insertData()
+            } else {
+                Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

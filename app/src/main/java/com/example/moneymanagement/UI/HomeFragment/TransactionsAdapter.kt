@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moneymanagement.R
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
+import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.item_transaksi.view.*
 
 class TransactionsAdapter(private val listTransaction: List<TransactionEntity>, private val listener: Listener): RecyclerView.Adapter<TransactionsAdapter.Holder>() {
@@ -19,7 +20,7 @@ class TransactionsAdapter(private val listTransaction: List<TransactionEntity>, 
         fun bind(transaction: TransactionEntity, listener: Listener) {
             with(itemView) {
                 setIcon(transaction.category, icon, line_color)
-                jumlah_saldo.text = transaction.amount.toString()
+                jumlah_saldo.text = Utilities.formatNumber(transaction.amount.toLong())
                 when(transaction.type) {
                     "pemasukan" -> {
                         rp.text = "+Rp"
