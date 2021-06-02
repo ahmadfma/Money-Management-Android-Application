@@ -98,13 +98,27 @@ class HomeFragment : Fragment() {
         dialogView.close_btn.setOnClickListener {
             mDialog?.dismiss()
         }
-        dialogView.pemasukanET.isEnabled = false
-        dialogView.pengeluaranET.isEnabled = false
         dialogView.simpan.setOnClickListener {
             val saldo = dialogView.saldoET.text.toString().toLong()
-            viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan_user, pengeluaran_user))
+            val pemasukan = dialogView.pemasukanET.text.toString().toLong()
+            val pengeluaran = dialogView.pengeluaranET.text.toString().toLong()
+            viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan, pengeluaran))
             mDialog?.dismiss()
             Toast.makeText(context, "Saldo Berhasil Disimpan", Toast.LENGTH_SHORT).show()
+        }
+        dialogView.reset_pemasukan.setOnClickListener {
+            val saldo = dialogView.saldoET.text.toString().toLong()
+            val pengeluaran = dialogView.pengeluaranET.text.toString().toLong()
+            viewModel.insertUserSaldo(SaldoEntity(0, saldo, 0, pengeluaran))
+            mDialog?.dismiss()
+            Toast.makeText(context, "Pemasukan berhasil direset", Toast.LENGTH_SHORT).show()
+        }
+        dialogView.reset_pengeluaran.setOnClickListener {
+            val saldo = dialogView.saldoET.text.toString().toLong()
+            val pemasukan = dialogView.pemasukanET.text.toString().toLong()
+            viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan, 0))
+            mDialog?.dismiss()
+            Toast.makeText(context, "Pengeluaran berhasil direset", Toast.LENGTH_SHORT).show()
         }
     }
 
