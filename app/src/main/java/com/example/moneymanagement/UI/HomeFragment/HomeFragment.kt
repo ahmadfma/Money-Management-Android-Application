@@ -62,6 +62,7 @@ class HomeFragment : Fragment() {
         viewModel.getCurrentSaldo().let {
             if(it != null) {
                 current_saldo.text = "$it"
+                saldo_user = it
             } else {
                 current_saldo.text = "0"
             }
@@ -69,15 +70,17 @@ class HomeFragment : Fragment() {
         viewModel.getCurrentPemasukan().let {
             if (it != null) {
                 pemasukan.text = "$it"
+                pemasukan_user = it
             } else {
-                pemasukan.text = "-"
+                pemasukan.text = "0"
             }
         }
         viewModel.getCurrentPengeluaran().let {
             if (it != null) {
                 pengeluaran.text = "$it"
+                pengeluaran_user = it
             } else {
-                pengeluaran.text = "-"
+                pengeluaran.text = "0"
             }
         }
     }
@@ -89,6 +92,9 @@ class HomeFragment : Fragment() {
                 .setView(dialogView)
         }
         val mDialog = builder?.show()
+        dialogView.saldoET.setText(saldo_user.toString())
+        dialogView.pemasukanET.setText(pemasukan_user.toString())
+        dialogView.pengeluaranET.setText(pengeluaran_user.toString())
         dialogView.close_btn.setOnClickListener {
             mDialog?.dismiss()
         }
@@ -209,5 +215,8 @@ class HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment()
+        var saldo_user = 0
+        private var pemasukan_user = 0
+        private var pengeluaran_user = 0
     }
 }
