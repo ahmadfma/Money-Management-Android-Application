@@ -221,7 +221,7 @@ class HomeFragment : Fragment() {
         @JvmStatic
         fun newInstance() = HomeFragment()
         var saldo_user = 0L
-        private var pemasukan_user = 0L
-        private var pengeluaran_user = 0L
+        var pemasukan_user = 0L
+        var pengeluaran_user = 0L
     }
 }
