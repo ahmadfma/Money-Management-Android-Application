@@ -51,15 +51,15 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //SALDO
-    suspend fun getCurrentSaldo(): Int? {
+    fun getCurrentSaldo(): LiveData<Int>? {
         return saldoRepository.getCurrentSaldo()
     }
 
-    suspend fun getCurrentPemasukan(): Int? {
+    fun getCurrentPemasukan(): LiveData<Int>? {
         return saldoRepository.getCurrentPemasukan()
     }
 
-    suspend fun getCurrentPengeluaran(): Int? {
+    fun getCurrentPengeluaran(): LiveData<Int>? {
         return saldoRepository.getCurrentPengeluaran()
     }
 

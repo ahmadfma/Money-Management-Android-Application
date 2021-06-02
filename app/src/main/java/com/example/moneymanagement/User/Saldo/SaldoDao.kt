@@ -1,5 +1,6 @@
 package com.example.moneymanagement.User.Saldo
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -9,13 +10,13 @@ import androidx.room.Query
 interface SaldoDao {
 
     @Query("SELECT saldo FROM user_saldo")
-    suspend fun getCurrentSaldo(): Int
+    fun getCurrentSaldo(): LiveData<Int>
 
     @Query("SELECT pemasukan FROM user_saldo")
-    suspend fun getCurrentPemasukan(): Int
+    fun getCurrentPemasukan(): LiveData<Int>
 
     @Query("SELECT pengeluaran FROM user_saldo")
-    suspend fun getCurrentPengeluaran(): Int
+    fun getCurrentPengeluaran(): LiveData<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSaldo(saldo: SaldoEntity)

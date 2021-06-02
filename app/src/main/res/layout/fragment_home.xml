@@ -117,7 +117,7 @@
                         android:textSize="20sp"
                         android:layout_marginTop="3dp"
                         android:layout_marginStart="3dp"
-                        android:text="-"
+                        android:text="0"
                         android:textColor="@color/hijau_tulisan"/>
 
                 </RelativeLayout>
@@ -158,7 +158,7 @@
                         android:textSize="20sp"
                         android:layout_marginTop="3dp"
                         android:layout_marginStart="3dp"
-                        android:text="-"
+                        android:text="0"
                         android:textColor="@color/merah_tulisan"/>
 
                 </RelativeLayout>

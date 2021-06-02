@@ -1,6 +1,7 @@
 package com.example.moneymanagement.User.Saldo
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import com.example.moneymanagement.User.UserDatabase
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -15,15 +16,15 @@ class SaldoRepository(application: Application) {
         saldoDao = db.saldoDao()
     }
 
-    suspend fun getCurrentSaldo(): Int? {
+    fun getCurrentSaldo(): LiveData<Int>? {
         return saldoDao?.getCurrentSaldo()
     }
 
-    suspend fun getCurrentPemasukan(): Int? {
+    fun getCurrentPemasukan(): LiveData<Int>? {
         return saldoDao?.getCurrentPemasukan()
     }
 
-    suspend fun getCurrentPengeluaran(): Int? {
+    fun getCurrentPengeluaran(): LiveData<Int>? {
         return saldoDao?.getCurrentPengeluaran()
     }
 

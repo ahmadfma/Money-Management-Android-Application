@@ -48,41 +48,40 @@ class HomeFragment : Fragment() {
         saldo.setOnClickListener {
             saldoAction()
         }
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            withContext(Dispatchers.Main) {
-                loadUserSaldo()
-            }
-        }
-
+        loadUserSaldo()
         loadUserLastTransaction()
     }
 
-    private suspend fun loadUserSaldo() {
-        viewModel.getCurrentSaldo().let {
+    private fun loadUserSaldo() {
+        viewModel.getCurrentSaldo()?.observe(viewLifecycleOwner, Observer {
             if(it != null) {
-                current_saldo.text = "$it"
                 saldo_user = it
+                current_saldo.text = it.toString()
             } else {
+                saldo_user = 0
                 current_saldo.text = "0"
             }
-        }
-        viewModel.getCurrentPemasukan().let {
-            if (it != null) {
-                pemasukan.text = "$it"
+        })
+
+        viewModel.getCurrentPemasukan()?.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
                 pemasukan_user = it
+                pemasukan.text = it.toString()
             } else {
+                pemasukan_user = 0
                 pemasukan.text = "0"
             }
-        }
-        viewModel.getCurrentPengeluaran().let {
-            if (it != null) {
-                pengeluaran.text = "$it"
+        })
+
+        viewModel.getCurrentPengeluaran()?.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
                 pengeluaran_user = it
+                pengeluaran.text = it.toString()
             } else {
+                pengeluaran_user = 0
                 pengeluaran.text = "0"
             }
-        }
+        })
     }
 
     private fun saldoAction() {
