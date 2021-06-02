@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
+import com.example.moneymanagement.UI.HomeFragment.HomeFragment
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
@@ -46,6 +47,7 @@ class AddFragment : Fragment() {
         rvkategori.setHasFixedSize(true)
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)
+        saldo_user.text = "(Saldo Anda: Rp.${HomeFragment.saldo_user})"
         tipe_pemasukan.setOnClickListener {
             btn_pemasukan.isChecked = true
             btn_pengeluaran.isChecked = false
@@ -64,8 +66,12 @@ class AddFragment : Fragment() {
     }
 
     private fun insertData() {
-        viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toInt(), judul.text.toString(), Utilities.getDate()))
-        Toast.makeText(context, "Transaksi berhasil dimasukkan", Toast.LENGTH_SHORT).show()
+        if(jumlah_saldo.text.toString().toInt() <= HomeFragment.saldo_user) {
+            viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toInt(), judul.text.toString(), Utilities.getDate()))
+            Toast.makeText(context, "Transaksi berhasil dimasukkan", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(context, "Saldo Anda Tidak Cukup", Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object {
