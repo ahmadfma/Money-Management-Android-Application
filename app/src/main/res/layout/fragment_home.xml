@@ -109,7 +109,7 @@
                         android:layout_marginStart="15dp"/>
 
                     <TextView
-                        android:id="@+id/start_saldo"
+                        android:id="@+id/pemasukan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/rp2"
@@ -150,7 +150,7 @@
                         android:layout_marginStart="15dp"/>
 
                     <TextView
-                        android:id="@+id/pengeluaran_saldo"
+                        android:id="@+id/pengeluaran"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/rp3"

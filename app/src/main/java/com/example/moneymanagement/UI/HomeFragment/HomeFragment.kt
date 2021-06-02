@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
@@ -22,8 +23,10 @@ import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.close_btn
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.jumlahET
 import kotlinx.android.synthetic.main.item_transaction_dialog.view.simpan
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 const val TAG = "HomeFragment"
 
@@ -42,28 +45,41 @@ class HomeFragment : Fragment() {
         rvhome.setHasFixedSize(true)
         rvhome.layoutManager = LinearLayoutManager(context)
         tanggal_saat_ini.text = Utilities.getDate()
-
-        GlobalScope.launch { //menampilkan saldo saat ini
-            viewModel.getCurrentSaldo().let {
-                if(it != null) {
-                    current_saldo.text = "$it"
-                } else {
-                    current_saldo.text = "0"
-                }
-            }
-        }
-
         saldo.setOnClickListener {
             saldoAction()
         }
 
-        viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
-            rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
-                override fun onViewClick(transaction: TransactionEntity) {
-                    onViewAction(transaction)
-                }
-            })
-        })
+        lifecycleScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                loadUserSaldo()
+            }
+        }
+
+        loadUserLastTransaction()
+    }
+
+    private suspend fun loadUserSaldo() {
+        viewModel.getCurrentSaldo().let {
+            if(it != null) {
+                current_saldo.text = "$it"
+            } else {
+                current_saldo.text = "0"
+            }
+        }
+        viewModel.getCurrentPemasukan().let {
+            if (it != null) {
+                pemasukan.text = "$it"
+            } else {
+                pemasukan.text = "-"
+            }
+        }
+        viewModel.getCurrentPengeluaran().let {
+            if (it != null) {
+                pengeluaran.text = "$it"
+            } else {
+                pengeluaran.text = "-"
+            }
+        }
     }
 
     private fun saldoAction() {
@@ -79,6 +95,16 @@ class HomeFragment : Fragment() {
         dialogView.simpan.setOnClickListener {
 
         }
+    }
+
+    private fun loadUserLastTransaction() {
+        viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
+            rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
+                override fun onViewClick(transaction: TransactionEntity) {
+                    onViewAction(transaction)
+                }
+            })
+        })
     }
 
     private fun onViewAction(transaction: TransactionEntity) {
