@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
+import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
@@ -98,7 +99,10 @@ class HomeFragment : Fragment() {
             mDialog?.dismiss()
         }
         dialogView.simpan.setOnClickListener {
-
+            val saldo = dialogView.saldoET.text.toString().toLong()
+            viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan_user, pengeluaran_user))
+            mDialog?.dismiss()
+            Toast.makeText(context, "Saldo Berhasil Disimpan", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -214,8 +218,8 @@ class HomeFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = HomeFragment()
-        var saldo_user = 0
-        private var pemasukan_user = 0
-        private var pengeluaran_user = 0
+        var saldo_user = 0L
+        private var pemasukan_user = 0L
+        private var pengeluaran_user = 0L
     }
 }

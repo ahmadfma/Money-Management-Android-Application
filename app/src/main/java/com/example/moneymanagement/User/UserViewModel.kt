@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.Saldo.SaldoRepository
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.TransactionData.TransactionRepository
@@ -51,16 +52,21 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //SALDO
-    fun getCurrentSaldo(): LiveData<Int>? {
+    fun getCurrentSaldo(): LiveData<Long>? {
         return saldoRepository.getCurrentSaldo()
     }
 
-    fun getCurrentPemasukan(): LiveData<Int>? {
+    fun getCurrentPemasukan(): LiveData<Long>? {
         return saldoRepository.getCurrentPemasukan()
     }
 
-    fun getCurrentPengeluaran(): LiveData<Int>? {
+    fun getCurrentPengeluaran(): LiveData<Long>? {
         return saldoRepository.getCurrentPengeluaran()
     }
+
+    fun insertUserSaldo(saldo: SaldoEntity) {
+        saldoRepository.insertUserSaldo(saldo)
+    }
+
 
 }
