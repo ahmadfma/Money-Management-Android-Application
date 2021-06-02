@@ -9,7 +9,7 @@ data class TransactionEntity(
     val id: Int,
     var type: String,
     var category: String,
-    var amount: Int,
+    var amount: Long,
     var title: String,
     var date: String
 )

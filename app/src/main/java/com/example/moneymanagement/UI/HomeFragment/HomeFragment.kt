@@ -215,7 +215,7 @@ class HomeFragment : Fragment() {
             viewModel.updateTransactions(TransactionEntity(transaction.id,
                 transaction.type,
                 kategori,
-                dialogView.jumlahET.text.toString().toInt(),
+                dialogView.jumlahET.text.toString().toLong(),
                 dialogView.judulET.text.toString(),
                 transaction.date
             ))
@@ -227,6 +227,20 @@ class HomeFragment : Fragment() {
             viewModel.deleteTransactions(transaction)
             mDialog?.dismiss()
             Toast.makeText(context, "Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+        }
+
+        dialogView.hapus_kembali.setOnClickListener {
+            when(transaction.type) {
+                "pemasukan" -> {
+                    viewModel.insertUserSaldo(SaldoEntity(0, (saldo_user-transaction.amount), (pemasukan_user-transaction.amount), pengeluaran_user ))
+                }
+                "pengeluaran" -> {
+                    viewModel.insertUserSaldo(SaldoEntity(0, (saldo_user+transaction.amount), pemasukan_user, (pengeluaran_user-transaction.amount) ))
+                }
+            }
+            viewModel.deleteTransactions(transaction)
+            mDialog?.dismiss()
+            Toast.makeText(context, "Transaksi dihapus dan saldo dikembalikan", Toast.LENGTH_SHORT).show()
         }
 
     }

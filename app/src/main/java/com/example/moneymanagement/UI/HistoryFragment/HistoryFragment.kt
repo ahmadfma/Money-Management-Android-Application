@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.HistoryFragment.Adapter.TombolTanggalAdapter
+import com.example.moneymanagement.UI.HomeFragment.HomeFragment
 import com.example.moneymanagement.UI.HomeFragment.TransactionsAdapter
+import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_history.*
@@ -166,7 +168,7 @@ class HistoryFragment : Fragment() {
             viewmodel_user.updateTransactions(TransactionEntity(transaction.id,
                 transaction.type,
                 kategori,
-                dialogView.jumlahET.text.toString().toInt(),
+                dialogView.jumlahET.text.toString().toLong(),
                 dialogView.judulET.text.toString(),
                 transaction.date
             ))
@@ -178,6 +180,20 @@ class HistoryFragment : Fragment() {
             viewmodel_user.deleteTransactions(transaction)
             mDialog?.dismiss()
             Toast.makeText(context, "Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+        }
+
+        dialogView.hapus_kembali.setOnClickListener {
+            when(transaction.type) {
+                "pemasukan" -> {
+                    viewmodel_user.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user -transaction.amount), (HomeFragment.pemasukan_user -transaction.amount), HomeFragment.pengeluaran_user ))
+                }
+                "pengeluaran" -> {
+                    viewmodel_user.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user +transaction.amount), HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user -transaction.amount) ))
+                }
+            }
+            viewmodel_user.deleteTransactions(transaction)
+            mDialog?.dismiss()
+            Toast.makeText(context, "Transaksi dihapus dan saldo dikembalikan", Toast.LENGTH_SHORT).show()
         }
 
     }
