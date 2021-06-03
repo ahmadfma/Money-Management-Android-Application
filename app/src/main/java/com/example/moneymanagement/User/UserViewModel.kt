@@ -71,7 +71,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun insertUserSaldo(saldo: SaldoEntity) {
         saldoRepository.insertUserSaldo(saldo)
     }
-    
+
     //GOALS
     fun getReachedGoals(): LiveData<List<GoalsEntity>>? {
         return goalsRepository.getReachedGoals()
