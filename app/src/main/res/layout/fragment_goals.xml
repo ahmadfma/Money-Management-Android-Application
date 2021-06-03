@@ -55,29 +55,20 @@
 
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="50dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="10dp"
-        app:cardCornerRadius="20dp"
-        android:backgroundTint="@color/primary2"
-        android:layout_alignParentBottom="true">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tambah Impian Baru"
-                android:layout_centerInParent="true"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+        android:text="Tambah Impian Baru"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        android:background="@drawable/cirlce_shape"
+        android:backgroundTint="@color/primary"/>
 
-</RelativeLayout>
+    </RelativeLayout>

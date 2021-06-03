@@ -1,11 +1,14 @@
 package com.example.moneymanagement.UI.BaseFragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation.*
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddFragment.AddFragment
 import com.example.moneymanagement.UI.GoalsFragment.GoalsFragment
@@ -14,6 +17,8 @@ import com.example.moneymanagement.UI.HomeFragment.HomeFragment
 import com.example.moneymanagement.UI.NewsFragment.NewsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.fragment_base.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BaseFragment : Fragment() {
 
@@ -28,94 +33,85 @@ class BaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        bottom_navigation.setOnNavigationItemSelectedListener(navListener())
-        bottom_navigation.selectedItemId = viewModel.selectedBottomNavigationID
-        loadFragment()
+        bottom_navigation.add(MeowBottomNavigation.Model(1, R.drawable.ic_home))
+        bottom_navigation.add(MeowBottomNavigation.Model(2, R.drawable.ic_history))
+        bottom_navigation.add(MeowBottomNavigation.Model(3, R.drawable.ic_add))
+        bottom_navigation.add(MeowBottomNavigation.Model(4, R.drawable.ic_target))
+        bottom_navigation.add(MeowBottomNavigation.Model(5, R.drawable.ic_news))
 
-    }
+        bottom_navigation.setOnClickMenuListener(ClickListener {
+        })
 
-    private fun loadFragment() {
-        when(viewModel.selectedBottomNavigationID) {
-            R.id.nav_home -> {
-                loadHomeFragment()
+        bottom_navigation.setOnShowListener(ShowListener {
+            when(it.id) {
+                1 -> {
+                    loadHomeFragment()
+                }
+                2 -> {
+                    loadHistoryFragment()
+                }
+                3 -> {
+                    loadAddFragment()
+                }
+                4 -> {
+                    loadGoalsFragment()
+                }
+                5 -> {
+                    loadNewsFragment()
+                }
             }
-            R.id.nav_history -> {
-                loadHistoryFragment()
-            }
-            R.id.nav_add -> {
-                loadAddFragment()
-            }
-            R.id.nav_goals -> {
-                loadGoalsFragment()
-            }
-            R.id.nav_news -> {
-                loadNewsFragment()
-            }
-        }
-    }
+        })
 
-    private fun navListener(): BottomNavigationView.OnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
-        when(it.itemId) {
-            R.id.nav_home -> {
-                loadHomeFragment()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_history -> {
-                loadHistoryFragment()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_add -> {
-                loadAddFragment()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_goals -> {
-                loadGoalsFragment()
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.nav_news -> {
-                loadNewsFragment()
-                return@OnNavigationItemSelectedListener true
-            }
-        }
-        false
+        bottom_navigation.setOnReselectListener(ReselectListener {
+            // your codes
+        })
+        bottom_navigation.show(viewModel.selectedBottomNavigationID, false)
     }
 
     private fun loadHomeFragment() {
-        viewModel.selectedBottomNavigationID = R.id.nav_home
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.childFragment, HomeFragment.newInstance())
-            ?.commit()
+        viewModel.selectedBottomNavigationID = 1
+        lifecycleScope.launch(Dispatchers.IO) {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.childFragment, HomeFragment.newInstance())
+                ?.commit()
+        }
     }
 
     private fun loadHistoryFragment() {
-        viewModel.selectedBottomNavigationID = R.id.nav_history
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.childFragment, HistoryFragment.newInstance())
-            ?.commit()
+        viewModel.selectedBottomNavigationID = 2
+        lifecycleScope.launch(Dispatchers.IO) {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.childFragment, HistoryFragment.newInstance())
+                ?.commit()
+        }
     }
 
     private fun loadAddFragment() {
-        viewModel.selectedBottomNavigationID = R.id.nav_add
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.childFragment, AddFragment.newInstance())
-            ?.commit()
+        viewModel.selectedBottomNavigationID = 3
+        lifecycleScope.launch {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.childFragment, AddFragment.newInstance())
+                ?.commit()
+        }
     }
 
     private fun loadGoalsFragment() {
-        viewModel.selectedBottomNavigationID = R.id.nav_goals
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.childFragment, GoalsFragment.newInstance())
-            ?.commit()
+        viewModel.selectedBottomNavigationID = 4
+        lifecycleScope.launch {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.childFragment, GoalsFragment.newInstance())
+                ?.commit()
+        }
     }
 
     private fun loadNewsFragment() {
-        viewModel.selectedBottomNavigationID = R.id.nav_news
-        activity?.supportFragmentManager?.beginTransaction()
-            ?.replace(R.id.childFragment, NewsFragment.newInstance())
-            ?.commit()
+        viewModel.selectedBottomNavigationID = 5
+        lifecycleScope.launch {
+            activity?.supportFragmentManager?.beginTransaction()
+                ?.replace(R.id.childFragment, NewsFragment.newInstance())
+                ?.commit()
+        }
     }
-
-
 
     companion object {
         @JvmStatic
