@@ -1,6 +1,7 @@
 package com.example.moneymanagement.UI.BaseFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,9 +41,6 @@ class BaseFragment : Fragment() {
         bottom_navigation.add(MeowBottomNavigation.Model(5, R.drawable.ic_news))
 
         bottom_navigation.setOnClickMenuListener(ClickListener {
-        })
-
-        bottom_navigation.setOnShowListener(ShowListener {
             when(it.id) {
                 1 -> {
                     loadHomeFragment()
@@ -60,12 +58,23 @@ class BaseFragment : Fragment() {
                     loadNewsFragment()
                 }
             }
+            Log.d("BaseFragment", "setOnClickMenuListener")
+        })
+
+        bottom_navigation.setOnShowListener(ShowListener {
+            when(it.id) {
+                1 -> {
+                    loadHomeFragment()
+                }
+            }
+            Log.d("BaseFragment", "setOnShowListener")
         })
 
         bottom_navigation.setOnReselectListener(ReselectListener {
             // your codes
         })
         bottom_navigation.show(viewModel.selectedBottomNavigationID, false)
+        Log.d("BaseFragment", "onViewCreated")
     }
 
     private fun loadHomeFragment() {
