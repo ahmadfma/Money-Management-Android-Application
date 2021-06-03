@@ -4,6 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.moneymanagement.User.Goals.GoalsEntity
+import com.example.moneymanagement.User.Goals.GoalsRepository
 import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.Saldo.SaldoRepository
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
@@ -19,6 +21,8 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     private var transactionRepository = TransactionRepository(application)
     private var saldoRepository = SaldoRepository(application)
+    private var goalsRepository = GoalsRepository(application)
+
     private var transactions: LiveData<List<TransactionEntity>>? = transactionRepository.getTransactions()
     private var allDateTransactions: LiveData<List<String>>? = transactionRepository.getAllDateTransactions()
 
@@ -67,6 +71,26 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     fun insertUserSaldo(saldo: SaldoEntity) {
         saldoRepository.insertUserSaldo(saldo)
     }
+    
+    //GOALS
+    fun getReachedGoals(): LiveData<List<GoalsEntity>>? {
+        return goalsRepository.getReachedGoals()
+    }
 
+    fun getUnReachedGoals(): LiveData<List<GoalsEntity>>? {
+        return goalsRepository.getUnReachedGoals()
+    }
+
+    fun insertGoals(goalsEntity: GoalsEntity) {
+        goalsRepository.insertGoals(goalsEntity)
+    }
+
+    fun updateGoals(goalsEntity: GoalsEntity) {
+        goalsRepository.updateGoals(goalsEntity)
+    }
+
+    fun deleteGoals(goalsEntity: GoalsEntity) {
+        goalsRepository.deleteGoals(goalsEntity)
+    }
 
 }
