@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.HistoryFragment.Adapter
+package com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Adapter
 
 import android.view.LayoutInflater
 import android.view.View

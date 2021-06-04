@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.GoalsFragment.GoalsFragment">
+    tools:context=".UI.BaseFragment.GoalsFragment.GoalsFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -26,8 +26,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/appbar"
-        android:layout_above="@+id/addbtn">
+        android:layout_below="@+id/appbar">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -54,21 +53,5 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:text="Tambah Impian Baru"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textAllCaps="false"
-        android:background="@drawable/cirlce_shape"
-        android:backgroundTint="@color/primary"/>
 
     </RelativeLayout>

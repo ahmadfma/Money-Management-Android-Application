@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.HomeFragment
+package com.example.moneymanagement.UI.BaseFragment.HomeFragment
 
 import android.view.LayoutInflater
 import android.view.View

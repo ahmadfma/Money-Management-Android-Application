@@ -1,6 +1,5 @@
-package com.example.moneymanagement.UI.AddFragment
+package com.example.moneymanagement.UI.AddTransactionFragment
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
 
                 itemView.setOnClickListener {
                     radio_btn.isChecked = true
-                    AddFragment.kategori = kategori
+                    AddTransactionFragment.kategori = kategori
                     if(selected_radio_btn != position) {
                         notifyDataSetChanged()
                         selected_radio_btn = position

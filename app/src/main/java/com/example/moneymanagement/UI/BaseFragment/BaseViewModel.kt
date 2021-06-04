@@ -10,6 +10,6 @@ class BaseViewModel: ViewModel() {
         Log.d("BaseViewModel", "created")
     }
 
-    var selectedBottomNavigationID = 1
+    var selectedBottomNavigationID = R.id.nav_home
 
 }

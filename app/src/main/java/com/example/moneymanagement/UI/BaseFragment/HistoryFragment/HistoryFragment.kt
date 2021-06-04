@@ -1,20 +1,18 @@
-package com.example.moneymanagement.UI.HistoryFragment
+package com.example.moneymanagement.UI.BaseFragment.HistoryFragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
-import com.example.moneymanagement.UI.HistoryFragment.Adapter.TombolTanggalAdapter
-import com.example.moneymanagement.UI.HomeFragment.HomeFragment
-import com.example.moneymanagement.UI.HomeFragment.TransactionsAdapter
+import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Adapter.TombolTanggalAdapter
+import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
+import com.example.moneymanagement.UI.BaseFragment.HomeFragment.TransactionsAdapter
 import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel

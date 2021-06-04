@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".UI.BaseFragment.BaseFragment">
+    tools:context=".UI.BaseFragment.BaseFragment"
+    android:background="#F6F6F6">
 
     <FrameLayout
         android:id="@+id/childFragment"
@@ -12,18 +13,22 @@
         android:layout_height="match_parent"
         android:layout_above="@id/bottom_navigation"/>
 
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:translationZ="-10dp"
         android:layout_alignParentBottom="true"
-        app:mbn_circleColor="#ffffff"
-        app:mbn_backgroundBottomColor="@color/primary2"
-        app:mbn_countBackgroundColor="#ff6f00"
-        app:mbn_countTextColor="#ffffff"
-        app:mbn_defaultIconColor="#FFFFFF"
-        app:mbn_rippleColor="#2FFF0000"
-        app:mbn_selectedIconColor="#3c415e"
-        app:mbn_shadowColor="#1f212121"/>
+        app:menu="@menu/bottom_navigation" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:translationZ="90dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic__add"
+        app:tint="@color/white"/>
 
 </RelativeLayout>

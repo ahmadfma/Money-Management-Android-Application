@@ -12,9 +12,9 @@
         android:title="History" />
 
     <item
-        android:id="@+id/nav_add"
-        android:icon="@drawable/ic_add"
-        android:title="Add"/>
+        android:id="@+id/holder"
+        android:title=""
+        android:enabled="false"/>
 
     <item
         android:id="@+id/nav_goals"

@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.HistoryFragment
+package com.example.moneymanagement.UI.BaseFragment.HistoryFragment
 
 import android.util.Log
 import androidx.fragment.app.Fragment
