@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation.*
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
@@ -16,6 +18,8 @@ import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryFragme
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
 import com.example.moneymanagement.UI.BaseFragment.NewsFragment.NewsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -37,7 +41,18 @@ class BaseFragment : Fragment() {
         bottom_navigation.selectedItemId = viewModel.selectedBottomNavigationID
         loadFragment()
 
+        addBtn.setOnClickListener {
+            showBottomSheet()
+        }
+
         Log.d("BaseFragment", "onViewCreated")
+    }
+
+    private fun showBottomSheet() {
+        val bottomSheetDialog = BottomSheetDialog(requireContext())
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null)
+        bottomSheetDialog.setContentView(dialogView)
+        bottomSheetDialog.show()
     }
 
     private fun loadFragment() {
@@ -93,15 +108,6 @@ class BaseFragment : Fragment() {
         lifecycleScope.launch(Dispatchers.IO) {
             activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.childFragment, HistoryFragment.newInstance())
-                ?.commit()
-        }
-    }
-
-    private fun loadAddFragment() {
-        viewModel.selectedBottomNavigationID = 3
-        lifecycleScope.launch {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.childFragment, AddTransactionFragment.newInstance())
                 ?.commit()
         }
     }
