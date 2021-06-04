@@ -53,6 +53,14 @@ class BaseFragment : Fragment() {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_layout, null)
         bottomSheetDialog.setContentView(dialogView)
         bottomSheetDialog.show()
+        dialogView.addTransaksi.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            findNavController().navigate(R.id.action_baseFragment_to_addTransactionFragment)
+        }
+        dialogView.addImpian.setOnClickListener {
+            bottomSheetDialog.dismiss()
+            Toast.makeText(context, "tambah impian", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun loadFragment() {
