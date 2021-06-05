@@ -23,6 +23,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Makanan &amp; Minuman"
@@ -32,6 +33,7 @@
             android:layout_marginTop="10dp"/>
 
         <TextView
+            android:id="@+id/catatan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
