@@ -14,10 +14,19 @@
             android:id="@+id/action_baseFragment_to_addTransactionFragment"
             app:destination="@id/addTransactionFragment"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_baseFragment_to_addGoalsFragment"
+            app:destination="@id/addGoalsFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/addTransactionFragment"
         android:name="com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add" />
+        tools:layout="@layout/fragment_add_transaction" />
+    <fragment
+        android:id="@+id/addGoalsFragment"
+        android:name="com.example.moneymanagement.UI.AddGoalsFragment"
+        android:label="fragment_add_goals"
+        tools:layout="@layout/fragment_add_goals" />
 </navigation>
