@@ -27,6 +27,9 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Go
                 saldo.text = Utilities.formatNumber(HomeFragment.saldo_user)
                 progress_horizontal.progress = calculateProgres(goalsEntity.amount, HomeFragment.saldo_user)
                 progress_horizontal.isActivated = false
+                itemView.setOnClickListener {
+                    listener.onViewClick(goalsEntity)
+                }
             }
         }
         private fun setIcon(categori: String, icon: ImageView, line: ImageView?) {

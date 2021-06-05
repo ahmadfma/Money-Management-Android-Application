@@ -9,14 +9,12 @@ import kotlinx.android.synthetic.main.item_kategori.view.*
 
 class KategoriAdapter(private val listKategori: ArrayList<String>, private val listColor: ArrayList<Int>): RecyclerView.Adapter<KategoriAdapter.Holder>() {
 
-    private var selected_radio_btn = -1
-
     inner class Holder(itemview: View): RecyclerView.ViewHolder(itemview) {
         fun bind(kategori: String, color: Int, position: Int) {
             with(itemView) {
                 line_color.setImageResource(color)
                 text.text = kategori
-
+                checkCategory()
                 if(selected_radio_btn == -1) {
                     radio_btn.isChecked = false
                 } else {
@@ -32,6 +30,28 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
                     }
                 }
 
+            }
+        }
+        private fun checkCategory() {
+            when(selected_radio_btn) {
+                0 -> {
+                    kategori = "Makanan & Minuman"
+                }
+                1 -> {
+                    kategori = "Kecantikan & Kesehatan"
+                }
+                2 -> {
+                    kategori = "Sosial & Gaya Hidup"
+                }
+                3 -> {
+                    kategori = "Entertainment"
+                }
+                4 -> {
+                    kategori = "Transportasi"
+                }
+                5 -> {
+                    kategori = "Lainnya"
+                }
             }
         }
     }
@@ -53,6 +73,7 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
 
     companion object {
         var kategori = ""
+        var selected_radio_btn = -1
     }
 
 }
