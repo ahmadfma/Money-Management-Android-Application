@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.moneymanagement.R
 
-class NewsFragment : Fragment() {
+class NotificationFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        return inflater.inflate(R.layout.fragment_notification, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -20,6 +20,6 @@ class NewsFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = NewsFragment()
+        fun newInstance() = NotificationFragment()
     }
 }

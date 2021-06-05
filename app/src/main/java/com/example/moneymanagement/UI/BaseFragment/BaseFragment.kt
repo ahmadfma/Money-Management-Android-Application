@@ -5,18 +5,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation.*
 import com.example.moneymanagement.R
-import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryFragment
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
-import com.example.moneymanagement.UI.BaseFragment.NewsFragment.NewsFragment
+import com.example.moneymanagement.UI.BaseFragment.NewsFragment.NotificationFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
@@ -74,8 +72,8 @@ class BaseFragment : Fragment() {
             R.id.nav_goals -> {
                 loadGoalsFragment()
             }
-            R.id.nav_news -> {
-                loadNewsFragment()
+            R.id.nav_notif -> {
+                loadNotifFragment()
             }
         }
     }
@@ -94,8 +92,8 @@ class BaseFragment : Fragment() {
                 loadGoalsFragment()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.nav_news -> {
-                loadNewsFragment()
+            R.id.nav_notif -> {
+                loadNotifFragment()
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -129,11 +127,11 @@ class BaseFragment : Fragment() {
         }
     }
 
-    private fun loadNewsFragment() {
-        viewModel.selectedBottomNavigationID = R.id.nav_news
+    private fun loadNotifFragment() {
+        viewModel.selectedBottomNavigationID = R.id.nav_notif
         lifecycleScope.launch {
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.childFragment, NewsFragment.newInstance())
+                ?.replace(R.id.childFragment, NotificationFragment.newInstance())
                 ?.commit()
         }
     }
