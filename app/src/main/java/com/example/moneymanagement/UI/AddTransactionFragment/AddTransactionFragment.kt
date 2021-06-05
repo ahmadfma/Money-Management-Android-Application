@@ -16,7 +16,7 @@ import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
-import kotlinx.android.synthetic.main.fragment_add.*
+import kotlinx.android.synthetic.main.fragment_add_transaction.*
 import java.util.*
 
 class AddTransactionFragment : Fragment() {

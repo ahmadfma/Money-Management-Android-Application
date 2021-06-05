@@ -59,7 +59,7 @@ class BaseFragment : Fragment() {
         }
         dialogView.addImpian.setOnClickListener {
             bottomSheetDialog.dismiss()
-            Toast.makeText(context, "tambah impian", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_baseFragment_to_addGoalsFragment)
         }
     }
 
