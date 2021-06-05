@@ -52,7 +52,6 @@ class AddTransactionFragment : Fragment() {
         saldo_user.text = "(Saldo Anda: Rp ${Utilities.formatNumber(HomeFragment.saldo_user)})"
         tanggal.setText(Utilities.getDate())
         tanggal.setOnClickListener {
-            Toast.makeText(context, "tanggal", Toast.LENGTH_SHORT).show()
             getDate(tanggal)
         }
         tipe_pemasukan.setOnClickListener {

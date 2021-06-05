@@ -3,11 +3,7 @@
 
     <item android:id="@android:id/background">
         <shape >
-            <gradient
-                android:angle="-90"
-                android:centerColor="#A1A1A1"
-                android:startColor="#A1A1A1"
-                android:endColor="#A1A1A1"/>
+            <stroke android:width="1dp" android:color="#676767"/>
             <size
                 android:height="15dp"
                 android:width="15dp"/>
@@ -24,10 +20,7 @@
                     android:top="2dp"
                     android:right="2dp" >
                     <shape >
-                        <gradient android:angle="-90"
-                            android:centerColor="@color/primary2"
-                            android:startColor="@color/primary"
-                            android:endColor="#6E7BFD"/>
+                        <solid android:color="@color/primary2"/>
                         <corners android:radius="4dp"/>
                     </shape>
                 </item>

@@ -25,6 +25,8 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Go
                 catatan.text = goalsEntity.note
                 target.text = Utilities.formatNumber(goalsEntity.amount)
                 saldo.text = Utilities.formatNumber(HomeFragment.saldo_user)
+                progress_horizontal.progress = calculateProgres(goalsEntity.amount, HomeFragment.saldo_user)
+                progress_horizontal.isActivated = false
             }
         }
         private fun setIcon(categori: String, icon: ImageView, line: ImageView?) {
@@ -53,6 +55,19 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Go
                     icon.setImageResource(R.drawable.ic_other)
                     line?.setImageResource(R.color.hijau)
                 }
+            }
+        }
+    }
+
+    private fun calculateProgres(amount: Long, saldoUser: Long): Int {
+        val cek: Double = (saldoUser.toDouble() / amount.toDouble()) * 100
+        return if(cek < 1) {
+            1
+        } else {
+            if(cek > 100) {
+                100
+            } else {
+                cek.toInt()
             }
         }
     }

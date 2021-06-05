@@ -6,10 +6,10 @@ import androidx.room.*
 @Dao
 interface GoalsDao {
 
-    @Query("SELECT * FROM user_goals WHERE reached = 'true'")
+    @Query("SELECT * FROM user_goals WHERE reached = '1'")
     fun getReachedGoals(): LiveData<List<GoalsEntity>>
 
-    @Query("SELECT * FROM user_goals WHERE reached = 'false'")
+    @Query("SELECT * FROM user_goals WHERE reached = '0'")
     fun getUnReachedGoals(): LiveData<List<GoalsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
