@@ -25,7 +25,7 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
 
                 itemView.setOnClickListener {
                     radio_btn.isChecked = true
-                    AddTransactionFragment.kategori = kategori
+                    KategoriAdapter.kategori = kategori
                     if(selected_radio_btn != position) {
                         notifyDataSetChanged()
                         selected_radio_btn = position
@@ -50,5 +50,9 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
         return listKategori.size
     }
 
+
+    companion object {
+        var kategori = ""
+    }
 
 }

@@ -67,7 +67,7 @@ class AddTransactionFragment : Fragment() {
         }
 
         simpan_btn.setOnClickListener {
-            if(kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
+            if(KategoriAdapter.kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
                 insertData()
             } else {
                 Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
@@ -91,13 +91,13 @@ class AddTransactionFragment : Fragment() {
     private fun insertData() {
         if(type == "pemasukan") {
             val saldoInput = jumlah_saldo.text.toString().toLong()
-            viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+            viewModel.insertTransaction(TransactionEntity(0, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
             viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user+saldoInput), (HomeFragment.pemasukan_user+saldoInput), HomeFragment.pengeluaran_user))
             Toast.makeText(context, "Transaksi Berhasil Disimpan", Toast.LENGTH_SHORT).show()
         } else {
             if(jumlah_saldo.text.toString().toLong() <= HomeFragment.saldo_user) {
                 val saldoInput = jumlah_saldo.text.toString().toLong()
-                viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+                viewModel.insertTransaction(TransactionEntity(0, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
                 viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user-saldoInput), HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user+saldoInput)))
                 Toast.makeText(context, "Transaksi Berhasil Disimpan", Toast.LENGTH_SHORT).show()
             } else {

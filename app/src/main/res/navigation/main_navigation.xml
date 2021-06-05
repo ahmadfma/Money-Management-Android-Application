@@ -26,7 +26,7 @@
         tools:layout="@layout/fragment_add_transaction" />
     <fragment
         android:id="@+id/addGoalsFragment"
-        android:name="com.example.moneymanagement.UI.AddGoalsFragment"
+        android:name="com.example.moneymanagement.UI.AddGoalsFragment.AddGoalsFragment"
         android:label="fragment_add_goals"
         tools:layout="@layout/fragment_add_goals" />
 </navigation>
