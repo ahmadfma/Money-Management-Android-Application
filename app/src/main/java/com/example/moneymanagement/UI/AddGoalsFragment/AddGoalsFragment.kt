@@ -67,6 +67,7 @@ class AddGoalsFragment : Fragment() {
     }
 
     private fun updateData() {
+        hapus_btn.visibility = View.VISIBLE
         when(GoalsFragment.selectedGoals?.category) {
             "Makanan & Minuman" -> {
                 KategoriAdapter.selected_radio_btn = 0
@@ -101,6 +102,10 @@ class AddGoalsFragment : Fragment() {
             } else {
                 Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
             }
+        }
+        hapus_btn.setOnClickListener {
+            viewmodel.deleteGoals(GoalsFragment.selectedGoals!!)
+            Toast.makeText(context, "Impian Berhasil Dihapus", Toast.LENGTH_SHORT).show()
         }
     }
 

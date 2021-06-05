@@ -118,9 +118,23 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
                 android:backgroundTint="@color/primary2"
                 android:textColor="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/hapus_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hapus Impian"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/primary2"
+                android:textColor="@color/white"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
