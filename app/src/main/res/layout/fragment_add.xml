@@ -57,27 +57,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kategori :"
+                android:text="Tanggal :"
                 android:textColor="@color/black"
-                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
+                android:textSize="16sp"
+                android:layout_marginTop="8dp"
                 android:layout_marginStart="18dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="5dp"/>
 
-            <RelativeLayout
+            <EditText
+                android:id="@+id/tanggal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edit_background"
                 android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvkategori"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"/>
-            </RelativeLayout>
-
+                android:layout_marginEnd="22dp"
+                android:padding="10dp"
+                android:hint="tanggal"
+                android:focusable="false"
+                android:backgroundTint="@color/abu"
+                android:background="@drawable/edit_background"/>
 
 
             <LinearLayout
@@ -118,6 +117,30 @@
                 android:inputType="number"
                 android:backgroundTint="@color/abu"
                 android:background="@drawable/edit_background"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kategori :"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="18dp"
+                android:layout_marginBottom="5dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_background"
+                android:layout_marginStart="22dp"
+                android:layout_marginEnd="22dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvkategori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="6dp"/>
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="wrap_content"

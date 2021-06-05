@@ -1,10 +1,12 @@
 package com.example.moneymanagement.UI.AddTransactionFragment
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,7 @@ import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_add.*
+import java.util.*
 
 class AddTransactionFragment : Fragment() {
 
@@ -47,6 +50,11 @@ class AddTransactionFragment : Fragment() {
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)
         saldo_user.text = "(Saldo Anda: Rp ${Utilities.formatNumber(HomeFragment.saldo_user)})"
+        tanggal.setText(Utilities.getDate())
+        tanggal.setOnClickListener {
+            Toast.makeText(context, "tanggal", Toast.LENGTH_SHORT).show()
+            getDate(tanggal)
+        }
         tipe_pemasukan.setOnClickListener {
             btn_pemasukan.isChecked = true
             btn_pengeluaran.isChecked = false
@@ -68,16 +76,28 @@ class AddTransactionFragment : Fragment() {
 
     }
 
+    private fun getDate(et: EditText) {
+        val cal = Calendar.getInstance()
+        val yearr = cal.get(Calendar.YEAR)
+        val monthh = cal.get(Calendar.MONTH)
+        val dayy = cal.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            et.setText(Utilities.getDate(year, (month+1), dayOfMonth))
+        }, yearr, monthh, dayy)
+        dpd.show()
+    }
+
     private fun insertData() {
         if(type == "pemasukan") {
             val saldoInput = jumlah_saldo.text.toString().toLong()
-            viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), Utilities.getDate()))
+            viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
             viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user+saldoInput), (HomeFragment.pemasukan_user+saldoInput), HomeFragment.pengeluaran_user))
             Toast.makeText(context, "Transaksi Berhasil Disimpan", Toast.LENGTH_SHORT).show()
         } else {
             if(jumlah_saldo.text.toString().toLong() <= HomeFragment.saldo_user) {
                 val saldoInput = jumlah_saldo.text.toString().toLong()
-                viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), Utilities.getDate()))
+                viewModel.insertTransaction(TransactionEntity(0, type, kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
                 viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user-saldoInput), HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user+saldoInput)))
                 Toast.makeText(context, "Transaksi Berhasil Disimpan", Toast.LENGTH_SHORT).show()
             } else {
