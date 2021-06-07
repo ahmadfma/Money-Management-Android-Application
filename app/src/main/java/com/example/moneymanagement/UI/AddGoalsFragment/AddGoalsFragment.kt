@@ -14,7 +14,6 @@ import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.User.Goals.GoalsEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_add_goals.*
-import kotlinx.android.synthetic.main.item_transaction_dialog.view.*
 
 class AddGoalsFragment : Fragment() {
 

@@ -24,6 +24,8 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import java.util.*
 
+const val TAG = "AddTransactionFragment"
+
 class AddTransactionFragment : Fragment() {
 
     private lateinit var viewModel: UserViewModel
@@ -166,19 +168,32 @@ class AddTransactionFragment : Fragment() {
             val saldoInput = jumlah_saldo.text.toString().toLong()
             if(type == "pemasukan") { // pemasukan -> pemasukan
                 HomeFragment.saldo_user = (HomeFragment.saldo_user-selected_transaction?.amount!!+saldoInput)
-                viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, (HomeFragment.pemasukan_user-selected_transaction?.amount!!+saldoInput), HomeFragment.pengeluaran_user))
-                Log.d("updateData", "pemasukan -> pemasukan")
+                viewModel.insertUserSaldo(SaldoEntity(0,
+                    checkIfNotBelowZero(HomeFragment.saldo_user),
+                    checkIfNotBelowZero((HomeFragment.pemasukan_user-selected_transaction?.amount!!+saldoInput)),
+                    checkIfNotBelowZero(HomeFragment.pengeluaran_user)
+                ))
+                Log.d(TAG, "pemasukan -> pemasukan")
             } else { //jika type transaksi yang dipilih diubah (pemasukan -> pengeluaran) maka jalankan program dibawah
                 //temp = saldo saat ini dikurang dengan jumlah uang dari transaksi yang dipilih
                 //temp = temp - inputan saldo
                 //pengeluaran = pengeluaran + inputan saldo
                 //pemasukan = pemasukan - jumlah uang dari transaksi yang dipilih
-                Log.d("updateData", "pemasukan -> pengeluaran")
+                Log.d(TAG, "pemasukan -> pemasukan")
+                Log.d(TAG, "saldo user : ${HomeFragment.saldo_user}")
+                Log.d(TAG, "selected transaksi amount : ${selected_transaction?.amount}")
+                Log.d(TAG, "saldo input : $saldoInput")
+                Log.d(TAG, "saldo user - selected transaksi amount - saldo input")
                 HomeFragment.saldo_user = HomeFragment.saldo_user - selected_transaction?.amount!!
                 HomeFragment.saldo_user = HomeFragment.saldo_user - saldoInput
+                Log.d(TAG, "saldo user = ${HomeFragment.saldo_user}")
                 HomeFragment.pemasukan_user = HomeFragment.pemasukan_user - selected_transaction?.amount!!
                 HomeFragment.pengeluaran_user = HomeFragment.pengeluaran_user + saldoInput
-                viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, HomeFragment.pemasukan_user, HomeFragment.pengeluaran_user))
+                viewModel.insertUserSaldo(SaldoEntity(0,
+                    checkIfNotBelowZero(HomeFragment.saldo_user),
+                    checkIfNotBelowZero(HomeFragment.pemasukan_user),
+                    checkIfNotBelowZero(HomeFragment.pengeluaran_user)
+                ))
 
             }
             viewModel.updateTransactions(TransactionEntity(selected_transaction?.id!!, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
@@ -187,29 +202,45 @@ class AddTransactionFragment : Fragment() {
         } else {
 
             val saldoInput = jumlah_saldo.text.toString().toLong()
-            if(saldoInput <= HomeFragment.saldo_user) {
-                if(type == "pengeluaran") { //pengeluaran -> pengeluaran
+            if(type == "pengeluaran") { //pengeluaran -> pengeluaran
+                if(saldoInput <= HomeFragment.saldo_user) {
                     HomeFragment.saldo_user = selected_transaction?.amount!!-saldoInput + HomeFragment.saldo_user
-                    viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user-selected_transaction?.amount!!+saldoInput)))
-                } else { //jika type transaksi yang dipilih diubah (pengeluaran -> pemasukan) maka jalankan program dibawah
-                    /*
-                     * pengeluaran -> pemasukan
-                     * saldo saat ini = saldo + jumlah uang dari transaksi yang pilih
-                     * saldo saat ini = saldo + jumlah inputan saldo
-                     * pengeluaran = pengeluaran - jumlah uang dari transaksi yang pilih
-                     * pemasukan = pemasukan + jumlah inputan saldo
-                     */
-                    HomeFragment.saldo_user = HomeFragment.saldo_user + selected_transaction?.amount!! + saldoInput
-                    HomeFragment.pengeluaran_user = HomeFragment.pengeluaran_user - selected_transaction?.amount!!
-                    HomeFragment.pemasukan_user = HomeFragment.pemasukan_user + saldoInput
-                    viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, HomeFragment.pemasukan_user, HomeFragment.pengeluaran_user))
+                    viewModel.insertUserSaldo(SaldoEntity(0,
+                        checkIfNotBelowZero(HomeFragment.saldo_user),
+                        checkIfNotBelowZero(HomeFragment.pemasukan_user),
+                        checkIfNotBelowZero((HomeFragment.pengeluaran_user-selected_transaction?.amount!!+saldoInput))
+                    ))
+                    viewModel.updateTransactions(TransactionEntity(selected_transaction?.id!!, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+                    Toast.makeText(context, "Transaksi Berhasil Diubah", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Saldo Anda Tidak Cukup", Toast.LENGTH_SHORT).show()
                 }
+            } else { //jika type transaksi yang dipilih diubah (pengeluaran -> pemasukan) maka jalankan program dibawah
+                /*
+                 * pengeluaran -> pemasukan
+                 * saldo saat ini = saldo + jumlah uang dari transaksi yang pilih
+                 * saldo saat ini = saldo + jumlah inputan saldo
+                 * pengeluaran = pengeluaran - jumlah uang dari transaksi yang pilih
+                 * pemasukan = pemasukan + jumlah inputan saldo
+                 */
+                Log.d(TAG, "pengeluaran -> pemasukan")
+                Log.d(TAG, "saldo user : ${HomeFragment.saldo_user}")
+                Log.d(TAG, "selected transaksi amount : ${selected_transaction?.amount}")
+                Log.d(TAG, "saldo input : $saldoInput")
+                Log.d(TAG, "saldo user + selected transaksi amount + saldo input")
+                HomeFragment.saldo_user = HomeFragment.saldo_user + selected_transaction?.amount!! + saldoInput
+                Log.d(TAG, "saldo user = ${HomeFragment.saldo_user}")
+
+                HomeFragment.pengeluaran_user = HomeFragment.pengeluaran_user - selected_transaction?.amount!!
+                HomeFragment.pemasukan_user = HomeFragment.pemasukan_user + saldoInput
+                viewModel.insertUserSaldo(SaldoEntity(0,
+                    checkIfNotBelowZero(HomeFragment.saldo_user),
+                    checkIfNotBelowZero(HomeFragment.pemasukan_user),
+                    checkIfNotBelowZero(HomeFragment.pengeluaran_user)
+                ))
                 viewModel.updateTransactions(TransactionEntity(selected_transaction?.id!!, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
                 Toast.makeText(context, "Transaksi Berhasil Diubah", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "Saldo Anda Tidak Cukup", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -231,6 +262,13 @@ class AddTransactionFragment : Fragment() {
         }
     }
 
+    private fun checkIfNotBelowZero(num: Long): Long {
+        return if(num < 0) {
+            0
+        } else {
+            num
+        }
+    }
 
     private fun getDate(et: EditText) {
         val cal = Calendar.getInstance()
