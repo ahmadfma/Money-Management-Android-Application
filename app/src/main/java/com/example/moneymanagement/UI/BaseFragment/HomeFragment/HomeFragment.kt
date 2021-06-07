@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
+import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
@@ -119,10 +121,16 @@ class HomeFragment : Fragment() {
         viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
             rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
                 override fun onViewClick(transaction: TransactionEntity) {
-                    onViewAction(transaction)
+                    onViewAction2(transaction)
                 }
             })
         })
+    }
+
+    private fun onViewAction2(transaction: TransactionEntity) {
+        AddTransactionFragment.selected_transaction = transaction
+        AddTransactionFragment.action = "update"
+        findNavController().navigate(R.id.action_baseFragment_to_addTransactionFragment)
     }
 
     private fun onViewAction(transaction: TransactionEntity) {

@@ -2,6 +2,7 @@ package com.example.moneymanagement.UI.AddTransactionFragment
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,16 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
+import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
 import com.example.moneymanagement.User.Saldo.SaldoEntity
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_add_transaction.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class AddTransactionFragment : Fragment() {
@@ -50,7 +55,6 @@ class AddTransactionFragment : Fragment() {
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)
         saldo_user.text = "(Saldo Anda: Rp ${Utilities.formatNumber(HomeFragment.saldo_user)})"
-        tanggal.setText(Utilities.getDate())
         tanggal.setOnClickListener {
             getDate(tanggal)
         }
@@ -65,6 +69,16 @@ class AddTransactionFragment : Fragment() {
             type = "pengeluaran"
         }
 
+        if(action == "add") {
+            tanggal.setText(Utilities.getDate())
+            addAction()
+        } else { //update
+            updateAction()
+        }
+
+    }
+
+    private fun addAction() {
         simpan_btn.setOnClickListener {
             if(KategoriAdapter.kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
                 insertData()
@@ -72,19 +86,131 @@ class AddTransactionFragment : Fragment() {
                 Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
-    private fun getDate(et: EditText) {
-        val cal = Calendar.getInstance()
-        val yearr = cal.get(Calendar.YEAR)
-        val monthh = cal.get(Calendar.MONTH)
-        val dayy = cal.get(Calendar.DAY_OF_MONTH)
+    private fun updateAction() {
+        hapus_btn.visibility = View.VISIBLE
+        hapus_kembalikan_btn.visibility = View.VISIBLE
+        when(selected_transaction?.category) {
+            "Makanan & Minuman" -> {
+                KategoriAdapter.selected_radio_btn = 0
+            }
+            "Kecantikan & Kesehatan" -> {
+                KategoriAdapter.selected_radio_btn = 1
+            }
+            "Sosial & Gaya Hidup" -> {
+                KategoriAdapter.selected_radio_btn = 2
+            }
+            "Entertainment" -> {
+                KategoriAdapter.selected_radio_btn = 3
+            }
+            "Transportasi" -> {
+                KategoriAdapter.selected_radio_btn = 4
+            }
+            "Lainnya" -> {
+                KategoriAdapter.selected_radio_btn = 5
+            }
+        }
+        judul.setText(selected_transaction?.title)
+        tanggal.setText(selected_transaction?.date)
+        jumlah_saldo.setText(selected_transaction?.amount.toString())
+        when(selected_transaction?.type) {
+            "pemasukan" -> {
+                btn_pemasukan.isChecked = true
+                type = "pemasukan"
+            } else -> {
+                btn_pengeluaran.isChecked = true
+                type = "pengeluaran"
+            }
+        }
+        simpan_btn.text = "Update Transaksi"
+        simpan_btn.setOnClickListener {
+            if(KategoriAdapter.kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
+                updateData()
+            } else {
+                Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
+            }
+        }
+        hapus_btn.setOnClickListener {
+            deleteData()
+        }
+        hapus_kembalikan_btn.setOnClickListener {
+            deleteAndReturnSaldo()
+        }
+    }
 
-        val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            et.setText(Utilities.getDate(year, (month+1), dayOfMonth))
-        }, yearr, monthh, dayy)
-        dpd.show()
+    private fun deleteAndReturnSaldo() {
+        when(selected_transaction?.type) {
+            "pemasukan" -> {
+                viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user - selected_transaction!!.amount), (HomeFragment.pemasukan_user -selected_transaction!!.amount),
+                    HomeFragment.pengeluaran_user
+                ))
+            }
+            "pengeluaran" -> {
+                viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user +selected_transaction!!.amount),
+                    HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user -selected_transaction!!.amount) ))
+            }
+        }
+        viewModel.deleteTransactions(selected_transaction!!)
+        Toast.makeText(context, "Transaksi dihapus dan saldo dikembalikan", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun deleteData() {
+        viewModel.deleteTransactions(selected_transaction!!)
+        Toast.makeText(context, "Transaksi Berhasil Dihapus", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun updateData() {
+        if(selected_transaction?.type == "pemasukan") { // cek type transaksi yang dipilih
+
+            val saldoInput = jumlah_saldo.text.toString().toLong()
+            if(type == "pemasukan") { // pemasukan -> pemasukan
+                HomeFragment.saldo_user = (HomeFragment.saldo_user-selected_transaction?.amount!!+saldoInput)
+                viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, (HomeFragment.pemasukan_user-selected_transaction?.amount!!+saldoInput), HomeFragment.pengeluaran_user))
+                Log.d("updateData", "pemasukan -> pemasukan")
+            } else { //jika type transaksi yang dipilih diubah (pemasukan -> pengeluaran) maka jalankan program dibawah
+                //temp = saldo saat ini dikurang dengan jumlah uang dari transaksi yang dipilih
+                //temp = temp - inputan saldo
+                //pengeluaran = pengeluaran + inputan saldo
+                //pemasukan = pemasukan - jumlah uang dari transaksi yang dipilih
+                Log.d("updateData", "pemasukan -> pengeluaran")
+                HomeFragment.saldo_user = HomeFragment.saldo_user - selected_transaction?.amount!!
+                HomeFragment.saldo_user = HomeFragment.saldo_user - saldoInput
+                HomeFragment.pemasukan_user = HomeFragment.pemasukan_user - selected_transaction?.amount!!
+                HomeFragment.pengeluaran_user = HomeFragment.pengeluaran_user + saldoInput
+                viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, HomeFragment.pemasukan_user, HomeFragment.pengeluaran_user))
+
+            }
+            viewModel.updateTransactions(TransactionEntity(selected_transaction?.id!!, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+            Toast.makeText(context, "Transaksi Berhasil Diubah", Toast.LENGTH_SHORT).show()
+
+        } else {
+
+            val saldoInput = jumlah_saldo.text.toString().toLong()
+            if(saldoInput <= HomeFragment.saldo_user) {
+                if(type == "pengeluaran") { //pengeluaran -> pengeluaran
+                    HomeFragment.saldo_user = selected_transaction?.amount!!-saldoInput + HomeFragment.saldo_user
+                    viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user-selected_transaction?.amount!!+saldoInput)))
+                } else { //jika type transaksi yang dipilih diubah (pengeluaran -> pemasukan) maka jalankan program dibawah
+                    /*
+                     * pengeluaran -> pemasukan
+                     * saldo saat ini = saldo + jumlah uang dari transaksi yang pilih
+                     * saldo saat ini = saldo + jumlah inputan saldo
+                     * pengeluaran = pengeluaran - jumlah uang dari transaksi yang pilih
+                     * pemasukan = pemasukan + jumlah inputan saldo
+                     */
+                    HomeFragment.saldo_user = HomeFragment.saldo_user + selected_transaction?.amount!! + saldoInput
+                    HomeFragment.pengeluaran_user = HomeFragment.pengeluaran_user - selected_transaction?.amount!!
+                    HomeFragment.pemasukan_user = HomeFragment.pemasukan_user + saldoInput
+                    viewModel.insertUserSaldo(SaldoEntity(0, HomeFragment.saldo_user, HomeFragment.pemasukan_user, HomeFragment.pengeluaran_user))
+                }
+                viewModel.updateTransactions(TransactionEntity(selected_transaction?.id!!, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+                Toast.makeText(context, "Transaksi Berhasil Diubah", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(context, "Saldo Anda Tidak Cukup", Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
 
     private fun insertData() {
@@ -105,10 +231,25 @@ class AddTransactionFragment : Fragment() {
         }
     }
 
+
+    private fun getDate(et: EditText) {
+        val cal = Calendar.getInstance()
+        val yearr = cal.get(Calendar.YEAR)
+        val monthh = cal.get(Calendar.MONTH)
+        val dayy = cal.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            et.setText(Utilities.getDate(year, (month+1), dayOfMonth))
+        }, yearr, monthh, dayy)
+        dpd.show()
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = AddTransactionFragment()
         var kategori = ""
+        var action = ""
+        var selected_transaction: TransactionEntity? = null
 
     }
 }

@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation.*
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddGoalsFragment.AddGoalsFragment
+import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryFragment
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
@@ -54,6 +55,7 @@ class BaseFragment : Fragment() {
         bottomSheetDialog.show()
         dialogView.addTransaksi.setOnClickListener {
             bottomSheetDialog.dismiss()
+            AddTransactionFragment.action = "add"
             findNavController().navigate(R.id.action_baseFragment_to_addTransactionFragment)
         }
         dialogView.addImpian.setOnClickListener {

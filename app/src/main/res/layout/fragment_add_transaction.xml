@@ -245,10 +245,37 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/primary2"
                 android:textColor="@color/white"/>
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/hapus_btn"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hapus Transaksi"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="10dp"
+                android:backgroundTint="@color/primary2"
+                android:textColor="@color/white"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/hapus_kembalikan_btn"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hapus &amp; Kembalikan Saldo"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                android:backgroundTint="@color/primary2"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
