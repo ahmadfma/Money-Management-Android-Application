@@ -15,9 +15,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="15dp"
-            android:paddingBottom="18dp"
+            android:layout_height="?attr/actionBarSize"
             app:title="Impian"
             app:titleTextColor="@color/white"/>
 

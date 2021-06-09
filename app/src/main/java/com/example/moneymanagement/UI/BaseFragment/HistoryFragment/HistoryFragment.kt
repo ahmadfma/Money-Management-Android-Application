@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
@@ -70,7 +71,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun loadTransactionBasedOnDate(date: String) {
-        GlobalScope.launch {
+        lifecycleScope.launch {
             withContext(Dispatchers.Main) {
                 val listTransaksi = async { viewmodel_fragment.getTransactionsBasedOnDate(viewmodel_user, date) }.await()
                 daftar_riwayat.setHasFixedSize(true)
