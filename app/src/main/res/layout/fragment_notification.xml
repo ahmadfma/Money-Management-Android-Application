@@ -10,13 +10,13 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary2"
+        android:backgroundTint="@color/primary"
         android:translationZ="10dp">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="30dp"
+            android:paddingTop="15dp"
             android:paddingBottom="18dp"
             app:title="Notifikasi"
             app:titleTextColor="@color/white"/>

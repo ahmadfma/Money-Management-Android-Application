@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:title="Riwayat"
             app:titleTextColor="@color/white"
-            android:paddingTop="30dp"
+            android:paddingTop="15dp"
             android:paddingBottom="18dp"/>
     </com.google.android.material.appbar.AppBarLayout>
 

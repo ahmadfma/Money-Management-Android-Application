@@ -10,13 +10,13 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary2">
+        android:backgroundTint="@color/primary">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarTransaksi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="30dp"
+            android:paddingTop="15dp"
             app:navigationIcon="@drawable/ic_arrow_back"
             app:title="Tambah Transaksi"
             app:titleTextColor="@color/white"/>

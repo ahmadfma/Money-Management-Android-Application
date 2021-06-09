@@ -16,7 +16,7 @@
             android:id="@+id/toolbarGoals"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="30dp"
+            android:paddingTop="10dp"
             app:title="Tambah Impian"
             app:titleTextColor="@color/white"
             app:navigationIcon="@drawable/ic_arrow_back"/>
