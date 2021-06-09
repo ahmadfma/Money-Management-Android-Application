@@ -62,6 +62,7 @@ class AddGoalsFragment : Fragment() {
                     0,false,KategoriAdapter.kategori, harga.text.toString().toLong(), catatan.text.toString()
                 )
             )
+            activity?.onBackPressed()
             Toast.makeText(context, "Impian Berhasil Ditambahkan", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
@@ -100,6 +101,7 @@ class AddGoalsFragment : Fragment() {
                         GoalsFragment.selectedGoals!!.id,false,KategoriAdapter.kategori, harga.text.toString().toLong(), catatan.text.toString()
                     )
                 )
+                activity?.onBackPressed()
                 Toast.makeText(context, "Impian Berhasil Diubah", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
@@ -107,6 +109,7 @@ class AddGoalsFragment : Fragment() {
         }
         hapus_btn.setOnClickListener {
             viewmodel.deleteGoals(GoalsFragment.selectedGoals!!)
+            activity?.onBackPressed()
             Toast.makeText(context, "Impian Berhasil Dihapus", Toast.LENGTH_SHORT).show()
         }
     }

@@ -87,6 +87,7 @@ class AddTransactionFragment : Fragment() {
         simpan_btn.setOnClickListener {
             if(KategoriAdapter.kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
                 insertData()
+                activity?.onBackPressed()
             } else {
                 Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
             }
@@ -132,15 +133,18 @@ class AddTransactionFragment : Fragment() {
         simpan_btn.setOnClickListener {
             if(KategoriAdapter.kategori != "" && jumlah_saldo.text.toString() != "" && judul.text.toString() != "" && type != "") {
                 updateData()
+                activity?.onBackPressed()
             } else {
                 Toast.makeText(context, "Harap Mengisi Semua Kolom", Toast.LENGTH_SHORT).show()
             }
         }
         hapus_btn.setOnClickListener {
             deleteData()
+            activity?.onBackPressed()
         }
         hapus_kembalikan_btn.setOnClickListener {
             deleteAndReturnSaldo()
+            activity?.onBackPressed()
         }
     }
 
