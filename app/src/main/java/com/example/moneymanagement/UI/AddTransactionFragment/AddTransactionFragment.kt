@@ -53,6 +53,9 @@ class AddTransactionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbarTransaksi.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
         rvkategori.setHasFixedSize(true)
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)

@@ -13,12 +13,13 @@
         android:backgroundTint="@color/primary2">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarGoals"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="30dp"
-            android:paddingBottom="18dp"
             app:title="Tambah Impian"
-            app:titleTextColor="@color/white"/>
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_arrow_back"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

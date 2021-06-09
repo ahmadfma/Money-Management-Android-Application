@@ -40,6 +40,9 @@ class AddGoalsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toolbarGoals.setNavigationOnClickListener {
+            activity?.onBackPressed()
+        }
         if(action == "add") {
             simpan_btn.setOnClickListener {
                 insertData()

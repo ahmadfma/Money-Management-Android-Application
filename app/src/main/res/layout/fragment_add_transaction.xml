@@ -13,10 +13,11 @@
         android:backgroundTint="@color/primary2">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarTransaksi"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="30dp"
-            android:paddingBottom="18dp"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="Tambah Transaksi"
             app:titleTextColor="@color/white"/>
 
