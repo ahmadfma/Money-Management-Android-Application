@@ -16,7 +16,7 @@ import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragm
 import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryFragment
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
-import com.example.moneymanagement.UI.BaseFragment.NewsFragment.NotificationFragment
+import com.example.moneymanagement.UI.BaseFragment.NotificationFragment.NotificationFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*

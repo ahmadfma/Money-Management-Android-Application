@@ -1,6 +1,7 @@
 package com.example.moneymanagement.UI.BaseFragment.HomeFragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -90,10 +91,19 @@ class HomeFragment : Fragment() {
             mDialog?.dismiss()
         }
         dialogView.simpan.setOnClickListener {
-            val saldo = dialogView.saldoET.text.toString().toLong()
-            val pemasukan = dialogView.pemasukanET.text.toString().toLong()
-            val pengeluaran = dialogView.pengeluaranET.text.toString().toLong()
-            viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan, pengeluaran))
+            var s = dialogView.saldoET.text.toString()
+            var pem = dialogView.pemasukanET.text.toString()
+            var peng = dialogView.pengeluaranET.text.toString()
+            if(s.isEmpty()) {
+                s = "0"
+            }
+            if(pem.isEmpty()) {
+                pem = "0"
+            }
+            if(peng.isEmpty()) {
+                peng = "0"
+            }
+            viewModel.insertUserSaldo(SaldoEntity(0, s.toLong(), pem.toLong(), peng.toLong()))
             mDialog?.dismiss()
             Toast.makeText(context, "Saldo Berhasil Disimpan", Toast.LENGTH_SHORT).show()
         }

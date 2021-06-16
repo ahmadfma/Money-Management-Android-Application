@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.BaseFragment.NewsFragment
+package com.example.moneymanagement.UI.BaseFragment.NotificationFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
