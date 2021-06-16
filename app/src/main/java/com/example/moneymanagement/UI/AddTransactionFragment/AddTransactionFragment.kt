@@ -303,7 +303,7 @@ class AddTransactionFragment : Fragment() {
     private fun getID(): String {
         val date = Calendar.getInstance().time
         val jam = DateFormat.format("HHmmss", date) as String
-        return "$y$m$d$jam"
+        return "$m$d$y$jam"
     }
 
     companion object {

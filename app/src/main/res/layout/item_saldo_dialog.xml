@@ -9,7 +9,6 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:background="@drawable/cirlce_shape"
-        android:backgroundTint="@color/merah_tulisan"
         android:drawableStart="@drawable/ic_close"
         android:paddingStart="3dp"
         android:layout_alignParentEnd="true"
@@ -31,6 +30,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            app:startIconDrawable="@drawable/ic_indonesia_rupiah_currency_symbol"
+            app:endIconMode="clear_text"
             android:hint="Saldo Anda"
             android:textColorHint="@color/black">
             <EditText
@@ -49,7 +50,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            app:startIconDrawable="@drawable/ic_indonesia_rupiah_currency_symbol"
             android:hint="Pemasukan"
+            app:endIconMode="clear_text"
             android:textColorHint="@color/hijau_tulisan">
             <EditText
                 android:id="@+id/pemasukanET"
@@ -67,6 +70,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            app:endIconMode="clear_text"
+            app:startIconDrawable="@drawable/ic_indonesia_rupiah_currency_symbol"
             android:hint="Pengeluaran"
             android:textColorHint="@color/merah_tulisan">
             <EditText
@@ -81,29 +86,32 @@
             android:id="@+id/simpan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Simpan"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="60dp"
-            android:layout_marginEnd="60dp" />
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="60dp"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:text="Simpan" />
 
         <Button
             android:id="@+id/reset_pemasukan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="reset pemasukan"
             android:layout_marginStart="60dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="60dp"
-            android:layout_marginTop="10dp"/>
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:text="reset pemasukan" />
 
         <Button
             android:id="@+id/reset_pengeluaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="reset pengeluaran"
             android:layout_marginStart="60dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="60dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"/>
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:text="reset pengeluaran" />
 
     </LinearLayout>
 
