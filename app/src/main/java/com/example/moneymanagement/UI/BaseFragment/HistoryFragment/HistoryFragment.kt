@@ -45,7 +45,7 @@ class HistoryFragment : Fragment() {
             override fun setTanggalUI(date: List<String>) {
                 if(date.isNotEmpty()) {
                     setTombolTanggal(date)
-                    loadTransactionBasedOnDate(date[0].split(" ").toTypedArray().let {
+                    loadTransactionBasedOnDate(date[date.size-1].split(" ").toTypedArray().let {
                         "${it[1]} ${it[2]}"
                     })
                     info_history_belum_ada.visibility = View.GONE

@@ -13,7 +13,7 @@ class TombolTanggalAdapter(private val listTanggal: List<String>?, private val l
         fun onDateClick(date: String)
     }
 
-    private var selectedIndex = 0
+    private var selectedIndex = listTanggal?.size?.minus(1)
 
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(tanggal: String, listener: Listener) {
