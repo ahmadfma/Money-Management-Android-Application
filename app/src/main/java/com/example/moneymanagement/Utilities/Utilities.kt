@@ -2,6 +2,7 @@ package com.example.moneymanagement.Utilities
 
 import android.text.format.DateFormat
 import android.util.Log
+import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -16,6 +17,9 @@ class Utilities {
             hariIni = DateFormat.format("EEEE", dateNow) as String
             val date = Calendar.getInstance().time
             Log.d("Utilities", "getDate : ${Calendar.getInstance().time}")
+            AddTransactionFragment.d = DateFormat.format("d", date) as String
+            AddTransactionFragment.m = DateFormat.format("MM", date) as String
+            AddTransactionFragment.y = DateFormat.format("yyyy", date) as String
             val tanggal = DateFormat.format("d MMMM yyyy", date) as String
             return "$hariIni, $tanggal"
         }

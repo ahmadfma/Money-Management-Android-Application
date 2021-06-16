@@ -2,6 +2,7 @@ package com.example.moneymanagement.UI.AddTransactionFragment
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -255,13 +256,13 @@ class AddTransactionFragment : Fragment() {
     private fun insertData() {
         if(type == "pemasukan") {
             val saldoInput = jumlah_saldo.text.toString().toLong()
-            viewModel.insertTransaction(TransactionEntity(0, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+            viewModel.insertTransaction(TransactionEntity(getID(), type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
             viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user+saldoInput), (HomeFragment.pemasukan_user+saldoInput), HomeFragment.pengeluaran_user))
             Toast.makeText(context, "Transaksi Berhasil Disimpan", Toast.LENGTH_SHORT).show()
         } else {
             if(jumlah_saldo.text.toString().toLong() <= HomeFragment.saldo_user) {
                 val saldoInput = jumlah_saldo.text.toString().toLong()
-                viewModel.insertTransaction(TransactionEntity(0, type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
+                viewModel.insertTransaction(TransactionEntity(getID(), type, KategoriAdapter.kategori, jumlah_saldo.text.toString().toLong(), judul.text.toString(), tanggal.text.toString()))
                 viewModel.insertUserSaldo(SaldoEntity(0, (HomeFragment.saldo_user-saldoInput), HomeFragment.pemasukan_user, (HomeFragment.pengeluaran_user+saldoInput)))
                 Toast.makeText(context, "Transaksi Berhasil Disimpan", Toast.LENGTH_SHORT).show()
             } else {
@@ -285,14 +286,32 @@ class AddTransactionFragment : Fragment() {
         val dayy = cal.get(Calendar.DAY_OF_MONTH)
 
         val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            m = (month+1).toString()
+            y = year.toString()
+            d = dayOfMonth.toString()
+            if(m.length == 1) {
+                m = "0$m"
+            }
+            if(d.length == 1) {
+                d = "0$d"
+            }
             et.setText(Utilities.getDate(year, (month+1), dayOfMonth))
         }, yearr, monthh, dayy)
         dpd.show()
     }
 
+    private fun getID(): String {
+        val date = Calendar.getInstance().time
+        val jam = DateFormat.format("HHmmss", date) as String
+        return "$y$m$d$jam"
+    }
+
     companion object {
         @JvmStatic
         fun newInstance() = AddTransactionFragment()
+        var m = ""
+        var y = ""
+        var d = ""
         var kategori = ""
         var action = ""
         var selected_transaction: TransactionEntity? = null
