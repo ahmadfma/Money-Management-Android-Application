@@ -10,7 +10,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary2">
+        android:backgroundTint="@color/primary">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarGoals"
@@ -57,78 +57,70 @@
                     android:padding="6dp"/>
             </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Catatan :"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/catatan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:padding="10dp"
                 android:hint="Catatan"
-                android:backgroundTint="@color/abu"
-                android:background="@drawable/edit_background"/>
+                app:startIconDrawable="@drawable/ic_note"
+                app:endIconMode="clear_text"
+                android:textColorHint="@color/black">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="7dp">
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/catatan"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Harga :"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="5dp"/>
-            </LinearLayout>
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/harga"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:padding="10dp"
-                android:hint="Rp"
-                android:inputType="number"
-                android:backgroundTint="@color/abu"
-                android:background="@drawable/edit_background"/>
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="Jumlah Uang"
+                app:helperTextTextColor="@color/primary"
+                app:startIconDrawable="@drawable/ic_indonesia_rupiah_currency_symbol"
+                app:endIconMode="clear_text"
+                android:textColorHint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/harga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/simpan_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Simpan Impian"
-                android:textSize="16sp"
-                android:textAllCaps="false"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
                 android:backgroundTint="@color/primary2"
-                android:textColor="@color/white"/>
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Simpan Impian"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/hapus_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hapus Impian"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textAllCaps="false"
                 android:layout_marginStart="30dp"
+                android:fontFamily="@font/roboto_condensed_regular"
                 android:layout_marginEnd="30dp"
                 android:layout_marginTop="6dp"
                 android:layout_marginBottom="30dp"

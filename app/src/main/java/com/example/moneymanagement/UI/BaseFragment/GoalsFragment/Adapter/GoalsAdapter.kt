@@ -55,7 +55,7 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Go
                     line?.setImageResource(R.color.kuning)
                 }
                 "Lainnya" -> {
-                    icon.setImageResource(R.drawable.ic_other)
+                    icon.setImageResource(R.drawable.ic_goal)
                     line?.setImageResource(R.color.hijau)
                 }
             }

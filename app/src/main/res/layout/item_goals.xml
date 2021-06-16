@@ -1,126 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginTop="3dp"
     android:layout_marginBottom="8dp"
     android:layout_marginStart="18dp"
     android:layout_marginEnd="18dp"
-    android:background="@drawable/edit_background">
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:src="@drawable/ic_fast_food"/>
-
-    <LinearLayout
-        android:id="@+id/txt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="80dp"
-        android:layout_toEndOf="@+id/icon"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Makanan &amp; Minuman"
-            android:textSize="20sp"
-            android:textColor="#4E4E4E"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:id="@+id/catatan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="8dp"
-            android:text="saya ingin membeli pizza limo sebanyak 10 box dihari ulang tahun saya"/>
-
-    </LinearLayout>
+    app:cardCornerRadius="20dp"
+    android:background="@drawable/goals_background">
 
     <RelativeLayout
-        android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txt"
-        android:layout_marginTop="20dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="8dp"
-                android:layout_alignParentEnd="true"/>
-            <TextView
-                android:id="@+id/saldo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2.000.000.000"
-                android:textSize="16sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp"
-            android:orientation="horizontal">
-            <TextView
-                android:id="@+id/rp2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rp"
-                android:textSize="18sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="8dp"
-                android:layout_alignParentEnd="true"/>
-            <TextView
-                android:id="@+id/target"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2.000.000.000"
-                android:textSize="16sp"/>
-        </LinearLayout>
-
+        android:layout_height="wrap_content">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_forward"
-            android:layout_centerHorizontal="true"/>
+            android:id="@+id/icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/ic_fast_food"/>
 
-        <ProgressBar
-            android:id="@+id/progress_horizontal"
+        <RelativeLayout
+            android:id="@+id/txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
-            android:progressDrawable="@drawable/progres_bar_item"
-            android:progress="50"
-            android:indeterminate="false"
-            android:indeterminateDrawable="@drawable/progres_bar_item"
-            android:layout_marginEnd="20dp" />
+            android:minHeight="80dp"
+            android:layout_toEndOf="@+id/icon"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Makanan &amp; Minuman"
+                android:textColor="#676666"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/catatan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/category"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="saya ingin membeli pizza limo sebanyak 10 box dihari ulang tahun saya"
+                android:textColor="#000000" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignParentEnd="true"/>
+
+                <TextView
+                    android:id="@+id/saldo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:text="2.000.000.000"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/rp2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_alignParentEnd="true"/>
+
+                <TextView
+                    android:id="@+id/target"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:text="2.000.000.000"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_right"
+                android:layout_centerHorizontal="true"/>
+
+            <ProgressBar
+                android:id="@+id/progress_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="20dp"
+                android:progressDrawable="@drawable/progres_bar_item"
+                android:progress="50"
+                android:indeterminate="false"
+                android:indeterminateDrawable="@drawable/progres_bar_item"
+                android:layout_marginEnd="20dp" />
+        </RelativeLayout>
     </RelativeLayout>
 
 
-
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

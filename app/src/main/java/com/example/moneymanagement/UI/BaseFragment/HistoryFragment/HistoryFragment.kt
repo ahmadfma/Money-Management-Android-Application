@@ -48,6 +48,12 @@ class HistoryFragment : Fragment() {
                     loadTransactionBasedOnDate(date[0].split(" ").toTypedArray().let {
                         "${it[1]} ${it[2]}"
                     })
+                    info_history_belum_ada.visibility = View.GONE
+                } else {
+                    tx1.visibility = View.GONE
+                    tx2.visibility = View.GONE
+                    line.visibility = View.GONE
+                    info_history_belum_ada.visibility = View.VISIBLE
                 }
             }
         })

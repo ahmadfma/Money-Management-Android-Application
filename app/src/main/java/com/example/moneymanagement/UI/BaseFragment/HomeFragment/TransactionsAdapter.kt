@@ -63,7 +63,7 @@ class TransactionsAdapter(private val listTransaction: List<TransactionEntity>, 
                     line.setImageResource(R.color.kuning)
                 }
                 "Lainnya" -> {
-                    icon.setImageResource(R.drawable.ic_other)
+                    icon.setImageResource(R.drawable.ic_transaction)
                     line.setImageResource(R.color.hijau)
                 }
             }

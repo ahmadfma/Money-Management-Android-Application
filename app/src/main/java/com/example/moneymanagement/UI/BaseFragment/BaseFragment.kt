@@ -85,20 +85,28 @@ class BaseFragment : Fragment() {
     private fun navListener(): BottomNavigationView.OnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
         when(it.itemId) {
             R.id.nav_home -> {
-                loadHomeFragment()
-                return@OnNavigationItemSelectedListener true
+                if(viewModel.selectedBottomNavigationID != R.id.nav_home) {
+                    loadHomeFragment()
+                    return@OnNavigationItemSelectedListener true
+                }
             }
             R.id.nav_history -> {
-                loadHistoryFragment()
-                return@OnNavigationItemSelectedListener true
+                if(viewModel.selectedBottomNavigationID != R.id.nav_history) {
+                    loadHistoryFragment()
+                    return@OnNavigationItemSelectedListener true
+                }
             }
             R.id.nav_goals -> {
-                loadGoalsFragment()
-                return@OnNavigationItemSelectedListener true
+                if(viewModel.selectedBottomNavigationID != R.id.nav_goals) {
+                    loadGoalsFragment()
+                    return@OnNavigationItemSelectedListener true
+                }
             }
             R.id.nav_notif -> {
-                loadNotifFragment()
-                return@OnNavigationItemSelectedListener true
+                if(viewModel.selectedBottomNavigationID != R.id.nav_notif) {
+                    loadNotifFragment()
+                    return@OnNavigationItemSelectedListener true
+                }
             }
         }
         false

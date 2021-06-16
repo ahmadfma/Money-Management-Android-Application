@@ -26,10 +26,11 @@
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="18dp"
+        android:fontFamily="@font/nunito"
         android:text="Makanan &amp; Minuman"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        android:layout_marginStart="18dp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/line"
         app:layout_constraintTop_toTopOf="parent" />

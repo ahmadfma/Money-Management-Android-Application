@@ -40,12 +40,14 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="10dp"
                     android:orientation="vertical" >
+
                     <TextView
                         android:id="@+id/greeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
                         android:text="Selamat Pagi,"
-                        android:textColor="#CACACA"/>
+                        android:textColor="#E3E3E3" />
                     <TextView
                         android:id="@+id/username"
                         android:layout_width="wrap_content"
@@ -61,12 +63,13 @@
                 android:id="@+id/tanggal_saat_ini"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#CACACA"
-                android:text="Senin, 1 Juni 2021"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
-                android:layout_alignParentEnd="true" />
+                android:fontFamily="@font/roboto_light"
+                android:text="Senin, 1 Juni 2021"
+                android:textColor="#E3E3E3"
+                android:textSize="14sp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/saldo"
@@ -91,38 +94,42 @@
                             android:id="@+id/saldo1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/roboto"
                             android:text="Saldo Anda"
                             android:textColor="@color/primary"
-                            android:textSize="16sp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginStart="15dp"/>
+                            android:textSize="16sp" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
                             android:orientation="horizontal" >
+
                             <TextView
                                 android:id="@+id/rp1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_below="@+id/saldo1"
+                                android:fontFamily="sans-serif-condensed-medium"
                                 android:text="Rp"
-                                android:textSize="25sp"
                                 android:textColor="@color/black"
-                                android:textStyle="bold"
-                                android:layout_below="@+id/saldo1" />
+                                android:textSize="25sp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/current_saldo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_toEndOf="@+id/rp1"
                                 android:layout_below="@+id/saldo1"
-                                android:textSize="25sp"
-                                android:layout_marginTop="3dp"
                                 android:layout_marginStart="3dp"
+                                android:layout_marginTop="3dp"
+                                android:layout_toEndOf="@+id/rp1"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:text="100.000"
                                 android:textColor="@color/black"
-                                android:text="100.000"/>
+                                android:textSize="25sp" />
                         </LinearLayout>
 
                     </RelativeLayout>
@@ -151,6 +158,7 @@
                                 android:layout_marginStart="15dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="15dp"
+                                android:fontFamily="@font/roboto_condensed_regular"
                                 android:text="Pemasukan"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
@@ -162,6 +170,7 @@
                                 android:layout_below="@+id/saldo2"
                                 android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/roboto_condensed_regular"
                                 android:text="Rp"
                                 android:textColor="@color/hijau_tulisan"
                                 android:textSize="17sp"
@@ -177,6 +186,7 @@
                                 android:layout_marginEnd="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_toEndOf="@+id/rp2"
+                                android:fontFamily="@font/roboto_condensed_regular"
                                 android:text="0"
                                 android:textColor="@color/hijau_tulisan"
                                 android:textSize="17sp" />
@@ -213,6 +223,7 @@
                                 android:layout_marginStart="15dp"
                                 android:layout_marginTop="5dp"
                                 android:layout_marginEnd="15dp"
+                                android:fontFamily="@font/roboto_condensed_regular"
                                 android:text="Pengeluaran"
                                 android:textColor="@color/black"
                                 android:textSize="14sp" />
@@ -224,6 +235,7 @@
                                 android:layout_below="@+id/saldo3"
                                 android:layout_marginStart="15dp"
                                 android:layout_marginBottom="5dp"
+                                android:fontFamily="@font/roboto_condensed_regular"
                                 android:text="Rp"
                                 android:textColor="@color/merah_tulisan"
                                 android:textSize="17sp"
@@ -239,6 +251,7 @@
                                 android:layout_marginEnd="15dp"
                                 android:layout_marginBottom="5dp"
                                 android:layout_toEndOf="@+id/rp3"
+                                android:fontFamily="@font/roboto_condensed_regular"
                                 android:text="0"
                                 android:textColor="@color/merah_tulisan"
                                 android:textSize="17sp" />
@@ -254,13 +267,14 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Riwayat terakhir anda"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:layout_below="@+id/saldo"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="3dp"
-                android:layout_below="@+id/saldo"/>
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Riwayat terakhir anda"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

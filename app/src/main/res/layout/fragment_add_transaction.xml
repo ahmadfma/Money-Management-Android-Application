@@ -33,101 +33,81 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Judul :"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginBottom="5dp"/>
-            <EditText
-                android:id="@+id/judul"
+                android:hint="Catatan"
+                app:startIconDrawable="@drawable/ic_note"
+                app:endIconMode="clear_text"
+                android:textColorHint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/judul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:padding="10dp"
-                android:hint="judul"
-                android:backgroundTint="@color/abu"
-                android:background="@drawable/edit_background"/>
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="Tanggal"
+                app:startIconDrawable="@drawable/ic_date"
+                android:textColorHint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tanggal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/saldolayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="10dp"
+                android:hint="Jumlah Uang"
+                app:helperText="Saldo Anda : Rp.500.000"
+                app:helperTextTextColor="@color/primary"
+                app:startIconDrawable="@drawable/ic_indonesia_rupiah_currency_symbol"
+                app:endIconMode="clear_text"
+                android:textColorHint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/jumlah_saldo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tanggal :"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="18dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="5dp"/>
-
-            <EditText
-                android:id="@+id/tanggal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:padding="10dp"
-                android:hint="tanggal"
-                android:focusable="false"
-                android:backgroundTint="@color/abu"
-                android:background="@drawable/edit_background"/>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="7dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Jumlah :"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="5dp"/>
-                <TextView
-                    android:id="@+id/saldo_user"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="(Saldo Anda : Rp.580.000)"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="5dp"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/jumlah_saldo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
-                android:layout_marginEnd="22dp"
-                android:padding="10dp"
-                android:hint="Rp"
-                android:inputType="number"
-                android:backgroundTint="@color/abu"
-                android:background="@drawable/edit_background"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kategori :"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 android:layout_marginTop="15dp"
-                android:layout_marginStart="18dp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Kategori"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -145,14 +125,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipe :"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:layout_marginTop="15dp"
                 android:layout_marginStart="18dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Tipe"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/tipe_pemasukan"
@@ -172,16 +153,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pemasukan"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:layout_marginStart="18dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/line"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="Pemasukan"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/line"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioButton
                         android:id="@+id/btn_pemasukan"
@@ -212,16 +194,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pengeluaran"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:layout_marginStart="18dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/line2"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="18dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="Pengeluaran"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/line2"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioButton
                         android:id="@+id/btn_pengeluaran"
@@ -239,15 +222,16 @@
                 android:id="@+id/simpan_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Simpan Transaksi"
-                android:textSize="16sp"
-                android:textAllCaps="false"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="30dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/primary2"
-                android:textColor="@color/white"/>
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Simpan Transaksi"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/hapus_btn"
@@ -255,7 +239,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hapus Transaksi"
-                android:textSize="16sp"
+                android:textSize="15sp"
+                android:fontFamily="@font/roboto_condensed_regular"
                 android:textAllCaps="false"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -269,7 +254,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hapus &amp; Kembalikan Saldo"
-                android:textSize="16sp"
+                android:textSize="15sp"
+                android:fontFamily="@font/roboto_condensed_regular"
                 android:textAllCaps="false"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"

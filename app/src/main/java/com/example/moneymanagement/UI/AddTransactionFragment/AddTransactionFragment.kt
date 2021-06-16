@@ -59,7 +59,8 @@ class AddTransactionFragment : Fragment() {
         rvkategori.setHasFixedSize(true)
         rvkategori.layoutManager = LinearLayoutManager(context)
         rvkategori.adapter = KategoriAdapter(listKategori, listColorKategori)
-        saldo_user.text = "(Saldo Anda: Rp ${Utilities.formatNumber(HomeFragment.saldo_user)})"
+        saldolayout.helperText = "Saldo Anda: Rp ${Utilities.formatNumber(HomeFragment.saldo_user)}"
+
         tanggal.setOnClickListener {
             getDate(tanggal)
         }

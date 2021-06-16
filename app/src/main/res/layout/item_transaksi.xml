@@ -11,11 +11,11 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:minHeight="100dp">
+        android:minHeight="90dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/line"
-            android:layout_width="10dp"
+            android:layout_width="8dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
             app:cardCornerRadius="10dp"
@@ -31,8 +31,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="10dp"
             app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -71,9 +71,10 @@
                     android:id="@+id/rp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="-Rp"
                     android:textColor="@color/merah_tulisan"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -81,19 +82,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="3dp"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:text="1.580.000"
                     android:textColor="@color/merah_tulisan"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/judul"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Membeli skincare "
-                android:textColor="@color/black"
                 android:layout_marginTop="3dp"
-                android:textSize="16sp"/>
+                android:fontFamily="@font/nunito"
+                android:text="Membeli skincare "
+                android:textColor="#000000"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -101,11 +104,12 @@
             android:id="@+id/tanggal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="23 Sept 20"
-            android:textColor="#2C2C2C"
-            android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="23 Sept 20"
+            android:textColor="#2C2C2C"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
