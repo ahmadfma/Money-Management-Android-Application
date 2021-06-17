@@ -24,40 +24,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@id/appbar">
-        <TextView
-            android:id="@+id/tx1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Tanggal "
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tanggal_btn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="10dp"
-            android:paddingStart="10dp"
-            android:layout_below="@+id/tx1"/>
+            android:orientation="vertical"
+            android:id="@+id/date"
+            android:background="#FFFFFF"
+            android:translationZ="2dp">
+            <TextView
+                android:id="@+id/tx1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="Tanggal "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_below="@id/tanggal_btn"
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:layout_height="1dp"
-            android:background="#D8D8D8"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tanggal_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="10dp"
+                android:paddingStart="10dp" />
+        </LinearLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true"
-            android:layout_below="@+id/line">
+            android:layout_below="@+id/date">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,7 +66,7 @@
                     android:id="@+id/tx2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/line"
+                    android:layout_marginTop="5dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginBottom="2dp"
                     android:fontFamily="@font/roboto_condensed_regular"
@@ -82,8 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_below="@+id/tx2"/>
+                    android:nestedScrollingEnabled="false"/>
             </LinearLayout>
 
         </ScrollView>

@@ -52,7 +52,6 @@ class HistoryFragment : Fragment() {
                 } else {
                     tx1.visibility = View.GONE
                     tx2.visibility = View.GONE
-                    line.visibility = View.GONE
                     info_history_belum_ada.visibility = View.VISIBLE
                 }
             }
