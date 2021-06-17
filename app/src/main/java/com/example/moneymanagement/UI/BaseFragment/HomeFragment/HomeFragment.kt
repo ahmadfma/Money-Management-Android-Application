@@ -26,6 +26,11 @@ const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
 
     private lateinit var viewModel: UserViewModel
+    private val listLayout = arrayListOf<String>(
+        "CARD",
+        "LAST TRANSACTION",
+        "STATISTIC"
+    )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
@@ -35,44 +40,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvhome.setHasFixedSize(true)
-        rvhome.layoutManager = LinearLayoutManager(context)
         tanggal_saat_ini.text = Utilities.getDate()
-        saldo.setOnClickListener {
-            saldoAction()
-        }
-        loadUserSaldo()
-        loadUserLastTransaction()
-    }
-
-    private fun loadUserSaldo() {
-        viewModel.getCurrentSaldo()?.observe(viewLifecycleOwner, Observer {
-            if(it != null) {
-                saldo_user = it
-                current_saldo.text = Utilities.formatNumber(it)
-            } else {
-                saldo_user = 0
-                current_saldo.text = "0"
+        recyclerview.setHasFixedSize(true)
+        recyclerview.layoutManager = LinearLayoutManager(context)
+        recyclerview.adapter = LayoutAdapter(listLayout, viewModel, this, object : LayoutAdapter.Listener {
+            override fun onCardClick() {
+                saldoAction()
             }
-        })
 
-        viewModel.getCurrentPemasukan()?.observe(viewLifecycleOwner, Observer {
-            if(it != null) {
-                pemasukan_user = it
-                pemasukan.text = Utilities.formatNumber(it)
-            } else {
-                pemasukan_user = 0
-                pemasukan.text = "0"
-            }
-        })
-
-        viewModel.getCurrentPengeluaran()?.observe(viewLifecycleOwner, Observer {
-            if(it != null) {
-                pengeluaran_user = it
-                pengeluaran.text = Utilities.formatNumber(it)
-            } else {
-                pengeluaran_user = 0
-                pengeluaran.text = "0"
+            override fun onTransactionViewClick(transactionEntity: TransactionEntity) {
+                onViewAction(transactionEntity)
             }
         })
     }
@@ -121,16 +98,6 @@ class HomeFragment : Fragment() {
             mDialog?.dismiss()
             Toast.makeText(context, "Pengeluaran berhasil direset", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun loadUserLastTransaction() {
-        viewModel.getLastTransaction()?.observe(viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
-            rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
-                override fun onViewClick(transaction: TransactionEntity) {
-                    onViewAction(transaction)
-                }
-            })
-        })
     }
 
     private fun onViewAction(transaction: TransactionEntity) {
