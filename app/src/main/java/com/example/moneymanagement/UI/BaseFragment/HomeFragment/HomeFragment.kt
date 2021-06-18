@@ -93,9 +93,11 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
-                if(!isTopChange) {
-                    isTopChange = true
-                    top.setBackgroundResource(R.drawable.user_background)
+                if(floatvalue == 0f) {
+                    if(!isTopChange) {
+                        isTopChange = true
+                        top.setBackgroundResource(R.drawable.user_background)
+                    }
                 }
             } else { //scroll ke atas
                 totalvalue += abs(oldScrollY)
