@@ -18,6 +18,9 @@ interface TransactionDao {
     @Query("SELECT * FROM user_transactions ORDER BY id DESC LIMIT :limit")
     fun getLastTransactions(limit: Int): LiveData<List<TransactionEntity>>?
 
+    @Query("SELECT SUM(amount) FROM user_transactions WHERE type = :type")
+    fun getTotalAmount(type: String): Long
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTransaction(data: TransactionEntity)
 

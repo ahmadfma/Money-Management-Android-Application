@@ -55,6 +55,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return transactionRepository.getLastTransactions()
     }
 
+    fun getTotalAmount(type: String): Long? {
+        return transactionRepository.getTotalAmount(type)
+    }
+
     //SALDO
     fun getCurrentSaldo(): LiveData<Long>? {
         return saldoRepository.getCurrentSaldo()

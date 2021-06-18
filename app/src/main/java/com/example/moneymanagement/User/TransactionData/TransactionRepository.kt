@@ -47,6 +47,10 @@ class TransactionRepository(application: Application) {
         return lastTransactions
     }
 
+    fun getTotalAmount(type: String): Long? {
+        return transactionDao?.getTotalAmount(type)
+    }
+
     fun insert(data: TransactionEntity) = runBlocking {
         this.launch(Dispatchers.IO) {
             transactionDao?.insertTransaction(data)
