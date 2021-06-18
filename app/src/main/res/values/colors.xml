@@ -20,4 +20,16 @@
     <color name="hijau_tulisan">#0DC300</color>
     <color name="abu">#EFEFEF</color>
     <color name="abu2">#F6F6F6</color>
+
+    <color name="p.1">#FF4557FF</color>
+    <color name="p.09">#E64557FF</color>
+    <color name="p.08">#CC4557FF</color>
+    <color name="p.07">#B34557FF</color>
+    <color name="p.06">#994557FF</color>
+    <color name="p.05">#804557FF</color>
+    <color name="p.04">#664557FF</color>
+    <color name="p.03">#4D4557FF</color>
+    <color name="p.02">#334557FF</color>
+    <color name="p.01">#1A4557FF</color>
+    <color name="p.00">#004557FF</color>
 </resources>

@@ -18,7 +18,7 @@ class TransactionRepository(application: Application) {
         transactionDao = db.transactionDao()
         transactions = transactionDao!!.getTransactions()
         allTransactionsDate = transactionDao!!.getAllDateTransactions()
-        lastTransactions = transactionDao!!.getLastTransactions(3)
+        lastTransactions = transactionDao!!.getLastTransactions(6)
     }
 
     fun getTransactions(): LiveData<List<TransactionEntity>>? {

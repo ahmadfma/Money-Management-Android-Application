@@ -1,15 +1,24 @@
 package com.example.moneymanagement.UI.BaseFragment.HomeFragment
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
@@ -20,6 +29,11 @@ import com.example.moneymanagement.User.UserViewModel
 import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_saldo_dialog.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import kotlin.math.abs
+
 
 const val TAG = "HomeFragment"
 
@@ -52,6 +66,110 @@ class HomeFragment : Fragment() {
                 onViewAction(transactionEntity)
             }
         })
+
+        lifecycleScope.launch {
+            withContext(Dispatchers.Main) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    setBackgroundColorOfTopBar(1.0f)
+                    changeColor()
+                }
+            }
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun changeColor() {
+        var floatvalue = 1f
+        var totalvalue = 550
+        var isTopChange = false
+        recyclerview.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            if(oldScrollY < 0) { //scroll ke bawah
+                totalvalue -= abs(oldScrollY)
+                if(totalvalue >= 0) {
+                    if(floatvalue > 0) {
+                        floatvalue -= abs(oldScrollY.toFloat()/400f)
+                        if(floatvalue < 0f) {
+                            floatvalue = 0f
+                        }
+                    }
+                }
+                if(!isTopChange) {
+                    isTopChange = true
+                    top.setBackgroundResource(R.drawable.user_background)
+                }
+            } else { //scroll ke atas
+                totalvalue += abs(oldScrollY)
+                if(totalvalue > 550) {
+                    totalvalue = 550
+                }
+                if(floatvalue < 1.0f) {
+                    floatvalue += abs(oldScrollY.toFloat()/400f)
+                    if(floatvalue > 1f) {
+                        floatvalue = 1f
+                    }
+                }
+            }
+
+            if(totalvalue < 0) {
+                totalvalue = 0
+            }
+
+            if(totalvalue != 0) {
+                setBackgroundColorOfTopBar(floatvalue)
+            }
+
+            if(totalvalue == 550) {
+                top.setBackgroundResource(R.color.primary)
+                isTopChange = false
+            }
+
+//            Log.d("ScrollChangeListener", "float value : $floatvalue")
+//            Log.d("ScrollChangeListener", "total value : $totalvalue")
+        }
+    }
+
+    private fun setBackgroundColorOfTopBar(value: Float) {
+//        Log.d("Top Bar Home", "setBackgroundColorOfTopBar, float value : $value")
+        when (value) {
+            in 0.0..0.1 -> {
+                setColor(R.color.p_00)
+            }
+            in 0.1..0.2 -> {
+                setColor(R.color.p_01)
+            }
+            in 0.2..0.3 -> {
+                setColor(R.color.p_02)
+            }
+            in 0.3..0.4 -> {
+                setColor(R.color.p_03)
+            }
+            in 0.4..0.5 -> {
+                setColor(R.color.p_04)
+            }
+            in 0.5..0.6 -> {
+                setColor(R.color.p_05)
+            }
+            in 0.6..0.7 -> {
+                setColor(R.color.p_06)
+            }
+            in 0.7..0.8 -> {
+                setColor(R.color.p_07)
+            }
+            in 0.8..0.9 -> {
+                setColor(R.color.p_08)
+            }
+            in 0.9..1.0 -> {
+                setColor(R.color.p_09)
+            }
+            else -> {
+                setColor(R.color.p_1)
+            }
+        }
+    }
+
+    private fun setColor(id: Int) {
+        val gradientDrawable = topback.background.mutate() as GradientDrawable
+        gradientDrawable.setColor(ResourcesCompat.getColor(resources, id, null))
     }
 
     private fun saldoAction() {
