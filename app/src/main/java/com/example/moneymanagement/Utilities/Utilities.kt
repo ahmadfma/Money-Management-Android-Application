@@ -1,12 +1,14 @@
 package com.example.moneymanagement.Utilities
 
+import android.graphics.drawable.Drawable
 import android.text.format.DateFormat
 import android.util.Log
+import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.ArrayList
 
 class Utilities {
     companion object {
@@ -42,5 +44,36 @@ class Utilities {
             return format.format(num)
         }
 
+        fun listKateogri(): ArrayList<String> {
+            return arrayListOf(
+                "Makanan & Minuman",
+                "Kecantikan & Kesehatan",
+                "Sosial & Gaya Hidup",
+                "Entertainment",
+                "Transportasi",
+                "Lainnya"
+            )
+        }
+
+        fun listKateogriColor(): ArrayList<Int> {
+            return arrayListOf<Int>(
+                R.color.merah,
+                R.color.pink,
+                R.color.ungu,
+                R.color.biru,
+                R.color.kuning,
+                R.color.hijau
+            )
+        }
+        fun listKategoriIcon(): ArrayList<Int> {
+            return arrayListOf(
+                R.drawable.ic_fast_food,
+                R.drawable.ic_healthy,
+                R.drawable.ic_makeup,
+                R.drawable.ic_drum_set,
+                R.drawable.ic_transportation,
+                R.drawable.ic_goal
+            )
+        }
     }
 }

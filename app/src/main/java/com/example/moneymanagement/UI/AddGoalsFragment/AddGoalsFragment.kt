@@ -9,28 +9,21 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
+import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import com.example.moneymanagement.UI.AddTransactionFragment.KategoriAdapter
 import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.User.Goals.GoalsEntity
 import com.example.moneymanagement.User.UserViewModel
+import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_add_goals.*
 
 class AddGoalsFragment : Fragment() {
 
     private lateinit var viewmodel : UserViewModel
 
-    private val listKategori = arrayListOf<String>(
-        "Makanan & Minuman",
-        "Kecantikan & Kesehatan",
-        "Sosial & Gaya Hidup",
-        "Entertainment",
-        "Transportasi",
-        "Lainnya"
-    )
+    private val listKategori = Utilities.listKateogri()
 
-    private val listColorKategori = arrayListOf<Int>(
-        R.color.merah,R.color.pink, R.color.ungu, R.color.biru, R.color.kuning, R.color.hijau
-    )
+    private val listColorKategori = Utilities.listKateogriColor()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -71,26 +64,13 @@ class AddGoalsFragment : Fragment() {
 
     private fun updateData() {
         hapus_btn.visibility = View.VISIBLE
-        when(GoalsFragment.selectedGoals?.category) {
-            "Makanan & Minuman" -> {
-                KategoriAdapter.selected_radio_btn = 0
-            }
-            "Kecantikan & Kesehatan" -> {
-                KategoriAdapter.selected_radio_btn = 1
-            }
-            "Sosial & Gaya Hidup" -> {
-                KategoriAdapter.selected_radio_btn = 2
-            }
-            "Entertainment" -> {
-                KategoriAdapter.selected_radio_btn = 3
-            }
-            "Transportasi" -> {
-                KategoriAdapter.selected_radio_btn = 4
-            }
-            "Lainnya" -> {
-                KategoriAdapter.selected_radio_btn = 5
+
+        listKategori.forEachIndexed { index, s ->
+            if(s == GoalsFragment.selectedGoals?.category) {
+                KategoriAdapter.selected_radio_btn = index
             }
         }
+
         catatan.setText(GoalsFragment.selectedGoals?.note)
         harga.setText(GoalsFragment.selectedGoals?.amount.toString())
         simpan_btn.text = "Update Impian"

@@ -11,14 +11,12 @@ class TransactionRepository(application: Application) {
     private var transactionDao: TransactionDao?
     private var transactions: LiveData<List<TransactionEntity>>? = null
     private var allTransactionsDate: LiveData<List<String>>? = null
-    private var lastTransactions: LiveData<List<TransactionEntity>>? = null
 
     init {
         val db = UserDatabase.getDatabase(application.applicationContext)
         transactionDao = db.transactionDao()
         transactions = transactionDao!!.getTransactions()
         allTransactionsDate = transactionDao!!.getAllDateTransactions()
-        lastTransactions = transactionDao!!.getLastTransactions(6)
     }
 
     fun getTransactions(): LiveData<List<TransactionEntity>>? {
@@ -43,8 +41,14 @@ class TransactionRepository(application: Application) {
         return list
     }
 
-    fun getLastTransactions(): LiveData<List<TransactionEntity>>? {
-        return lastTransactions
+    fun getLastTransactions(): List<TransactionEntity>? {
+        val list: List<TransactionEntity>?
+        runBlocking {
+            list = this.async(Dispatchers.IO) {
+                transactionDao?.getLastTransactions(3)
+            }.await()
+        }
+        return list
     }
 
     fun getTotalAmount(type: String): Long? {

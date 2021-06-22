@@ -1,12 +1,11 @@
 package com.example.moneymanagement.User.Saldo
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import com.example.moneymanagement.User.UserDatabase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class SaldoRepository(application: Application) {
 
@@ -17,16 +16,34 @@ class SaldoRepository(application: Application) {
         saldoDao = db.saldoDao()
     }
 
-    fun getCurrentSaldo(): LiveData<Long>? {
-        return saldoDao?.getCurrentSaldo()
+    fun getCurrentSaldo(): Long? {
+        var saldo: Long? = 0L
+        runBlocking {
+            saldo = withContext(this.coroutineContext + Dispatchers.IO) {
+                saldoDao?.getCurrentSaldo()
+            }
+        }
+        return saldo
     }
 
-    fun getCurrentPemasukan(): LiveData<Long>? {
-        return saldoDao?.getCurrentPemasukan()
+    fun getCurrentPemasukan(): Long? {
+        var pemasukan: Long? = 0L
+        runBlocking {
+            pemasukan = withContext(this.coroutineContext + Dispatchers.IO) {
+                saldoDao?.getCurrentPemasukan()
+            }
+        }
+        return pemasukan
     }
 
-    fun getCurrentPengeluaran(): LiveData<Long>? {
-        return saldoDao?.getCurrentPengeluaran()
+    fun getCurrentPengeluaran(): Long? {
+        var pengeluaran: Long? = 0L
+        runBlocking {
+            pengeluaran = withContext(this.coroutineContext + Dispatchers.IO) {
+                saldoDao?.getCurrentPengeluaran()
+            }
+        }
+        return pengeluaran
     }
 
     fun insertUserSaldo(saldo: SaldoEntity) {

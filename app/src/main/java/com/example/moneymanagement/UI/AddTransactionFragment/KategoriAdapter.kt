@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moneymanagement.R
+import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.item_kategori.view.*
 
 class KategoriAdapter(private val listKategori: ArrayList<String>, private val listColor: ArrayList<Int>): RecyclerView.Adapter<KategoriAdapter.Holder>() {
@@ -32,25 +33,12 @@ class KategoriAdapter(private val listKategori: ArrayList<String>, private val l
 
             }
         }
+
         private fun checkCategory() {
-            when(selected_radio_btn) {
-                0 -> {
-                    kategori = "Makanan & Minuman"
-                }
-                1 -> {
-                    kategori = "Kecantikan & Kesehatan"
-                }
-                2 -> {
-                    kategori = "Sosial & Gaya Hidup"
-                }
-                3 -> {
-                    kategori = "Entertainment"
-                }
-                4 -> {
-                    kategori = "Transportasi"
-                }
-                5 -> {
-                    kategori = "Lainnya"
+            for(i in 0..Utilities.listKateogri().size) {
+                if(selected_radio_btn == i) {
+                    kategori = Utilities.listKateogri()[i]
+                    break
                 }
             }
         }

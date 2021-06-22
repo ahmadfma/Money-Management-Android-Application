@@ -32,31 +32,12 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Go
                 }
             }
         }
+
         private fun setIcon(categori: String, icon: ImageView, line: ImageView?) {
-            when(categori) {
-                "Makanan & Minuman" -> {
-                    icon.setImageResource(R.drawable.ic_fast_food)
-                    line?.setImageResource(R.color.merah)
-                }
-                "Kecantikan & Kesehatan" -> {
-                    icon.setImageResource(R.drawable.ic_healthy)
-                    line?.setImageResource(R.color.pink)
-                }
-                "Sosial & Gaya Hidup" -> {
-                    icon.setImageResource(R.drawable.ic_makeup)
-                    line?.setImageResource(R.color.ungu)
-                }
-                "Entertainment" -> {
-                    icon.setImageResource(R.drawable.ic_drum_set)
-                    line?.setImageResource(R.color.biru)
-                }
-                "Transportasi" -> {
-                    icon.setImageResource(R.drawable.ic_transportation)
-                    line?.setImageResource(R.color.kuning)
-                }
-                "Lainnya" -> {
-                    icon.setImageResource(R.drawable.ic_goal)
-                    line?.setImageResource(R.color.hijau)
+            Utilities.listKateogri().forEachIndexed { index, s ->
+                if(categori == s) {
+                    icon.setImageResource(Utilities.listKategoriIcon()[index])
+                    line?.setImageResource(Utilities.listKateogriColor()[index])
                 }
             }
         }

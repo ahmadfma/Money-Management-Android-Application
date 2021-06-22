@@ -10,13 +10,13 @@ import androidx.room.Query
 interface SaldoDao {
 
     @Query("SELECT saldo FROM user_saldo")
-    fun getCurrentSaldo(): LiveData<Long>
+    fun getCurrentSaldo(): Long?
 
     @Query("SELECT pemasukan FROM user_saldo")
-    fun getCurrentPemasukan(): LiveData<Long>
+    fun getCurrentPemasukan(): Long?
 
     @Query("SELECT pengeluaran FROM user_saldo")
-    fun getCurrentPengeluaran(): LiveData<Long>
+    fun getCurrentPengeluaran(): Long?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertSaldo(saldo: SaldoEntity)

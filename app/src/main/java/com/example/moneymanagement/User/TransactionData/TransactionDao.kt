@@ -16,7 +16,7 @@ interface TransactionDao {
     suspend fun getTransactionsBasedOnDate(date: String): List<TransactionEntity>
 
     @Query("SELECT * FROM user_transactions ORDER BY id DESC LIMIT :limit")
-    fun getLastTransactions(limit: Int): LiveData<List<TransactionEntity>>?
+    fun getLastTransactions(limit: Int): List<TransactionEntity>
 
     @Query("SELECT SUM(amount) FROM user_transactions WHERE type = :type")
     fun getTotalAmount(type: String): Long

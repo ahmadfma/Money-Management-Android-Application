@@ -31,18 +31,9 @@ class AddTransactionFragment : Fragment() {
 
     private lateinit var viewModel: UserViewModel
 
-    private val listKategori = arrayListOf<String>(
-        "Makanan & Minuman",
-        "Kecantikan & Kesehatan",
-        "Sosial & Gaya Hidup",
-        "Entertainment",
-        "Transportasi",
-        "Lainnya"
-    )
+    private val listKategori = Utilities.listKateogri()
 
-    private val listColorKategori = arrayListOf<Int>(
-        R.color.merah,R.color.pink, R.color.ungu, R.color.biru, R.color.kuning, R.color.hijau
-    )
+    private val listColorKategori = Utilities.listKateogriColor()
 
     private var type = ""
 
@@ -99,26 +90,13 @@ class AddTransactionFragment : Fragment() {
     private fun updateAction() {
         hapus_btn.visibility = View.VISIBLE
         hapus_kembalikan_btn.visibility = View.VISIBLE
-        when(selected_transaction?.category) {
-            "Makanan & Minuman" -> {
-                KategoriAdapter.selected_radio_btn = 0
-            }
-            "Kecantikan & Kesehatan" -> {
-                KategoriAdapter.selected_radio_btn = 1
-            }
-            "Sosial & Gaya Hidup" -> {
-                KategoriAdapter.selected_radio_btn = 2
-            }
-            "Entertainment" -> {
-                KategoriAdapter.selected_radio_btn = 3
-            }
-            "Transportasi" -> {
-                KategoriAdapter.selected_radio_btn = 4
-            }
-            "Lainnya" -> {
-                KategoriAdapter.selected_radio_btn = 5
+
+        listKategori.forEachIndexed { index, s ->
+            if(s == selected_transaction?.category) {
+                KategoriAdapter.selected_radio_btn = index
             }
         }
+
         judul.setText(selected_transaction?.title)
         tanggal.setText(selected_transaction?.date)
         jumlah_saldo.setText(selected_transaction?.amount.toString())

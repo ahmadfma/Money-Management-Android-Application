@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
@@ -55,33 +56,52 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tanggal_saat_ini.text = Utilities.getDate()
-        recyclerview.setHasFixedSize(true)
-        recyclerview.layoutManager = LinearLayoutManager(context)
-        recyclerview.adapter = LayoutAdapter(listLayout, viewModel, this, object : LayoutAdapter.Listener {
-            override fun onCardClick() {
-                saldoAction()
-            }
-
-            override fun onTransactionViewClick(transactionEntity: TransactionEntity) {
-                onViewAction(transactionEntity)
-            }
-        })
+        loadUI()
 
         lifecycleScope.launch {
             withContext(Dispatchers.Main) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    setBackgroundColorOfTopBar(1.0f)
+                    setBackgroundColorOfTopBar(2.0f)
                     changeColor()
                 }
             }
         }
+        tes()
+    }
+
+    private fun loadUI() = lifecycleScope.launch {
+        withContext(Dispatchers.Main) {
+            recyclerview.setHasFixedSize(true)
+            recyclerview.layoutManager = LinearLayoutManager(context)
+            recyclerview.adapter = LayoutAdapter(listLayout, viewModel, this@HomeFragment, object : LayoutAdapter.Listener {
+                override fun onCardClick(
+                    saldo: TextView,
+                    pemasukan: TextView,
+                    pengeluaran: TextView
+                ) {
+                    saldoAction(saldo, pemasukan, pengeluaran)
+                }
+
+                override fun onTransactionViewClick(transactionEntity: TransactionEntity) {
+                    onViewAction(transactionEntity)
+                }
+            })
+        }
+    }
+
+    private fun tes() = lifecycleScope.launch(Dispatchers.IO) {
+        val pem = viewModel.getTotalAmount("pemasukan")
+        val peng = viewModel.getTotalAmount("pengeluaran")
+        Log.d("DEBUGING", "total pemasukan : $pem")
+        Log.d("DEBUGING", "total pemasukan : $peng")
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun changeColor() {
         var floatvalue = 1f
         var totalvalue = 550
-        var isTopChange = false
+        var isTopChangeColor = false
+        var isTopChangeTranslationZChange = false
         recyclerview.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             if(oldScrollY < 0) { //scroll ke bawah
                 totalvalue -= abs(oldScrollY)
@@ -94,9 +114,16 @@ class HomeFragment : Fragment() {
                     }
                 }
                 if(floatvalue == 0f) {
-                    if(!isTopChange) {
-                        isTopChange = true
+                    if(!isTopChangeColor) {
+                        isTopChangeColor = true
                         top.setBackgroundResource(R.drawable.user_background)
+                    }
+                }
+                if(totalvalue < 550) {
+                    if(!isTopChangeTranslationZChange) {
+                        Log.d("TOP TRANSLATION Z", "change")
+                        top.translationZ = 8F
+                        isTopChangeTranslationZChange = true
                     }
                 }
             } else { //scroll ke atas
@@ -116,13 +143,17 @@ class HomeFragment : Fragment() {
                 totalvalue = 0
             }
 
-            if(totalvalue != 0) {
+            if(totalvalue in 1..549) {
                 setBackgroundColorOfTopBar(floatvalue)
             }
 
             if(totalvalue == 550) {
+                setBackgroundColorOfTopBar(2.0f)
                 top.setBackgroundResource(R.color.primary)
-                isTopChange = false
+                top.translationZ = 0F
+                isTopChangeColor = false
+                isTopChangeTranslationZChange = false
+                Log.d("TOP TRANSLATION Z", "back")
             }
 
 //            Log.d("ScrollChangeListener", "float value : $floatvalue")
@@ -174,7 +205,7 @@ class HomeFragment : Fragment() {
         gradientDrawable.setColor(ResourcesCompat.getColor(resources, id, null))
     }
 
-    private fun saldoAction() {
+    private fun saldoAction(user_saldo: TextView, pemasukan: TextView, pengeluaran: TextView) {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.item_saldo_dialog, null)
         val builder = context?.let {
             AlertDialog.Builder(it)
@@ -200,23 +231,50 @@ class HomeFragment : Fragment() {
             if(peng.isEmpty()) {
                 peng = "0"
             }
+
+            user_saldo.text = Utilities.formatNumber(s.toLong())
+            pemasukan.text = Utilities.formatNumber(pem.toLong())
+            pengeluaran.text = Utilities.formatNumber(peng.toLong())
+
             viewModel.insertUserSaldo(SaldoEntity(0, s.toLong(), pem.toLong(), peng.toLong()))
             mDialog?.dismiss()
             Toast.makeText(context, "Saldo Berhasil Disimpan", Toast.LENGTH_SHORT).show()
+
+            saldo_user = s.toLong()
+            pemasukan_user = pem.toLong()
+            pengeluaran_user = peng.toLong()
         }
         dialogView.reset_pemasukan.setOnClickListener {
-            val saldo = dialogView.saldoET.text.toString().toLong()
-            val pengeluaran = dialogView.pengeluaranET.text.toString().toLong()
-            viewModel.insertUserSaldo(SaldoEntity(0, saldo, 0, pengeluaran))
+            val saldo = dialogView.saldoET.text.toString()
+            val pengeluaran_user = dialogView.pengeluaranET.text.toString()
+
+            user_saldo.text = Utilities.formatNumber(saldo.toLong())
+            pemasukan.text = "0"
+            pengeluaran.text = Utilities.formatNumber(pengeluaran_user.toLong())
+
+            viewModel.insertUserSaldo(SaldoEntity(0, saldo.toLong(), 0, pengeluaran_user.toLong()))
             mDialog?.dismiss()
             Toast.makeText(context, "Pemasukan berhasil direset", Toast.LENGTH_SHORT).show()
+
+            saldo_user = saldo.toLong()
+            pemasukan_user = 0
+            Companion.pengeluaran_user = pengeluaran_user.toLong()
         }
         dialogView.reset_pengeluaran.setOnClickListener {
-            val saldo = dialogView.saldoET.text.toString().toLong()
-            val pemasukan = dialogView.pemasukanET.text.toString().toLong()
-            viewModel.insertUserSaldo(SaldoEntity(0, saldo, pemasukan, 0))
+            val saldo = dialogView.saldoET.text.toString()
+            val pemasukan_user = dialogView.pemasukanET.text.toString()
+
+            user_saldo.text = Utilities.formatNumber(saldo.toLong())
+            pemasukan.text = Utilities.formatNumber(pemasukan_user.toLong())
+            pengeluaran.text = "0"
+
+            viewModel.insertUserSaldo(SaldoEntity(0, saldo.toLong(), pemasukan_user.toLong(), 0))
             mDialog?.dismiss()
             Toast.makeText(context, "Pengeluaran berhasil direset", Toast.LENGTH_SHORT).show()
+
+            saldo_user = saldo.toLong()
+            Companion.pemasukan_user = pemasukan_user.toLong()
+            pengeluaran_user = 0
         }
     }
 

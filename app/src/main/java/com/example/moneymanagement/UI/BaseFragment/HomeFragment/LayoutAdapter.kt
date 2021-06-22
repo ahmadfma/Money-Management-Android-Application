@@ -3,6 +3,7 @@ package com.example.moneymanagement.UI.BaseFragment.HomeFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +22,7 @@ private const val STATISTIC = 2
 class LayoutAdapter(private var listLayout: List<String>, private val viewModel: UserViewModel, private val fragment: Fragment, private val listener: Listener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     interface Listener {
-        fun onCardClick()
+        fun onCardClick(saldo: TextView, pemasukan: TextView, pengeluaran: TextView)
         fun onTransactionViewClick(transactionEntity: TransactionEntity)
     }
 
@@ -30,41 +31,26 @@ class LayoutAdapter(private var listLayout: List<String>, private val viewModel:
             with(itemView) {
                 loadUserSaldo(viewModel, this, fragment)
                 itemView.setOnClickListener {
-                    listener.onCardClick()
+                    listener.onCardClick(current_saldo, pemasukan, pengeluaran)
                 }
             }
         }
         fun loadUserSaldo(viewModel: UserViewModel, view: View, fragment: Fragment) {
             with(view) {
-                viewModel.getCurrentSaldo()?.observe(fragment.viewLifecycleOwner, Observer {
-                    if(it != null) {
-                        HomeFragment.saldo_user = it
-                        current_saldo.text = Utilities.formatNumber(it)
-                    } else {
-                        HomeFragment.saldo_user = 0
-                        current_saldo.text = "0"
-                    }
-                })
+                viewModel.getCurrentSaldo()?.let {
+                    HomeFragment.saldo_user = it
+                    current_saldo.text = Utilities.formatNumber(it)
+                }
 
-                viewModel.getCurrentPemasukan()?.observe(fragment.viewLifecycleOwner, Observer {
-                    if(it != null) {
-                        HomeFragment.pemasukan_user = it
-                        pemasukan.text = Utilities.formatNumber(it)
-                    } else {
-                        HomeFragment.pemasukan_user = 0
-                        pemasukan.text = "0"
-                    }
-                })
+                viewModel.getCurrentPemasukan()?.let {
+                    HomeFragment.pemasukan_user = it
+                    pemasukan.text = Utilities.formatNumber(it)
+                }
 
-                viewModel.getCurrentPengeluaran()?.observe(fragment.viewLifecycleOwner, Observer {
-                    if(it != null) {
-                        HomeFragment.pengeluaran_user = it
-                        pengeluaran.text = Utilities.formatNumber(it)
-                    } else {
-                        HomeFragment.pengeluaran_user = 0
-                        pengeluaran.text = "0"
-                    }
-                })
+                viewModel.getCurrentPengeluaran()?.let {
+                    HomeFragment.pengeluaran_user = it
+                    pengeluaran.text = Utilities.formatNumber(it)
+                }
             }
         }
     }
@@ -74,13 +60,13 @@ class LayoutAdapter(private var listLayout: List<String>, private val viewModel:
             with(itemView) {
                 rvhome.setHasFixedSize(true)
                 rvhome.layoutManager = LinearLayoutManager(fragment.context)
-                viewModel.getLastTransaction()?.observe(fragment.viewLifecycleOwner, Observer { //menampilkan riwayat terakhir
+                viewModel.getLastTransaction()?.let {
                     rvhome.adapter = TransactionsAdapter(it, object : TransactionsAdapter.Listener {
                         override fun onViewClick(transaction: TransactionEntity) {
                             listener.onTransactionViewClick(transaction)
                         }
                     })
-                })
+                }
             }
         }
     }

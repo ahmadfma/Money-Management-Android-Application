@@ -51,7 +51,7 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return transactionRepository.getTransactionsBasedOnDate(date)
     }
 
-    fun getLastTransaction(): LiveData<List<TransactionEntity>>?{
+    fun getLastTransaction(): List<TransactionEntity>? {
         return transactionRepository.getLastTransactions()
     }
 
@@ -60,15 +60,15 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     }
 
     //SALDO
-    fun getCurrentSaldo(): LiveData<Long>? {
+    fun getCurrentSaldo(): Long? {
         return saldoRepository.getCurrentSaldo()
     }
 
-    fun getCurrentPemasukan(): LiveData<Long>? {
+    fun getCurrentPemasukan(): Long? {
         return saldoRepository.getCurrentPemasukan()
     }
 
-    fun getCurrentPengeluaran(): LiveData<Long>? {
+    fun getCurrentPengeluaran(): Long? {
         return saldoRepository.getCurrentPengeluaran()
     }
 
