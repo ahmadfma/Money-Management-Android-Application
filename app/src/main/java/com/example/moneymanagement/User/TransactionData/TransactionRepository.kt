@@ -55,6 +55,16 @@ class TransactionRepository(application: Application) {
         return transactionDao?.getTotalAmount(type)
     }
 
+    fun getTotalAmountByCategory(category: String, type: String): Long? {
+        var saldo: Long? = 0
+        runBlocking {
+            saldo = this.async(Dispatchers.IO) {
+                transactionDao?.getTotalAmountByCategory(category, type)
+            }.await()
+        }
+        return saldo
+    }
+
     fun insert(data: TransactionEntity) = runBlocking {
         this.launch(Dispatchers.IO) {
             transactionDao?.insertTransaction(data)
