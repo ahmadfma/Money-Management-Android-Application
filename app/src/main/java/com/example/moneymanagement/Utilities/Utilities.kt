@@ -65,15 +65,29 @@ class Utilities {
                 R.color.hijau
             )
         }
-        fun listKategoriIcon(): ArrayList<Int> {
-            return arrayListOf(
-                R.drawable.ic_fast_food,
-                R.drawable.ic_healthy,
-                R.drawable.ic_makeup,
-                R.drawable.ic_drum_set,
-                R.drawable.ic_transportation,
-                R.drawable.ic_goal
-            )
+        fun listKategoriIcon(type: String): ArrayList<Int> {
+            when(type) {
+                "GOAL" -> {
+                    return arrayListOf(
+                        R.drawable.ic_fast_food,
+                        R.drawable.ic_healthy,
+                        R.drawable.ic_makeup,
+                        R.drawable.ic_drum_set,
+                        R.drawable.ic_transportation,
+                        R.drawable.ic_goal
+                    )
+                }
+                else -> {
+                    return arrayListOf(
+                        R.drawable.ic_fast_food,
+                        R.drawable.ic_healthy,
+                        R.drawable.ic_makeup,
+                        R.drawable.ic_drum_set,
+                        R.drawable.ic_transportation,
+                        R.drawable.ic_transaction
+                    )
+                }
+            }
         }
     }
 }

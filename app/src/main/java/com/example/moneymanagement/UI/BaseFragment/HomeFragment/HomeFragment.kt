@@ -31,6 +31,7 @@ import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.item_saldo_dialog.view.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.math.abs
@@ -44,7 +45,8 @@ class HomeFragment : Fragment() {
     private val listLayout = arrayListOf<String>(
         "CARD",
         "LAST TRANSACTION",
-        "STATISTIC"
+        "STATISTIC PEMASUKAN",
+        "STATISTIC PENGELUARAN"
     )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -73,7 +75,7 @@ class HomeFragment : Fragment() {
         withContext(Dispatchers.Main) {
             recyclerview.setHasFixedSize(true)
             recyclerview.layoutManager = LinearLayoutManager(context)
-            recyclerview.adapter = LayoutAdapter(listLayout, viewModel, this@HomeFragment, object : LayoutAdapter.Listener {
+            recyclerview.adapter = LayoutAdapter(listLayout, info_transaksi_belum_ada, viewModel, this@HomeFragment, object : LayoutAdapter.Listener {
                 override fun onCardClick(
                     saldo: TextView,
                     pemasukan: TextView,
@@ -93,7 +95,19 @@ class HomeFragment : Fragment() {
         val pem = viewModel.getTotalAmount("pemasukan")
         val peng = viewModel.getTotalAmount("pengeluaran")
         Log.d("DEBUGING", "total pemasukan : $pem")
-        Log.d("DEBUGING", "total pemasukan : $peng")
+        Log.d("DEBUGING", "total pengeluaran : $peng")
+        Utilities.listKateogri().forEach {
+            val saldo = async {
+                viewModel.getTotalAmountByCategory(it, "pemasukan")
+            }.await()
+            Log.d("DEBUGING", "total pemasukan kategori $it : $saldo")
+        }
+        Utilities.listKateogri().forEach {
+            val saldo = async {
+                viewModel.getTotalAmountByCategory(it, "pengeluaran")
+            }.await()
+            Log.d("DEBUGING", "total pengeluaran kategori $it : $saldo")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -139,11 +153,14 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            if(totalvalue < 0) {
-                totalvalue = 0
+            if(totalvalue < 0 && floatvalue != 0.0f) {
+                setBackgroundColorOfTopBar(0.0f)
+                floatvalue = 0.0f
             }
 
-            if(totalvalue in 1..549) {
+            if(totalvalue in 1..550) {
+                Log.d("ScrollChangeListener", "float value : $floatvalue")
+                Log.d("ScrollChangeListener", "total value : $totalvalue")
                 setBackgroundColorOfTopBar(floatvalue)
             }
 
@@ -156,8 +173,7 @@ class HomeFragment : Fragment() {
                 Log.d("TOP TRANSLATION Z", "back")
             }
 
-//            Log.d("ScrollChangeListener", "float value : $floatvalue")
-//            Log.d("ScrollChangeListener", "total value : $totalvalue")
+
         }
     }
 

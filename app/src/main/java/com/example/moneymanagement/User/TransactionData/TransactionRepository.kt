@@ -45,14 +45,20 @@ class TransactionRepository(application: Application) {
         val list: List<TransactionEntity>?
         runBlocking {
             list = this.async(Dispatchers.IO) {
-                transactionDao?.getLastTransactions(3)
+                transactionDao?.getLastTransactions(5)
             }.await()
         }
         return list
     }
 
     fun getTotalAmount(type: String): Long? {
-        return transactionDao?.getTotalAmount(type)
+        var saldo: Long? = 0
+        runBlocking {
+            saldo = this.async(Dispatchers.IO) {
+                transactionDao?.getTotalAmount(type)
+            }.await()
+        }
+        return saldo
     }
 
     fun getTotalAmountByCategory(category: String, type: String): Long? {

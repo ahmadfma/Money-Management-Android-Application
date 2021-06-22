@@ -44,7 +44,7 @@ class TransactionsAdapter(private val listTransaction: List<TransactionEntity>, 
         private fun setIcon(categori: String, icon: ImageView, line: ImageView) {
             Utilities.listKateogri().forEachIndexed { index, s ->
                 if(categori == s) {
-                    icon.setImageResource(Utilities.listKategoriIcon()[index])
+                    icon.setImageResource(Utilities.listKategoriIcon("TRANSACTION")[index])
                     line.setImageResource(Utilities.listKateogriColor()[index])
                 }
             }

@@ -36,7 +36,7 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Go
         private fun setIcon(categori: String, icon: ImageView, line: ImageView?) {
             Utilities.listKateogri().forEachIndexed { index, s ->
                 if(categori == s) {
-                    icon.setImageResource(Utilities.listKategoriIcon()[index])
+                    icon.setImageResource(Utilities.listKategoriIcon("GOAL")[index])
                     line?.setImageResource(Utilities.listKateogriColor()[index])
                 }
             }
