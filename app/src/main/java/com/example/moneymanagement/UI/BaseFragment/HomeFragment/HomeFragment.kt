@@ -34,6 +34,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.abs
 
 
@@ -57,6 +59,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setGreeting()
         tanggal_saat_ini.text = Utilities.getDate()
         loadUI()
 
@@ -69,6 +72,27 @@ class HomeFragment : Fragment() {
             }
         }
         tes()
+    }
+
+    private fun setGreeting() {
+        val simpleDateFormat = SimpleDateFormat("HH")
+        val currentTime: String = simpleDateFormat.format(Date())
+        Log.d("setGreeting", "$currentTime")
+        val time = currentTime.toLong()
+        when (time) {
+            in 0..11 -> {
+                greeting.text = "Selamat Pagi,"
+            }
+            in 12..14 -> {
+                greeting.text = "Selamat Siang,"
+            }
+            in 15..18 -> {
+                greeting.text = "Selamat Sore,"
+            }
+            in 19..23 -> {
+                greeting.text = "Selamat Malam,"
+            }
+        }
     }
 
     private fun loadUI() = lifecycleScope.launch {
