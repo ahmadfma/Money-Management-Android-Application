@@ -145,9 +145,10 @@ class LayoutAdapter(
         private fun setPemasukanBarChart(view: View) {
             with(view) {
                 val listEntry: ArrayList<BarEntry> = arrayListOf()
+                var num = 1f
                 Utilities.listKateogri().forEachIndexed { index, s ->
                     if(listTotalAmountOfPemasukanByCategory[index] != 0.toLong()) {
-                        listEntry.add(BarEntry((index+1).toFloat(), listTotalAmountOfPemasukanByCategory[index]!!.toFloat()))
+                        listEntry.add(BarEntry(num++, listTotalAmountOfPemasukanByCategory[index]!!.toFloat()))
                         listColor.add(ContextCompat.getColor(fragment.requireContext(), Utilities.listKateogriColor()[index]))
                     }
                 }
@@ -226,9 +227,15 @@ class LayoutAdapter(
         private fun setPengeluaranBarChart(view: View) {
             with(view) {
                 val listEntry: ArrayList<BarEntry> = arrayListOf()
+                var num = 1f
                 Utilities.listKateogri().forEachIndexed { index, s ->
                     if (listTotalAmountOfPengeluaranByCategory[index] != 0.toLong()) {
-                        listEntry.add(BarEntry((index + 1).toFloat(), listTotalAmountOfPengeluaranByCategory[index]!!.toFloat()))
+                        listEntry.add(
+                            BarEntry(
+                                num++,
+                                listTotalAmountOfPengeluaranByCategory[index]!!.toFloat()
+                            )
+                        )
                         listColor.add(
                             ContextCompat.getColor(
                                 fragment.requireContext(),

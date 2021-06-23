@@ -9,7 +9,7 @@ interface TransactionDao {
     @Query("SELECT * From user_transactions")
     fun getTransactions(): LiveData<List<TransactionEntity>>
 
-    @Query("SELECT date From user_transactions ORDER BY id")
+    @Query("SELECT date From user_transactions ORDER BY id DESC")
     fun getAllDateTransactions(): LiveData<List<String>>
 
     @Query("SELECT * FROM user_transactions WHERE date LIKE :date ORDER BY id DESC")
