@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation.*
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddGoalsFragment.AddGoalsFragment
 import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment

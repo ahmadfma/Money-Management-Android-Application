@@ -14,7 +14,4 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="EditTextThemeOverlay" parent="ThemeOverlay.AppCompat">
-        <item name="colorAccent">@color/text_input_stroke_color</item>
-    </style>
 </resources>

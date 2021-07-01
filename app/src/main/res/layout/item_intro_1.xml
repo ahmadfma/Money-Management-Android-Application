@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary">
+    android:background="@color/primary"
+    tools:context=".Intro.FirstScreenFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/top"
@@ -12,7 +13,7 @@
         android:layout_height="430dp"
         android:background="@drawable/top_background"
         android:backgroundTint="#7684FF"
-        android:translationZ="5dp">
+        android:translationZ="1dp">
 
         <ImageView
             android:layout_width="370dp"
@@ -61,5 +62,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"/>
+
 
 </RelativeLayout>

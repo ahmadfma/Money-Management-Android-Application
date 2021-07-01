@@ -1,5 +1,6 @@
 package com.example.moneymanagement.UI.BaseFragment.HomeFragment
 
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -60,6 +61,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setGreeting()
+        setUsername()
         tanggal_saat_ini.text = Utilities.getDate()
         loadUI()
 
@@ -71,13 +73,17 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        tes()
+    }
+
+    private fun setUsername() {
+        val sharedPref = activity?.getSharedPreferences("intro", Context.MODE_PRIVATE)
+        username.text = sharedPref?.getString("username", "")
     }
 
     private fun setGreeting() {
         val simpleDateFormat = SimpleDateFormat("HH")
         val currentTime: String = simpleDateFormat.format(Date())
-        Log.d("setGreeting", "$currentTime")
+        Log.d("setGreeting", currentTime)
         val time = currentTime.toLong()
         when (time) {
             in 0..11 -> {
@@ -112,25 +118,6 @@ class HomeFragment : Fragment() {
                     onViewAction(transactionEntity)
                 }
             })
-        }
-    }
-
-    private fun tes() = lifecycleScope.launch(Dispatchers.IO) {
-        val pem = viewModel.getTotalAmount("pemasukan")
-        val peng = viewModel.getTotalAmount("pengeluaran")
-        Log.d("DEBUGING", "total pemasukan : $pem")
-        Log.d("DEBUGING", "total pengeluaran : $peng")
-        Utilities.listKateogri().forEach {
-            val saldo = async {
-                viewModel.getTotalAmountByCategory(it, "pemasukan")
-            }.await()
-            Log.d("DEBUGING", "total pemasukan kategori $it : $saldo")
-        }
-        Utilities.listKateogri().forEach {
-            val saldo = async {
-                viewModel.getTotalAmountByCategory(it, "pengeluaran")
-            }.await()
-            Log.d("DEBUGING", "total pengeluaran kategori $it : $saldo")
         }
     }
 
