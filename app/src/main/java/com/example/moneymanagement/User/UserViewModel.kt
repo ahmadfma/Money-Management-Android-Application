@@ -63,6 +63,14 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
         return transactionRepository.getTotalAmountByCategory(category, type)
     }
 
+    fun getTotalAmountByMonth(month: String, type: String): Long? {
+        return transactionRepository.getTotalAmountByMonth(month, type)
+    }
+
+    fun getTotalAmountByMonthAndCategory(month: String, type: String, category: String): Long? {
+        return transactionRepository.getTotalAmountByMonthAndCategory(month, type, category)
+    }
+
     //SALDO
     fun getCurrentSaldo(): Long? {
         return saldoRepository.getCurrentSaldo()

@@ -10,16 +10,16 @@ import kotlinx.android.synthetic.main.item_tombol_bulan.view.*
 class TombolBulanAdapter(private val listTanggal: List<String>?, private val listener: Listener): RecyclerView.Adapter<TombolBulanAdapter.Holder>() {
 
     interface Listener {
-        fun onDateClick(date: String)
+        fun onDateClick(month: String)
     }
 
     private var selectedIndex = 0
 
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(tanggal: String, listener: Listener) {
+        fun bind(month: String, listener: Listener) {
             with(itemView) {
 
-                bulan_statistik.text = tanggal
+                bulan_statistik.text = month
 
                 if(selectedIndex == absoluteAdapterPosition) {
                     bulan_statistik.setTextColor(resources.getColor(R.color.white))
@@ -36,7 +36,7 @@ class TombolBulanAdapter(private val listTanggal: List<String>?, private val lis
                         selectedIndex = absoluteAdapterPosition
                         notifyDataSetChanged()
                     }
-                    listener.onDateClick(tanggal)
+                    listener.onDateClick(month)
                 }
 
             }

@@ -24,6 +24,12 @@ interface TransactionDao {
     @Query("SELECT SUM(amount) FROM user_transactions WHERE category = :category AND type = :type")
     fun getTotalAmountByCategory(category: String, type: String): Long
 
+    @Query("SELECT SUM(amount) FROM user_transactions WHERE date LIKE :month AND type = :type")
+    fun getTotalAmountByMonth(month: String, type: String): Long
+
+    @Query("SELECT SUM(amount) FROM user_transactions WHERE date LIKE :month AND type = :type AND category = :category")
+    fun getTotalAmountByMonthAndCategory(month: String, type: String, category: String): Long
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertTransaction(data: TransactionEntity)
 

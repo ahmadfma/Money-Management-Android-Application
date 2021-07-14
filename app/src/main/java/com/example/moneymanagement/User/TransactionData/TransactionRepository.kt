@@ -71,6 +71,26 @@ class TransactionRepository(application: Application) {
         return saldo
     }
 
+    fun getTotalAmountByMonth(month: String, type: String): Long? {
+        var totalAmount: Long? = 0L
+        runBlocking {
+            totalAmount = this.async(Dispatchers.IO) {
+                transactionDao?.getTotalAmountByMonth(month, type)
+            }.await()
+        }
+        return totalAmount
+    }
+
+    fun getTotalAmountByMonthAndCategory(month: String, type: String, category: String): Long? {
+        var totalAmount: Long? = 0L
+        runBlocking {
+            totalAmount = this.async(Dispatchers.IO) {
+                transactionDao?.getTotalAmountByMonthAndCategory(month, type, category)
+            }.await()
+        }
+        return totalAmount
+    }
+
     fun insert(data: TransactionEntity) = runBlocking {
         this.launch(Dispatchers.IO) {
             transactionDao?.insertTransaction(data)

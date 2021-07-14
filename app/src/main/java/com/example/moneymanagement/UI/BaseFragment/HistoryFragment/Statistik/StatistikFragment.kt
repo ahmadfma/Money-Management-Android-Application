@@ -2,17 +2,21 @@ package com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Statistik
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryViewModel
-import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Riwayat.TombolTanggalAdapter
 import com.example.moneymanagement.User.UserViewModel
+import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.item_history_fragment_statistik.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 const val TAG = "StatistikFragment"
 class StatistikFragment : Fragment() {
@@ -58,16 +62,38 @@ class StatistikFragment : Fragment() {
         val set = month.toSet().toMutableList()
         Log.d(TAG, "$set")
         bulan_btn.adapter = TombolBulanAdapter(set, object : TombolBulanAdapter.Listener {
-            override fun onDateClick(date: String) {
-                loadTransactionBasedOnDate(date)
+            override fun onDateClick(month: String) {
+                loadStatisticBasedOnMonth(month)
             }
         })
     }
 
-    private fun loadTransactionBasedOnDate(date: String) {
-
+    private fun loadStatisticBasedOnMonth(month: String) = lifecycleScope.launch(Dispatchers.IO) {
+        loadTotalPemasukan(month)
+        loadTotalPengeluaran(month)
     }
 
+    private suspend fun loadTotalPemasukan(month: String) {
+        withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+            val pemasukan = userViewModel.getTotalAmountByMonth("%$month%", "pemasukan")
+            Log.d(TAG, "total pemasukan bulan $month = $pemasukan")
+            Utilities.listKateogri().forEach {
+                val totalamount = userViewModel.getTotalAmountByMonthAndCategory("%$month%", "pemasukan", it)
+                Log.d(TAG, "total pemasukan bulan $month = $totalamount, kategori $it")
+            }
+        }
+    }
+
+    private suspend fun loadTotalPengeluaran(month: String) {
+        withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
+            val pengeluaran = userViewModel.getTotalAmountByMonth("%$month%", "pengeluaran")
+            Log.d(TAG, "total pengeluran bulan $month = $pengeluaran")
+            Utilities.listKateogri().forEach {
+                val totalamount = userViewModel.getTotalAmountByMonthAndCategory("%$month%", "pengeluaran", it)
+                Log.d(TAG, "total pengeluaran bulan $month = $totalamount, kategori $it")
+            }
+        }
+    }
 
     companion object {
         @JvmStatic
