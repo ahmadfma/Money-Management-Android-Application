@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.BaseFragment.HistoryFragment
+package com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Riwayat
 
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +22,7 @@ class TombolTanggalAdapter(private val listTanggal: List<String>?, private val l
                 val temp = tanggal.split(" ").toTypedArray()
                 tanggal_tombol.text = temp[0]
                 bulan_tombol.text = temp[1]
+
                 if(selectedIndex == absoluteAdapterPosition) {
                     tanggal_tombol.setTextColor(resources.getColor(R.color.white))
                     bulan_tombol.setTextColor(resources.getColor(R.color.white))

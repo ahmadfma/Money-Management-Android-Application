@@ -14,7 +14,6 @@ import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryViewModel
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.TAG
-import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.TombolTanggalAdapter
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.TransactionsAdapter
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
@@ -68,9 +67,8 @@ class RiwayatFragment : Fragment() {
         tanggal_btn.adapter = TombolTanggalAdapter(list, object : TombolTanggalAdapter.Listener {
             override fun onDateClick(date: String) {
                 loadTransactionBasedOnDate(date)
-                Log.d(TAG, "$date")
+                Log.d(TAG, date)
             }
-
         })
     }
 
