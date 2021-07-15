@@ -30,12 +30,12 @@ class StatistikFragment : Fragment() {
 
     private lateinit var userViewModel: UserViewModel
     private lateinit var historyViewModel: HistoryViewModel
-    private var totalPemasukan: Long? = 0
-    private var totalPengeluaran: Long? = 0
-    private var listPengeluaranByCategory: ArrayList<Long?> = arrayListOf()
-    private var listPemasukanByCategory: ArrayList<Long?> = arrayListOf()
-    private val listPercentPemasukan = mutableListOf<Float>()
-    private val listPercentPengeluaran = mutableListOf<Float>()
+
+    private val listLayout = arrayListOf<String>(
+        "CHART",
+        "PEMASUKAN",
+        "PENGELUARAN"
+    )
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -60,7 +60,6 @@ class StatistikFragment : Fragment() {
                 } else {
                     info_statistik_belum_ada.visibility = View.VISIBLE
                     txt1st.visibility = View.GONE
-                    txt2st.visibility = View.GONE
                 }
             }
         })
@@ -82,87 +81,10 @@ class StatistikFragment : Fragment() {
         loadStatisticBasedOnMonth(set[0])
     }
 
-    private fun loadStatisticBasedOnMonth(month: String) = lifecycleScope.launch(Dispatchers.IO) {
-        clearList()
-        loadTotalPemasukan(month)
-        loadTotalPengeluaran(month)
-        loadStatistic(pieChartPemasukan, "Pemasukan", totalPemasukan, listPemasukanByCategory, listPercentPemasukan)
-        loadStatistic(pieChartPengeluaran, "Pengeluaran", totalPengeluaran, listPengeluaranByCategory, listPercentPengeluaran)
-    }
-
-    private fun clearList() {
-        listPemasukanByCategory.clear()
-        listPengeluaranByCategory.clear()
-        listPercentPemasukan.clear()
-        listPercentPengeluaran.clear()
-    }
-
-    private suspend fun loadTotalPemasukan(month: String) {
-        withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-            totalPemasukan = userViewModel.getTotalAmountByMonth("%$month%", "pemasukan")
-            Log.d(TAG, "total pemasukan bulan $month = $totalPemasukan")
-            Utilities.listKateogri().forEach {
-                val totalamount = userViewModel.getTotalAmountByMonthAndCategory("%$month%", "pemasukan", it)
-                Log.d(TAG, "total pemasukan bulan $month = $totalamount, kategori $it")
-                listPemasukanByCategory.add(totalamount)
-            }
-        }
-    }
-
-    private suspend fun loadTotalPengeluaran(month: String) {
-        withContext(lifecycleScope.coroutineContext + Dispatchers.IO) {
-            totalPengeluaran = userViewModel.getTotalAmountByMonth("%$month%", "pengeluaran")
-            Log.d(TAG, "total pengeluran bulan $month = $totalPengeluaran")
-            Utilities.listKateogri().forEach {
-                val totalamount = userViewModel.getTotalAmountByMonthAndCategory("%$month%", "pengeluaran", it)
-                Log.d(TAG, "total pengeluaran bulan $month = $totalamount, kategori $it")
-                listPengeluaranByCategory.add(totalamount)
-            }
-        }
-    }
-
-    private fun loadStatistic(pieChart: PieChart, type: String, total: Long?, listAmount: ArrayList<Long?>, listPercent: MutableList<Float>) {
-        listPercentPemasukan.clear()
-        listPercentPengeluaran.clear()
-
-        listAmount.forEach {
-            if(it != null && it != 0L) {
-                val percent = it.toFloat() / total!!.toFloat() * 100
-                listPercent.add(percent)
-            } else {
-                listPercent.add(0F)
-            }
-        }
-
-        //load pie chart
-
-        pieChart.isDrawHoleEnabled = true
-        pieChart.setUsePercentValues(true)
-        pieChart.setDrawEntryLabels(false)
-        pieChart.centerText = type
-        pieChart.description.isEnabled = false
-        pieChart.legend.isEnabled = false
-
-        val colors = arrayListOf<Int>()
-        val entries = arrayListOf<PieEntry>()
-        Utilities.listKateogri().forEachIndexed { index, s ->
-            if(listPercent[index] != 0.0F) {
-                entries.add(PieEntry(listPercent[index], s))
-                colors.add(ContextCompat.getColor(requireContext(), Utilities.listKateogriColor()[index]))
-            }
-        }
-
-        val dataset = PieDataSet(entries, type)
-        dataset.colors = colors
-
-        val data = PieData(dataset)
-        data.setDrawValues(true)
-        data.setValueFormatter(PercentFormatter(pieChartPemasukan))
-        data.setValueTextSize(10f)
-        data.setValueTextColor(Color.BLACK)
-
-        pieChart.data = data
-        pieChart.invalidate()
+    private fun loadStatisticBasedOnMonth(month: String) {
+        rcview_layout.setHasFixedSize(true)
+        rcview_layout.layoutManager = LinearLayoutManager(requireContext())
+        rcview_layout.adapter = StatistikLayoutAdapter(listLayout, this, userViewModel, month)
     }
 
     companion object {
