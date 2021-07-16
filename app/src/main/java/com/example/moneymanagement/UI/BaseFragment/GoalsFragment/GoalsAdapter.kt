@@ -1,4 +1,4 @@
-package com.example.moneymanagement.UI.BaseFragment.GoalsFragment.Adapter
+package com.example.moneymanagement.UI.BaseFragment.GoalsFragment
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.example.moneymanagement.User.Goals.GoalsEntity
 import com.example.moneymanagement.Utilities.Utilities
 import kotlinx.android.synthetic.main.item_goals.view.*
 
-class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: GoalsAdapter.Listener): RecyclerView.Adapter<GoalsAdapter.Holder>() {
+class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Listener): RecyclerView.Adapter<GoalsAdapter.Holder>() {
 
     interface Listener {
         fun onViewClick(goalsEntity: GoalsEntity)

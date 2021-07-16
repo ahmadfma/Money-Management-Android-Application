@@ -5,51 +5,67 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import com.example.moneymanagement.R
-import com.example.moneymanagement.UI.AddGoalsFragment.AddGoalsFragment
-import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.Adapter.GoalsAdapter
+import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.Reached.ReachedFragment
+import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.Unreached.UnreachedFragment
+import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Riwayat.RiwayatFragment
 import com.example.moneymanagement.User.Goals.GoalsEntity
-import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.fragment_goals.*
 
 class GoalsFragment : Fragment() {
 
-    private lateinit var viewmodel: UserViewModel
+    var selectedBtn = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        viewmodel = ViewModelProvider(this).get(UserViewModel::class.java)
         return inflater.inflate(R.layout.fragment_goals, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerview.setHasFixedSize(true)
-        recyclerview.layoutManager = LinearLayoutManager(context)
-        viewmodel.getUnReachedGoals()?.observe(viewLifecycleOwner, Observer {
-            if(it.isNotEmpty()) {
-                recyclerview.adapter = GoalsAdapter(it, object : GoalsAdapter.Listener {
-                    override fun onViewClick(goalsEntity: GoalsEntity) {
-                        onViewAction(goalsEntity)
-                    }
-                })
-                info_impian_belum_ada.visibility = View.GONE
-            } else {
-                info_impian_belum_ada.visibility = View.VISIBLE
-                recyclerview.visibility = View.GONE
-            }
+        loadUnReachedFragment()
 
-        })
+        reachedBtn.setOnClickListener {
+            if(selectedBtn != 1) {
+                loadReachedFragment()
+                selectedBtn = 1
+            }
+        }
+        unreachedBtn.setOnClickListener {
+            if(selectedBtn != 2) {
+                loadUnReachedFragment()
+                selectedBtn = 2
+            }
+        }
+
     }
 
-    private fun onViewAction(goalsEntity: GoalsEntity) {
-        selectedGoals = goalsEntity
-        AddGoalsFragment.action = "update"
-        findNavController().navigate(R.id.action_baseFragment_to_addGoalsFragment)
+    private fun loadUnReachedFragment() {
+        selectedBtn(unreachedBtn, unreachedtxt)
+        unSelectedBtn(reachedBtn, reachedtxt)
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container_fragment_goals, UnreachedFragment())
+            ?.commit()
+    }
+
+    private fun loadReachedFragment() {
+        selectedBtn(reachedBtn, reachedtxt)
+        unSelectedBtn(unreachedBtn, unreachedtxt)
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container_fragment_goals, ReachedFragment())
+            ?.commit()
+    }
+
+    private fun selectedBtn(cv: CardView, txt: TextView) {
+        cv.setCardBackgroundColor(resources.getColor(R.color.primary))
+        txt.setTextColor(resources.getColor(R.color.white))
+    }
+
+    private fun unSelectedBtn(cv: CardView, txt: TextView) {
+        cv.setCardBackgroundColor(resources.getColor(R.color.white))
+        txt.setTextColor(resources.getColor(R.color.black))
     }
 
     companion object {

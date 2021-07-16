@@ -6,65 +6,87 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UI.BaseFragment.GoalsFragment.GoalsFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menubtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary"
-        android:translationZ="10dp">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Impian"
-            app:titleTextColor="@color/white"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appbar">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:paddingTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/recyclerview" />
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/cirlce_shape">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/info_impian_belum_ada"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone"
+            android:id="@+id/unreachedBtn"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="1dp"
+            app:cardBackgroundColor="@color/primary"
             app:cardCornerRadius="20dp"
-            android:backgroundTint="#F1F1F1">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/ic_folder"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:id="@+id/img"/>
-
                 <TextView
+                    android:id="@+id/unreachedtxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/img"
                     android:layout_centerInParent="true"
-                    android:layout_marginBottom="20dp"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Belum ada apa-apa nih"
-                    android:textColor="#000000"
-                    android:textSize="14sp"/>
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:text="Belum Tercapai"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/reachedBtn"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_margin="2dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/reachedtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:text="Sudah Tercapai"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/container_fragment_goals"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/menubtn"/>
+
+</RelativeLayout>
