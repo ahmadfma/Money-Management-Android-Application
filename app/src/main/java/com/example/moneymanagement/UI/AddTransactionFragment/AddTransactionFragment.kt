@@ -293,6 +293,5 @@ class AddTransactionFragment : Fragment() {
         var kategori = ""
         var action = ""
         var selected_transaction: TransactionEntity? = null
-
     }
 }

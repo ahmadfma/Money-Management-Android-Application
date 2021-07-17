@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddGoalsFragment.AddGoalsFragment
-import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsAdapter
 import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.User.Goals.GoalsEntity
 import com.example.moneymanagement.User.UserViewModel
@@ -32,7 +31,7 @@ class UnreachedFragment : Fragment() {
         rcview_unreached.layoutManager = LinearLayoutManager(context)
         viewmodel.getUnReachedGoals()?.observe(viewLifecycleOwner, Observer {
             if(it.isNotEmpty()) {
-                rcview_unreached.adapter = GoalsAdapter(it, object : GoalsAdapter.Listener {
+                rcview_unreached.adapter = UnreachedGoalsAdapter(it, viewmodel, object : UnreachedGoalsAdapter.Listener {
                     override fun onViewClick(goalsEntity: GoalsEntity) {
                         onViewAction(goalsEntity)
                     }
