@@ -70,8 +70,8 @@
 
             <ImageView
                 android:id="@+id/delete"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:src="@drawable/ic_delete"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
@@ -80,7 +80,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/t3"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_centerHorizontal="true">
 
                 <TextView
@@ -90,7 +90,7 @@
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="Rp"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +106,7 @@
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="2.000.000.000"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/t1r"
@@ -118,11 +118,11 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/t3"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/roboto_condensed_regular"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/roboto_light"
                 android:text="Tercapai"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

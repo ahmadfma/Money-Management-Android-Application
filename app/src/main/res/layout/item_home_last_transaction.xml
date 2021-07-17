@@ -3,21 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="1dp"
-        android:background="#DFDFDF"/>
+
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/saldo"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="5dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="Riwayat terakhir anda"
         android:textColor="@color/black"
@@ -26,6 +19,7 @@
         android:id="@+id/rvhome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
         android:paddingTop="5dp"
         android:layout_marginTop="3dp"/>
 </LinearLayout>

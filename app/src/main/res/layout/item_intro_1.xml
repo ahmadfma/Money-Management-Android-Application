@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="430dp"
         android:background="@drawable/top_background"
-        android:backgroundTint="#7684FF"
+        android:backgroundTint="#00B7FF"
         android:translationZ="1dp">
 
         <ImageView
@@ -27,11 +27,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:fontFamily="@font/nunito"
             android:text="Money Management"
             android:textColor="@color/white"
-            android:textSize="25sp"
+            android:textSize="23sp"
             android:textStyle="bold"
-            android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -44,24 +45,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/top"
-        android:text="Yuk Atur Keuangan Anda"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/nunito"
+        android:text="Yuk Atur Keuangan Anda"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/t2"
-        android:text="Kami membantu anda untuk memanajemen keuangan anda, yuk tunggu apa lagi"
-        android:textColor="@color/white"
-        android:textAlignment="center"
-        android:textSize="18sp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"/>
+        android:fontFamily="@font/roboto_light"
+        android:text="Kami membantu anda untuk memanajemen keuangan anda, yuk tunggu apa lagi"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
 
 </RelativeLayout>

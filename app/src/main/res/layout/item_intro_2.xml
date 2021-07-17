@@ -33,11 +33,12 @@
                 android:id="@+id/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Silahkan Mengisi data terlebih dahulu"
-                android:textStyle="italic"
-                android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/nunito"
+                android:text="Silahkan Mengisi data terlebih dahulu"
+                android:textColor="@color/black"
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:id="@+id/lnr"
@@ -64,7 +65,7 @@
                         android:id="@+id/namauser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito"
+                        android:fontFamily="@font/roboto_light"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,7 +86,7 @@
                         android:id="@+id/saldouser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/nunito"
+                        android:fontFamily="@font/roboto_light"
                         android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,17 +94,18 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/mulaibtn"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:text="Mulai"
-                android:background="@drawable/card_background"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textAllCaps="false"
                 android:layout_below="@+id/lnr"
+                android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"/>
+                android:background="@drawable/card_background"
+                android:fontFamily="@font/roboto"
+                android:text="Mulai"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

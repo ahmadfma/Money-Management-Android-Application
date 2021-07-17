@@ -8,8 +8,8 @@
     <color name="black">#505050</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">#4E5FFF</color>
-    <color name="primary2">#4557FF</color>
+    <color name="primary">#05A6FD</color>
+    <color name="primary2">#10A9FB</color>
     <color name="merah">#FA697C</color>
     <color name="merah_tulisan">#F70000</color>
     <color name="pink">#FA69E3</color>
@@ -21,15 +21,15 @@
     <color name="abu">#EFEFEF</color>
     <color name="abu2">#F6F6F6</color>
 
-    <color name="p.1">#FF4E5FFF</color>
-    <color name="p.09">#E64E5FFF</color>
-    <color name="p.08">#CC4E5FFF</color>
-    <color name="p.07">#B34E5FFF</color>
-    <color name="p.06">#994E5FFF</color>
-    <color name="p.05">#804E5FFF</color>
-    <color name="p.04">#664E5FFF</color>
-    <color name="p.03">#4D4E5FFF</color>
-    <color name="p.02">#334E5FFF</color>
-    <color name="p.01">#1A4E5FFF</color>
-    <color name="p.00">#004E5FFF</color>
+    <color name="p.1">#FF05A6FD</color>
+    <color name="p.09">#E605A6FD</color>
+    <color name="p.08">#CC05A6FD</color>
+    <color name="p.07">#B305A6FD</color>
+    <color name="p.06">#9905A6FD</color>
+    <color name="p.05">#8005A6FD</color>
+    <color name="p.04">#6605A6FD</color>
+    <color name="p.03">#4D05A6FD</color>
+    <color name="p.02">#3305A6FD</color>
+    <color name="p.01">#1A05A6FD</color>
+    <color name="p.00">#0005A6FD</color>
 </resources>

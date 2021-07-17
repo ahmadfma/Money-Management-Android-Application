@@ -30,8 +30,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="2dp"
             android:paddingStart="10dp" />
+
+        <ImageView
+            android:id="@+id/expand"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_expand_up"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <LinearLayout
