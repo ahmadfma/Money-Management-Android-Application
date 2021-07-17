@@ -69,12 +69,14 @@ class BaseFragment : Fragment() {
                         num++
                     }
                 }
-                val badge = bottom_navigation.getOrCreateBadge(R.id.nav_goals)
-                badge.backgroundColor = resources.getColor(R.color.kuning)
-                badge.badgeTextColor = Color.BLACK
-                badge.maxCharacterCount = 3
-                badge.number = num
-                badge.isVisible = true
+                if(num != 0) {
+                    val badge = bottom_navigation.getOrCreateBadge(R.id.nav_goals)
+                    badge.backgroundColor = resources.getColor(R.color.kuning)
+                    badge.badgeTextColor = Color.BLACK
+                    badge.maxCharacterCount = 3
+                    badge.number = num
+                    badge.isVisible = true
+                }
             }
         })
     }
