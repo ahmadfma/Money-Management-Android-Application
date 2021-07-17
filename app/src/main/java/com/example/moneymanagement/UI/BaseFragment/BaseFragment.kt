@@ -1,11 +1,13 @@
 package com.example.moneymanagement.UI.BaseFragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,19 +18,25 @@ import com.example.moneymanagement.UI.BaseFragment.GoalsFragment.GoalsFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryFragment
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.HomeFragment
 import com.example.moneymanagement.UI.BaseFragment.NotificationFragment.NotificationFragment
+import com.example.moneymanagement.User.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.bottom_sheet_layout.view.*
 import kotlinx.android.synthetic.main.fragment_base.*
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class BaseFragment : Fragment() {
 
     private lateinit var viewModel: BaseViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel = ViewModelProvider(this).get(BaseViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_base, container, false)
     }
@@ -38,6 +46,7 @@ class BaseFragment : Fragment() {
 
         bottom_navigation.setOnNavigationItemSelectedListener(navListener())
         bottom_navigation.selectedItemId = viewModel.selectedBottomNavigationID
+        loadBadge()
         loadFragment()
 
         addBtn.setOnClickListener {
@@ -45,6 +54,29 @@ class BaseFragment : Fragment() {
         }
 
         Log.d("BaseFragment", "onViewCreated")
+    }
+
+    private fun loadBadge() = lifecycleScope.launch {
+        val badge = bottom_navigation.getBadge(R.id.nav_goals)
+        badge?.clearNumber()
+
+        val saldo = userViewModel.getCurrentSaldo()
+        userViewModel.getUnReachedGoals()?.observe(viewLifecycleOwner, Observer {
+            var num = 0
+            if(it.isNotEmpty()) {
+                it.forEach { goals ->
+                    if(saldo!! >= goals.amount) {
+                        num++
+                    }
+                }
+                val badge = bottom_navigation.getOrCreateBadge(R.id.nav_goals)
+                badge.backgroundColor = resources.getColor(R.color.kuning)
+                badge.badgeTextColor = Color.BLACK
+                badge.maxCharacterCount = 3
+                badge.number = num
+                badge.isVisible = true
+            }
+        })
     }
 
     private fun showBottomSheet() {
@@ -130,6 +162,9 @@ class BaseFragment : Fragment() {
     }
 
     private fun loadGoalsFragment() {
+        val badge = bottom_navigation.getBadge(R.id.nav_goals)
+        badge?.clearNumber()
+        badge?.isVisible = false
         viewModel.selectedBottomNavigationID = R.id.nav_goals
         lifecycleScope.launch {
             activity?.supportFragmentManager?.beginTransaction()
