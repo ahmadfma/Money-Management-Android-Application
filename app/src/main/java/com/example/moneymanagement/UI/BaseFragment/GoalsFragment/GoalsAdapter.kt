@@ -23,10 +23,24 @@ class GoalsAdapter(private val list: List<GoalsEntity>, private val listener: Li
                 setIcon(goalsEntity.category, icon, null)
                 category.text = goalsEntity.category
                 catatan.text = goalsEntity.note
-                target.text = Utilities.formatNumber(goalsEntity.amount)
-                saldo.text = Utilities.formatNumber(HomeFragment.saldo_user)
-                progress_horizontal.progress = calculateProgres(goalsEntity.amount, HomeFragment.saldo_user)
-                progress_horizontal.isActivated = false
+
+                //cek saldo user
+                if(HomeFragment.saldo_user >= goalsEntity.amount) {
+                    target2.text = Utilities.formatNumber(goalsEntity.amount)
+                    progres.visibility = View.GONE
+                    finish.visibility = View.VISIBLE
+                    finish.setOnClickListener {
+                        //action
+                    }
+                } else {
+                    target.text = Utilities.formatNumber(goalsEntity.amount)
+                    saldo.text = Utilities.formatNumber(HomeFragment.saldo_user)
+                    progress_horizontal.progress = calculateProgres(goalsEntity.amount, HomeFragment.saldo_user)
+                    progress_horizontal.isActivated = false
+                    progres.visibility = View.VISIBLE
+                    finish.visibility = View.GONE
+                }
+
                 itemView.setOnClickListener {
                     listener.onViewClick(goalsEntity)
                 }
