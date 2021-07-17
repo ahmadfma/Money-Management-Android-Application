@@ -35,9 +35,11 @@
 
         <ImageView
             android:id="@+id/expand"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
             android:src="@drawable/ic_expand_up"
+            android:tag="up"
             android:layout_gravity="center_horizontal" />
     </LinearLayout>
 

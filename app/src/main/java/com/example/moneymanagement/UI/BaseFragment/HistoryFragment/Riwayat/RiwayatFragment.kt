@@ -39,6 +39,7 @@ class RiwayatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         tanggal_btn.setHasFixedSize(true)
         tanggal_btn.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        expandBtn()
         viewmodel_fragment.getAllTransactionsDate(viewmodel_user, this, object: HistoryViewModel.UI {
             override fun setTanggalUI(date: List<String>) {
                 if(date.isNotEmpty()) {
@@ -54,6 +55,20 @@ class RiwayatFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun expandBtn() {
+        expand.setOnClickListener {
+            if(expand.tag == "up") {
+                tanggal_btn.visibility = View.GONE
+                expand.tag = "down"
+                expand.setImageResource(R.drawable.ic_expand_down)
+            } else if(expand.tag == "down") {
+                tanggal_btn.visibility = View.VISIBLE
+                expand.tag = "up"
+                expand.setImageResource(R.drawable.ic_expand_up)
+            }
+        }
     }
 
     private fun setTombolTanggal(data: List<String>?) {

@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.formatter.PercentFormatter
+import kotlinx.android.synthetic.main.item_history_fragment_riwayat.*
 import kotlinx.android.synthetic.main.item_history_fragment_statistik.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,6 +48,21 @@ class StatistikFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadMonth()
+        expandBtn()
+    }
+
+    private fun expandBtn() {
+        expandS.setOnClickListener {
+            if(expandS.tag == "up") {
+                bulan_btn.visibility = View.GONE
+                expandS.tag = "down"
+                expandS.setImageResource(R.drawable.ic_expand_down)
+            } else if(expandS.tag == "down") {
+                bulan_btn.visibility = View.VISIBLE
+                expandS.tag = "up"
+                expandS.setImageResource(R.drawable.ic_expand_up)
+            }
+        }
     }
 
     private fun loadMonth(){
