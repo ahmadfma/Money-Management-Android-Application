@@ -23,6 +23,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter
 import kotlinx.android.synthetic.main.item_history_fragment_riwayat.*
 import kotlinx.android.synthetic.main.item_history_fragment_statistik.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -51,16 +52,47 @@ class StatistikFragment : Fragment() {
         expandBtn()
     }
 
-    private fun expandBtn() {
+    private fun expandBtn()  {
+
         expandS.setOnClickListener {
+            val param = bulan_btn.layoutParams
+            if(isHeightZero) {
+                height = param.height
+                isHeightZero = false
+            }
+
             if(expandS.tag == "up") {
-                bulan_btn.visibility = View.GONE
-                expandS.tag = "down"
-                expandS.setImageResource(R.drawable.ic_expand_down)
+                lifecycleScope.launch {
+                    expandS.tag = "down"
+                    expandS.setImageResource(R.drawable.ic_expand_down)
+                    while(param.height != 0) {
+                        param.height /= 2
+                        Log.d("EXPAND", "up, proses = ${param.height}")
+                        if(param.height < 0) {
+                            param.height = 0
+                        }
+                        bulan_btn.layoutParams = param
+                        delay(50)
+                    }
+                    Log.d("EXPAND", "Up, height = ${param.height}")
+                }
             } else if(expandS.tag == "down") {
-                bulan_btn.visibility = View.VISIBLE
-                expandS.tag = "up"
-                expandS.setImageResource(R.drawable.ic_expand_up)
+                Log.d("EXPAND", "height = $height")
+                lifecycleScope.launch {
+                    expandS.tag = "up"
+                    expandS.setImageResource(R.drawable.ic_expand_up)
+                    param.height = 1
+                    while(param.height != height) {
+                        param.height *= 2
+                        Log.d("EXPAND", "Down, proses = ${param.height}")
+                        if(param.height > height) {
+                            param.height = height
+                        }
+                        bulan_btn.layoutParams = param
+                        delay(50)
+                    }
+                    Log.d("EXPAND", "Down, height = ${param.height}")
+                }
             }
         }
     }
@@ -106,5 +138,7 @@ class StatistikFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = StatistikFragment()
+        private var height = 0
+        private var isHeightZero = true
     }
 }

@@ -13,15 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.moneymanagement.R
 import com.example.moneymanagement.UI.AddTransactionFragment.AddTransactionFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.HistoryViewModel
+import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.Statistik.StatistikFragment
 import com.example.moneymanagement.UI.BaseFragment.HistoryFragment.TAG
 import com.example.moneymanagement.UI.BaseFragment.HomeFragment.TransactionsAdapter
 import com.example.moneymanagement.User.TransactionData.TransactionEntity
 import com.example.moneymanagement.User.UserViewModel
 import kotlinx.android.synthetic.main.item_history_fragment_riwayat.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.android.synthetic.main.item_history_fragment_statistik.*
+import kotlinx.coroutines.*
 
 class RiwayatFragment : Fragment() {
 
@@ -59,14 +58,48 @@ class RiwayatFragment : Fragment() {
 
     private fun expandBtn() {
         expand.setOnClickListener {
+            val param = tanggal_btn.layoutParams
+            if(isHeightZero) {
+                height = param.height
+                isHeightZero = false
+            }
+
             if(expand.tag == "up") {
-                tanggal_btn.visibility = View.GONE
-                expand.tag = "down"
-                expand.setImageResource(R.drawable.ic_expand_down)
+                expand.isEnabled = false
+                lifecycleScope.launch {
+                    expand.tag = "down"
+                    expand.setImageResource(R.drawable.ic_expand_down)
+                    while(param.height != 0) {
+                        param.height /= 2
+                        Log.d("EXPAND", "up, proses = ${param.height}")
+                        if(param.height < 0) {
+                            param.height = 0
+                        }
+                        tanggal_btn.layoutParams = param
+                        delay(50)
+                    }
+                    expand.isEnabled = true
+                    Log.d("EXPAND", "Up, height = ${param.height}")
+                }
             } else if(expand.tag == "down") {
-                tanggal_btn.visibility = View.VISIBLE
-                expand.tag = "up"
-                expand.setImageResource(R.drawable.ic_expand_up)
+                Log.d("EXPAND", "height = ${height}")
+                expand.isEnabled = false
+                lifecycleScope.launch {
+                    expand.tag = "up"
+                    expand.setImageResource(R.drawable.ic_expand_up)
+                    param.height = 1
+                    while(param.height != height) {
+                        param.height *= 2
+                        Log.d("EXPAND", "Down, proses = ${param.height}")
+                        if(param.height > height) {
+                            param.height = height
+                        }
+                        tanggal_btn.layoutParams = param
+                        delay(50)
+                    }
+                    expand.isEnabled = true
+                    Log.d("EXPAND", "Down, height = ${param.height}")
+                }
             }
         }
     }
@@ -113,5 +146,7 @@ class RiwayatFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() = RiwayatFragment()
+        private var height = 0
+        private var isHeightZero = true
     }
 }

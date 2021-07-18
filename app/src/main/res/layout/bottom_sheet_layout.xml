@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:fontFamily="@font/roboto"
+        android:fontFamily="@font/nunito"
         android:text="Tambah"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -29,8 +29,8 @@
         android:orientation="horizontal"
         android:layout_marginStart="10dp">
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@drawable/ic_transaction"/>
 
         <TextView
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/roboto_condensed_regular"
+            android:fontFamily="@font/nunito"
             android:text="Transaksi Baru"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -53,8 +53,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp">
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@drawable/ic_goal"/>
 
         <TextView
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
-            android:fontFamily="@font/roboto_condensed_regular"
+            android:fontFamily="@font/nunito"
             android:text="Impian Baru"
             android:textSize="18sp"
             android:textStyle="bold" />
